@@ -1,0 +1,71 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  chamada_voice_id: 
+  data_criacao: 2019-04-09 15:57:06
+  ativa: false
+  url_gravacao: MyString
+  cliente_id: 
+  conta_id: 
+  ramal_id_origem: 
+  tags: MyString
+  status_geral: MyString
+  origem_data_inicio: 2019-04-09 15:57:06
+  origem_numero: MyString
+  origem_tipo: MyString
+  origem_status: MyString
+  origem_duracao_segundos: 1
+  origem_duracao: 2019-04-09 15:57:06
+  origem_duracao_cobrada_segundos: 1
+  origem_duracao_cobrada: 2019-04-09 15:57:06
+  origem_duracao_falada_segundos: 1
+  origem_duracao_falada: 2019-04-09 15:57:06
+  origem_preco: 1.5
+  origem_motivo_desconexao: MyString
+  destino_data_inicio: 2019-04-09 15:57:06
+  destino_numero: MyString
+  destino_tipo: MyString
+  destino_status: MyString
+  destino_duracao_segundos: 1
+  destino_duracao: 2019-04-09 15:57:06
+  destino_duracao_cobrada_segundos: 1
+  destino_duracao_cobrada: 2019-04-09 15:57:06
+  destino_duracao_falada_segundos: 1
+  destino_duracao_falada: 2019-04-09 15:57:06
+  destino_preco: 1.5
+  destino_motivo_desconexao: MyString
+
+two:
+  chamada_voice_id: 
+  data_criacao: 2019-04-09 15:57:06
+  ativa: false
+  url_gravacao: MyString
+  cliente_id: 
+  conta_id: 
+  ramal_id_origem: 
+  tags: MyString
+  status_geral: MyString
+  origem_data_inicio: 2019-04-09 15:57:06
+  origem_numero: MyString
+  origem_tipo: MyString
+  origem_status: MyString
+  origem_duracao_segundos: 1
+  origem_duracao: 2019-04-09 15:57:06
+  origem_duracao_cobrada_segundos: 1
+  origem_duracao_cobrada: 2019-04-09 15:57:06
+  origem_duracao_falada_segundos: 1
+  origem_duracao_falada: 2019-04-09 15:57:06
+  origem_preco: 1.5
+  origem_motivo_desconexao: MyString
+  destino_data_inicio: 2019-04-09 15:57:06
+  destino_numero: MyString
+  destino_tipo: MyString
+  destino_status: MyString
+  destino_duracao_segundos: 1
+  destino_duracao: 2019-04-09 15:57:06
+  destino_duracao_cobrada_segundos: 1
+  destino_duracao_cobrada: 2019-04-09 15:57:06
+  destino_duracao_falada_segundos: 1
+  destino_duracao_falada: 2019-04-09 15:57:06
+  destino_preco: 1.5
+  destino_motivo_desconexao: MyString

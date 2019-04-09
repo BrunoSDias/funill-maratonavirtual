@@ -1,0 +1,42 @@
+<div class="page-header">
+  <h1>Listando chamadas</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Data</th>
+        <th>Áudio</th>
+        <th>Origem</th>
+        <th>Origem duração</th>
+        <th>Origem preço</th>
+        <th>Destino</th>
+        <th>Destino duração</th>
+        <th>Destino preço</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @chamadas) do |chamada| %>
+        <td><%= chamada.chamada_voice_id %></td>
+        <td><%= chamada.data_criacao.strftime("%d/%m/%Y %H:%M:%S") %></td>
+        <td>
+          <audio controls>
+            <source src="<%= chamada.url_gravacao %>" >
+          </audio>
+        </td>
+        <td><%= chamada.origem_numero %> - <%= chamada.origem_tipo %></td>
+        <td><%= chamada.origem_duracao_cobrada.strftime("%H:%M:%S") %></td>
+        <td><%= chamada.origem_preco %></td>
+        <td><%= chamada.destino_numero %> - <%= chamada.destino_tipo %></td>
+        <td><%= chamada.destino_duracao_cobrada.strftime("%H:%M:%S") %></td>
+        <td><%= chamada.destino_preco %></td>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="apple_pagination">
+    <%= will_paginate(@chamadas, :container => false) %>
+  </div>
+</div>

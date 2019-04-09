@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root to: "administradores#index"
+  resources :chamadas
+  root to: "chamadas#index"
   resources :administradores
 
   get '/login', to: 'login#index'
