@@ -17,9 +17,9 @@ namespace :jobs do
       if (200..300).include?(chamadas["status"])
         chamadas = chamadas["dados"]["relatorio"]
         chamadas.each do |voice|
-
           if Chamada.where(chamada_voice_id: voice["id"]).count == 0
             chamada = Chamada.new
+
             chamada.chamada_voice_id = voice["id"]
             chamada.data_criacao = voice["data_criacao"]
             chamada.ativa = voice["ativa"]
@@ -82,7 +82,6 @@ namespace :jobs do
       if (200..300).include?(chamadas["status"])
         chamadas = chamadas["dados"]["relatorio"]
         chamadas.each do |voice|
-
           if Chamada.where(chamada_voice_id: voice["id"]).count == 0
             chamada = Chamada.new
             chamada.chamada_voice_id = voice["id"]
