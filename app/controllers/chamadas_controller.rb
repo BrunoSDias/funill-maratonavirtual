@@ -5,6 +5,32 @@ class ChamadasController < ApplicationController
   # GET /chamadas.json
   def index
     @chamadas = Chamada.all
+
+    if params[:q].present?
+      login_like = Chamada.arel_table[:login]
+      telefone_like = Chamada.arel_table[:destino_numero]
+      @chamadas = @chamadas.where(login_like.matches("%#{params[:q]}%")).or(@chamadas.where(telefone_like.matches("%#{params[:q]}%")))
+    end
+
+    if params[:status].present?
+      @chamadas = @chamadas.where(status_geral: params[:status])
+    end
+
+    if params[:data_de].present? && params[:data_ate].present?
+      data_de = DateTime.parse(params[:data_de]).beginning_of_day
+      data_ate = DateTime.parse(params[:data_ate]).end_of_day
+      @chamadas = @chamadas.where("data_criacao >= '#{data_de.strftime("%Y-%m-%d %H:%M:%S")}'")
+      @chamadas = @chamadas.where("data_criacao <= '#{data_ate.strftime("%Y-%m-%d %H:%M:%S")}'")
+    elsif params[:data_de].present? && params[:data_ate].blank?
+      data_de = DateTime.parse(params[:data_de]).beginning_of_day
+      @chamadas = @chamadas.where("data_criacao >= '#{data_de.strftime("%Y-%m-%d %H:%M:%S")}'")
+    elsif params[:data_de].blank? && params[:data_ate].present?
+      data_ate = DateTime.parse(params[:data_ate]).end_of_day
+      @chamadas = @chamadas.where("data_criacao <= '#{data_ate.strftime("%Y-%m-%d %H:%M:%S")}'")
+    end
+      
+    @chamadas_total = @chamadas
+    
     options = {page: params[:page] || 1, per_page: 10}
     @chamadas = @chamadas.paginate(options)
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_09_183512) do
+ActiveRecord::Schema.define(version: 2019_04_12_192535) do
 
   create_table "administradores", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nome"
@@ -56,6 +56,13 @@ ActiveRecord::Schema.define(version: 2019_04_09_183512) do
     t.string "destino_motivo_desconexao"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "origem_duracao_string"
+    t.string "origem_duracao_cobrada_string"
+    t.string "origem_duracao_falada_string"
+    t.string "destino_duracao_string"
+    t.string "destino_duracao_cobrada_string"
+    t.string "destino_duracao_falada_string"
+    t.string "login"
   end
 
 end
