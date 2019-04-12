@@ -28,6 +28,19 @@ class ChamadasController < ApplicationController
       data_ate = DateTime.parse(params[:data_ate]).end_of_day
       @chamadas = @chamadas.where("data_criacao <= '#{data_ate.strftime("%Y-%m-%d %H:%M:%S")}'")
     end
+
+    if params[:duracao_de].present? && params[:duracao_ate].present?
+      duracao_de = Time.parse(params[:duracao_de])
+      duracao_ate = Time.parse(params[:duracao_ate])
+      @chamadas = @chamadas.where("destino_duracao_cobrada >= '#{duracao_de.strftime("%H:%M:%S")}'")
+      @chamadas = @chamadas.where("destino_duracao_cobrada <= '#{duracao_ate.strftime("%H:%M:%S")}'")
+    elsif params[:duracao_de].present? && params[:duracao_ate].blank?
+      duracao_de = Time.parse(params[:duracao_de]).beginning_of_day
+      @chamadas = @chamadas.where("destino_duracao_cobrada >= '#{duracao_de.strftime("%H:%M:%S")}'")
+    elsif params[:duracao_de].blank? && params[:duracao_ate].present?
+      duracao_ate = Time.parse(params[:duracao_ate]).end_of_day
+      @chamadas = @chamadas.where("destino_duracao_cobrada <= '#{data_ate.strftime("%H:%M:%S")}'")
+    end
       
     @chamadas_total = @chamadas
     
