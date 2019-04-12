@@ -57,8 +57,9 @@
         <td><%= chamada.login %></td>
         <td><%= chamada.destino_numero %> - <%= chamada.destino_tipo %></td>
         <td>
-          <%#= chamada.destino_duracao_cobrada_string %>
-          <%= chamada.destino_duracao_cobrada.strftime("%H hora(s) %M minuto(s) e %S segundo(s)") %>
+          <% time_split = chamada.destino_duracao_cobrada_string.split(":") %>
+          <%= "#{time_split[0]} hora(s) #{time_split[1]} minuto(s) #{time_split[2]} segundo(s)" %>
+          <%#= chamada.destino_duracao_cobrada.strftime("%H hora(s) %M minuto(s) e %S segundo(s)") %>
         </td>
         <td>R$ <%= chamada.destino_preco %></td>
         <td>
