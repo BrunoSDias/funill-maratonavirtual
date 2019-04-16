@@ -4,6 +4,9 @@
 
 <form action="/chamadas" method="get" class="busca">
   <div style="clear:both">
+    <label>ID chamada:</label>
+    <input type="text" class="form-control" name="chamada_voice_id" value="<%= params[:chamada_voice_id] %>">
+    <br>
     <label>Login ou telefone:</label>
     <input type="text" class="form-control" name="q" value="<%= params[:q] %>">
     <br>
@@ -21,9 +24,22 @@
     <input type="date" style="width: 180px" class="form-control" name="data_ate" value="<%= params[:data_ate] %>">
     <br>
     <label>Duração de:</label>
-    <input type="text" placeholder="00:00:00" style="width: 180px" class="form-control" name="duracao_de" value="<%= params[:duracao_de] %>">
+    <% time = Time.parse("00:00:00") %>
+    <select class="form-control"  name="duracao_de" style="width: 180px"  >
+      <% while time < Time.parse("01:00:15") %>
+        <option value="<%= time.strftime("%H:%M:%S") %>" <% if params[:duracao_de] == time.strftime("%H:%M:%S") %>selected<% end %>><%= time.strftime("%H:%M:%S") %></option>
+        <% time = time + 15.seconds %>
+      <% end %>
+    </select>
+
     <label>Duração até:</label>
-    <input type="text" placeholder="00:00:00" style="width: 180px" class="form-control" name="duracao_ate" value="<%= params[:duracao_ate] %>">
+    <% time = Time.parse("00:00:00") %>
+    <select class="form-control"  name="duracao_ate" style="width: 180px"  >
+      <% while time < Time.parse("01:00:15") %>
+        <option value="<%= time.strftime("%H:%M:%S") %>" <% if params[:duracao_ate] == time.strftime("%H:%M:%S") %>selected<% end %>><%= time.strftime("%H:%M:%S") %></option>
+        <% time = time + 15.seconds %>
+      <% end %>
+    </select>
     <br>
     <input type="submit" value="Buscar" class="btn btn-primary">
   </div>
@@ -52,7 +68,7 @@
     <tbody>
       <%= content_tag_for(:tr, @chamadas) do |chamada| %>
         <td><%= chamada.chamada_voice_id %></td>
-        <td><%= chamada.status_geral %></td>
+        <td><%= chamada.destino_status %></td>
         <td><%= chamada.data_criacao.strftime("%d/%m/%Y %H:%M:%S") %></td>
         <td><%= chamada.login %></td>
         <td><%= chamada.destino_numero %> - <%= chamada.destino_tipo %></td>

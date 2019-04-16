@@ -12,6 +12,10 @@ class ChamadasController < ApplicationController
       @chamadas = @chamadas.where(login_like.matches("%#{params[:q]}%")).or(@chamadas.where(telefone_like.matches("%#{params[:q]}%")))
     end
 
+    if params[:chamada_voice_id].present?
+      @chamadas = @chamadas.where(chamada_voice_id: params[:chamada_voice_id])
+    end
+
     if params[:status].present?
       @chamadas = @chamadas.where(status_geral: params[:status])
     end
@@ -35,10 +39,10 @@ class ChamadasController < ApplicationController
       @chamadas = @chamadas.where("destino_duracao_cobrada >= '#{duracao_de.strftime("%H:%M:%S")}'")
       @chamadas = @chamadas.where("destino_duracao_cobrada <= '#{duracao_ate.strftime("%H:%M:%S")}'")
     elsif params[:duracao_de].present? && params[:duracao_ate].blank?
-      duracao_de = Time.parse(params[:duracao_de]).beginning_of_day
+      duracao_de = Time.parse(params[:duracao_de])
       @chamadas = @chamadas.where("destino_duracao_cobrada >= '#{duracao_de.strftime("%H:%M:%S")}'")
     elsif params[:duracao_de].blank? && params[:duracao_ate].present?
-      duracao_ate = Time.parse(params[:duracao_ate]).end_of_day
+      duracao_ate = Time.parse(params[:duracao_ate])
       @chamadas = @chamadas.where("destino_duracao_cobrada <= '#{data_ate.strftime("%H:%M:%S")}'")
     end
       
