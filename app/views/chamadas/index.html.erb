@@ -26,6 +26,7 @@
     <label>Duração de:</label>
     <% time = Time.parse("00:00:00") %>
     <select class="form-control"  name="duracao_de" style="width: 180px"  >
+      <option value="">[Selecione]</option>
       <% while time < Time.parse("01:00:15") %>
         <option value="<%= time.strftime("%H:%M:%S") %>" <% if params[:duracao_de] == time.strftime("%H:%M:%S") %>selected<% end %>><%= time.strftime("%H:%M:%S") %></option>
         <% time = time + 15.seconds %>
@@ -35,6 +36,7 @@
     <label>Duração até:</label>
     <% time = Time.parse("00:00:00") %>
     <select class="form-control"  name="duracao_ate" style="width: 180px"  >
+      <option value="">[Selecione]</option>
       <% while time < Time.parse("01:00:15") %>
         <option value="<%= time.strftime("%H:%M:%S") %>" <% if params[:duracao_ate] == time.strftime("%H:%M:%S") %>selected<% end %>><%= time.strftime("%H:%M:%S") %></option>
         <% time = time + 15.seconds %>
