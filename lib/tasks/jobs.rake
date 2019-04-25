@@ -5,7 +5,7 @@ namespace :jobs do
 
     # date_inicial = DateTime.now.beginning_of_day
     (1..12).each do |mes|
-      date_inicial = DateTime.parse("2018-#{mes}-01T00:00:00-03:00").beginning_of_day
+      date_inicial = DateTime.parse("2017-#{mes}-01T00:00:00-03:00").beginning_of_day
       date_final = date_inicial.end_of_day
       date_final_mes = date_inicial.end_of_month
 
