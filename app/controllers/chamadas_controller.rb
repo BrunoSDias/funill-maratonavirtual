@@ -17,7 +17,7 @@ class ChamadasController < ApplicationController
     end
 
     if params[:status].present?
-      @chamadas = @chamadas.where(status_geral: params[:status])
+      @chamadas = @chamadas.where(destino_status: params[:status])
     end
 
     if params[:data_de].present? && params[:data_ate].present?
