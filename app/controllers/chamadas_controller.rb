@@ -12,11 +12,15 @@ class ChamadasController < ApplicationController
         telefone_like = Chamada.arel_table[:destino_numero]
         @chamadas = @chamadas.where(login_like.matches("%#{params[:q]}%")).or(@chamadas.where(telefone_like.matches("%#{params[:q]}%")))
       else
+        query = []
         params[:q].split(",").map{|q|q.strip}.each do |q|
-          login_like = Chamada.arel_table[:login]
-          telefone_like = Chamada.arel_table[:destino_numero]
-          @chamadas = @chamadas.where(login_like.matches("%#{q}%")).or(@chamadas.where(telefone_like.matches("%#{q}%")))
+          if Rails.env == "production"
+            query << " chamadas.login ilike '%#{q}%' OR chamadas.destino_numero ilike '%#{q}%' "
+          else
+            query << " chamadas.login like '%#{q}%' OR chamadas.destino_numero like '%#{q}%' "
+          end
         end
+        @chamadas = @chamadas.where("( #{query.join(" or ")} )")
       end
     end
 
