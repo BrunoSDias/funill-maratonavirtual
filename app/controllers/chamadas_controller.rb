@@ -7,9 +7,17 @@ class ChamadasController < ApplicationController
     @chamadas = Chamada.all
 
     if params[:q].present?
-      login_like = Chamada.arel_table[:login]
-      telefone_like = Chamada.arel_table[:destino_numero]
-      @chamadas = @chamadas.where(login_like.matches("%#{params[:q]}%")).or(@chamadas.where(telefone_like.matches("%#{params[:q]}%")))
+      if not params[:q].include?(",")
+        login_like = Chamada.arel_table[:login]
+        telefone_like = Chamada.arel_table[:destino_numero]
+        @chamadas = @chamadas.where(login_like.matches("%#{params[:q]}%")).or(@chamadas.where(telefone_like.matches("%#{params[:q]}%")))
+      else
+        params[:q].split(",").map{|q|q.strip}.each do |q|
+          login_like = Chamada.arel_table[:login]
+          telefone_like = Chamada.arel_table[:destino_numero]
+          @chamadas = @chamadas.where(login_like.matches("%#{q}%")).or(@chamadas.where(telefone_like.matches("%#{q}%")))
+        end
+      end
     end
 
     if params[:chamada_voice_id].present?
