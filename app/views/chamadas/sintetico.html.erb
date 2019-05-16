@@ -131,11 +131,13 @@
         <td><%= login %></td>
         <% todos_status.each do |status| %>
           <td>
-            <%= @chamadas.where(login: login).where(destino_status: status).sum(:destino_duracao_cobrada) %>
+            <% valor = @chamadas.where(login: login).where(destino_status: status).sum(:destino_duracao_cobrada) %>
+            <%= valor == "0" ? "00:00:00" : valor %>
           </td>
         <% end %>
         <td>
-          <%= @chamadas.where(login: login).where(destino_status: todos_status).sum(:destino_duracao_cobrada) %>
+          <% valor = @chamadas.where(login: login).where(destino_status: todos_status).sum(:destino_duracao_cobrada) %>
+          <%= valor == "0" ? "00:00:00" : valor %>
         </td>
       </tr>
       <% end %>
@@ -143,11 +145,13 @@
         <td>TOTAL</td>
         <% todos_status.each do |status| %>
           <td>
-            <%= @chamadas.where(login: todos_login).where(destino_status: status).sum(:destino_duracao_cobrada) %>
+            <% valor = @chamadas.where(login: todos_login).where(destino_status: status).sum(:destino_duracao_cobrada) %>
+            <%= valor == "0" ? "00:00:00" : valor %>
           </td>
         <% end %>
         <td>
-          <%= @chamadas.where(login: todos_login).where(destino_status: todos_status).sum(:destino_duracao_cobrada) %>
+          <% valor = @chamadas.where(login: todos_login).where(destino_status: todos_status).sum(:destino_duracao_cobrada) %>
+          <%= valor == "0" ? "00:00:00" : valor %>
         </td>
       </tr>
     </tbody>
