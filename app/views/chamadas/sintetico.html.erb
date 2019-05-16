@@ -42,7 +42,7 @@
   <table class="table table-striped table-bordered table-hover" style="width: 100%">
     <thead>
       <tr style="background-color: #cfcfcf;">
-        <th colspan="100%" style="text-align: center;">Relatório sintético de Ligações Rimaq - Por Volume</th>
+        <th colspan="100%" style="text-align: center;">Relatório sintético de Ligações Rimaq - Por Volume (Feita)</th>
       </tr>
     </thead>
 
@@ -158,18 +158,19 @@
   </table>
 </div>
 
+<hr>
 
 <div class="table-responsive">
   <table class="table table-striped table-bordered table-hover" style="width: 100%">
     <thead>
       <tr style="background-color: #cfcfcf;">
-        <th colspan="100%" style="text-align: center;">Relatório sintético de Ligações Rimaq - Por Duração (Recebida)</th>
+        <th colspan="100%" style="text-align: center;">Relatório sintético de Ligações Rimaq - Por Volume (Recebida)</th>
       </tr>
     </thead>
 
     <% 
     todos_status = []
-    @chamadas.pluck(:destino_status).uniq.compact.each do |status|
+    @chamadas.pluck(:origem_status).uniq.compact.each do |status|
       todos_status << status if status.present?
     end
 
@@ -194,12 +195,70 @@
         <td><%= login %></td>
         <% todos_status.each do |status| %>
           <td>
-            <% valor = @chamadas.where(login: login).where(destino_status: status).sum(:origem_duracao_cobrada) %>
+            <%= @chamadas.where(login: login).where(origem_status: status).count %>
+          </td>
+        <% end %>
+        <td>
+          <%= @chamadas.where(login: login).where(origem_status: todos_status).count %>
+        </td>
+      </tr>
+      <% end %>
+      <tr style="background-color: #bebee8">
+        <td>TOTAL</td>
+        <% todos_status.each do |status| %>
+          <td>
+            <%= @chamadas.where(login: todos_login).where(origem_status: status).count %>
+          </td>
+        <% end %>
+        <td>
+          <%= @chamadas.where(login: todos_login).where(origem_status: todos_status).count %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover" style="width: 100%">
+    <thead>
+      <tr style="background-color: #cfcfcf;">
+        <th colspan="100%" style="text-align: center;">Relatório sintético de Ligações Rimaq - Por Duração (Recebida)</th>
+      </tr>
+    </thead>
+
+    <% 
+    todos_status = []
+    @chamadas.pluck(:origem_status).uniq.compact.each do |status|
+      todos_status << status if status.present?
+    end
+
+    todos_login = []
+    @chamadas.pluck(:login).uniq.compact.each do |login|
+      todos_login << login if login.present?
+    end
+    %>
+    <thead>
+      <tr>
+        <th></th>
+        <% todos_status.each do |status| %>
+          <th><%= status.upcase %></th>
+        <% end %>
+        <th>TOTAL</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% todos_login.each do |login| %>
+      <tr>
+        <td><%= login %></td>
+        <% todos_status.each do |status| %>
+          <td>
+            <% valor = @chamadas.where(login: login).where(origem_status: status).sum(:origem_duracao_cobrada) %>
             <%= valor == "0" ? "00:00:00" : valor %>
           </td>
         <% end %>
         <td>
-          <% valor = @chamadas.where(login: login).where(destino_status: todos_status).sum(:origem_duracao_cobrada) %>
+          <% valor = @chamadas.where(login: login).where(origem_status: todos_status).sum(:origem_duracao_cobrada) %>
           <%= valor == "0" ? "00:00:00" : valor %>
         </td>
       </tr>
@@ -208,12 +267,12 @@
         <td>TOTAL</td>
         <% todos_status.each do |status| %>
           <td>
-            <% valor = @chamadas.where(login: todos_login).where(destino_status: status).sum(:origem_duracao_cobrada) %>
+            <% valor = @chamadas.where(login: todos_login).where(origem_status: status).sum(:origem_duracao_cobrada) %>
             <%= valor == "0" ? "00:00:00" : valor %>
           </td>
         <% end %>
         <td>
-          <% valor = @chamadas.where(login: todos_login).where(destino_status: todos_status).sum(:origem_duracao_cobrada) %>
+          <% valor = @chamadas.where(login: todos_login).where(origem_status: todos_status).sum(:origem_duracao_cobrada) %>
           <%= valor == "0" ? "00:00:00" : valor %>
         </td>
       </tr>
