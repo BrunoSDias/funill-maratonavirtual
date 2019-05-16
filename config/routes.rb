@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/chamadas/sintetico', to: 'chamadas#sintetico'
+  
   resources :chamadas
   root to: "chamadas#index"
   resources :administradores

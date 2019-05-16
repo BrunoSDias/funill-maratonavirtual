@@ -1,8 +1,55 @@
 class ChamadasController < ApplicationController
   before_action :set_chamada, only: [:show, :edit, :update, :destroy]
 
-  # GET /chamadas
-  # GET /chamadas.json
+  def sintetico
+    @chamadas = Chamada.all
+
+    if params[:q].present?
+      if not params[:q].include?(",")
+        login_like = Chamada.arel_table[:login]
+        telefone_like = Chamada.arel_table[:destino_numero]
+        @chamadas = @chamadas.where(login_like.matches("%#{params[:q]}%")).or(@chamadas.where(telefone_like.matches("%#{params[:q]}%")))
+      else
+        query = []
+        params[:q].split(",").map{|q|q.strip}.each do |q|
+          if Rails.env == "production"
+            query << " chamadas.login ilike '%#{q}%' OR chamadas.destino_numero ilike '%#{q}%' "
+          else
+            query << " chamadas.login like '%#{q}%' OR chamadas.destino_numero like '%#{q}%' "
+          end
+        end
+        @chamadas = @chamadas.where("( #{query.join(" or ")} )")
+      end
+    end
+
+    if params[:data_de].present? && params[:data_ate].present?
+      data_de = DateTime.parse(params[:data_de]).beginning_of_day
+      data_ate = DateTime.parse(params[:data_ate]).end_of_day
+      @chamadas = @chamadas.where("data_criacao >= '#{data_de.strftime("%Y-%m-%d %H:%M:%S")}'")
+      @chamadas = @chamadas.where("data_criacao <= '#{data_ate.strftime("%Y-%m-%d %H:%M:%S")}'")
+    elsif params[:data_de].present? && params[:data_ate].blank?
+      data_de = DateTime.parse(params[:data_de]).beginning_of_day
+      @chamadas = @chamadas.where("data_criacao >= '#{data_de.strftime("%Y-%m-%d %H:%M:%S")}'")
+    elsif params[:data_de].blank? && params[:data_ate].present?
+      data_ate = DateTime.parse(params[:data_ate]).end_of_day
+      @chamadas = @chamadas.where("data_criacao <= '#{data_ate.strftime("%Y-%m-%d %H:%M:%S")}'")
+    end
+
+    if params[:duracao_de].present? && params[:duracao_ate].present?
+      duracao_de = Time.parse(params[:duracao_de])
+      duracao_ate = Time.parse(params[:duracao_ate])
+      @chamadas = @chamadas.where("destino_duracao_cobrada >= '#{duracao_de.strftime("%H:%M:%S")}'")
+      @chamadas = @chamadas.where("destino_duracao_cobrada <= '#{duracao_ate.strftime("%H:%M:%S")}'")
+    elsif params[:duracao_de].present? && params[:duracao_ate].blank?
+      duracao_de = Time.parse(params[:duracao_de])
+      @chamadas = @chamadas.where("destino_duracao_cobrada >= '#{duracao_de.strftime("%H:%M:%S")}'")
+    elsif params[:duracao_de].blank? && params[:duracao_ate].present?
+      duracao_ate = Time.parse(params[:duracao_ate])
+      @chamadas = @chamadas.where("destino_duracao_cobrada <= '#{data_ate.strftime("%H:%M:%S")}'")
+    end
+
+  end
+
   def index
     @chamadas = Chamada.all
 

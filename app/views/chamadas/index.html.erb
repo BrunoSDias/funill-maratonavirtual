@@ -13,7 +13,7 @@
     <label>Status</label>
     <select class="form-control"  name="status" >
       <option selected value="">[Selecione]</option>
-      <% @chamadas_total.map{|c|c.destino_status}.uniq.each do |status| %>
+      <% Chamada.all.pluck(:destino_status).uniq.each do |status| %>
       <% if status.present? %>
         <option value="<%= status %>" <% if params[:status] == status %>selected<% end %>><%= status %></option>
       <% end %>
