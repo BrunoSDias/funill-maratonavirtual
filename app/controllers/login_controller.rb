@@ -14,7 +14,7 @@ class LoginController < ApplicationController
         nome: user.nome,
         email: user.email
       }
-      cookies[:rimaq_admin] = { value: value.to_json, expires: time, httponly: true }
+      cookies[:funil_admin] = { value: value.to_json, expires: time, httponly: true }
 
       redirect_to root_path
     else
@@ -24,7 +24,7 @@ class LoginController < ApplicationController
   end
 
   def deslogar
-    cookies[:rimaq_admin] = nil
+    cookies[:funil_admin] = nil
     redirect_to login_path
   end
 

@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
-  get '/chamadas/sintetico', to: 'chamadas#sintetico'
-  
-  resources :chamadas
-  root to: "chamadas#index"
   resources :administradores
+  root to: 'administradores#index'
 
+  root to: 'administradores#index'
   get '/login', to: 'login#index'
   post '/login', to: 'login#logar'
   get '/sair', to: 'login#deslogar'
