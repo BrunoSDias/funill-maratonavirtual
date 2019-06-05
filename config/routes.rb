@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :produtos
   resources :administradores
   root to: 'administradores#index'
 
