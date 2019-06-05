@@ -1,0 +1,2 @@
+module UpsellHelper
+end

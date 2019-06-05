@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_05_162954) do
+ActiveRecord::Schema.define(version: 2019_06_05_172709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 2019_06_05_162954) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "paginas", force: :cascade do |t|
+    t.string "nome"
+    t.string "slug"
+    t.text "conteudo"
+    t.bigint "produto_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "pagina_id"
+    t.index ["produto_id"], name: "index_paginas_on_produto_id"
+  end
+
   create_table "produtos", force: :cascade do |t|
     t.string "nome"
     t.string "url"
@@ -30,4 +41,20 @@ ActiveRecord::Schema.define(version: 2019_06_05_162954) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "upsell", force: :cascade do |t|
+    t.bigint "produto_id"
+    t.datetime "data_inicial"
+    t.datetime "data_final"
+    t.boolean "somente_boleto"
+    t.boolean "somente_cartao"
+    t.integer "tentar_a_cada_compra"
+    t.integer "mostrar_para_compras_acima_de"
+    t.float "mostrar_para_compras_ate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["produto_id"], name: "index_upsell_on_produto_id"
+  end
+
+  add_foreign_key "paginas", "produtos"
+  add_foreign_key "upsell", "produtos"
 end

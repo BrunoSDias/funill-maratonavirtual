@@ -1,0 +1,13 @@
+<div class="page-header">
+  <%= link_to produto_paginas_path(@produto), class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Voltar
+  <% end %>
+  <%= link_to produto_pagina_path(@produto, @pagina), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-info-sign"></span>
+    Mostrar
+  <% end %>
+  <h1>Editando pagina</h1>
+</div>
+
+<%= render 'form' %>

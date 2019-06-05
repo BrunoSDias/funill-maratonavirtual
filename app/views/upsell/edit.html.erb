@@ -1,0 +1,13 @@
+<div class="page-header">
+  <%= link_to produto_upsell_index_path(@produto), class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Voltar
+  <% end %>
+  <%= link_to produto_upsell_path(@produto, @upsell), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-info-sign"></span>
+    Mostrar
+  <% end %>
+  <h1>Editando upsell</h1>
+</div>
+
+<%= render 'form' %>

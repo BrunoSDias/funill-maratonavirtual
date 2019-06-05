@@ -1,0 +1,63 @@
+<%= form_for([@produto, @upsell], html: { class: "form-horizontal", role: "form" }) do |f| %>
+  <% if @upsell.errors.any? %>
+    <div class="alert alert-danger alert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h4>Confira os erros abaixo:</h4>
+
+      <ul>
+      <% @upsell.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+  <div class="form-group">
+    <%= f.label :data_inicial, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.datetime_select :data_inicial, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :data_final, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.datetime_select :data_final, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :somente_boleto, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.check_box :somente_boleto, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :somente_cartao, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.check_box :somente_cartao, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :tentar_a_cada_compra, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.number_field :tentar_a_cada_compra, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :mostrar_para_compras_acima_de, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.number_field :mostrar_para_compras_acima_de, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :mostrar_para_compras_ate, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :mostrar_para_compras_ate, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit "Salvar", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

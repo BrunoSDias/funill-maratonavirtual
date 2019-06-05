@@ -1,0 +1,22 @@
+<div class="page-header">
+  <%= link_to produto_paginas_path(@produto), class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Voltar
+  <% end %>
+  <%= link_to edit_produto_pagina_path(@produto, @pagina), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Editar
+  <% end %>
+  <h1>Mostrar pagina</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Nome:</dt>
+  <dd><%= @pagina.nome %></dd>
+  <dt>Slug:</dt>
+  <dd><%= @pagina.slug %></dd>
+  <dt>Conteudo:</dt>
+  <dd><%= @pagina.conteudo %></dd>
+  <dt>Produto:</dt>
+  <dd><%= @pagina.produto %></dd>
+</dl>

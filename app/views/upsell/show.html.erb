@@ -1,0 +1,30 @@
+<div class="page-header">
+  <%= link_to produto_upsell_index_path(@produto), class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Voltar
+  <% end %>
+  <%= link_to edit_produto_upsell_path(@produto, @upsell), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Editar
+  <% end %>
+  <h1>Mostrar upsell</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Produto:</dt>
+  <dd><%= @upsell.produto %></dd>
+  <dt>Data inicial:</dt>
+  <dd><%= @upsell.data_inicial %></dd>
+  <dt>Data final:</dt>
+  <dd><%= @upsell.data_final %></dd>
+  <dt>Somente boleto:</dt>
+  <dd><%= @upsell.somente_boleto %></dd>
+  <dt>Somente cartao:</dt>
+  <dd><%= @upsell.somente_cartao %></dd>
+  <dt>Tentar a cada compra:</dt>
+  <dd><%= @upsell.tentar_a_cada_compra %></dd>
+  <dt>Mostrar para compras acima de:</dt>
+  <dd><%= @upsell.mostrar_para_compras_acima_de %></dd>
+  <dt>Mostrar para compras ate:</dt>
+  <dd><%= @upsell.mostrar_para_compras_ate %></dd>
+</dl>
