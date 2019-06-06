@@ -11,8 +11,10 @@
 </div>
 
 <dl class="dl-horizontal">
+  <dt>Nome:</dt>
+  <dd><%= @upsell.nome %></dd>
   <dt>Produto:</dt>
-  <dd><%= @upsell.produto %></dd>
+  <dd><%= @upsell.produto.nome %></dd>
   <dt>Data inicial:</dt>
   <dd><%= @upsell.data_inicial %></dd>
   <dt>Data final:</dt>

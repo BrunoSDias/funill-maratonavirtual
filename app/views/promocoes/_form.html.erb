@@ -1,0 +1,189 @@
+<%= form_for([@produto, @upsell, @promocao], html: { class: "form-horizontal", role: "form" }) do |f| %>
+  <% if @promocao.errors.any? %>
+    <div class="alert alert-danger alert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h4>Confira os erros abaixo:</h4>
+
+      <ul>
+      <% @promocao.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :nome, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :nome, class: "form-control" %>
+    </div>
+  </div>
+  <hr>
+  <div class="jsUpsellProduto">
+    <div class="jsmodelo">
+      <div class="item" style="border-bottom: 1px solid #ccc;margin-bottom: 10px; display: none;">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Produto</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="text" name="item_promocao[][codigo_produto]">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Preco promocional</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="text" name="item_promocao[][preco_promocional]">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Texto botão negado</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="text" name="item_promocao[][btn_negado]">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Texto botão aceito</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="text" name="item_promocao[][btn_aceito]">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Url video</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="text" name="item_promocao[][video]">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Quantidade</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="number" name="item_promocao[][quantidade]">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Url Imagem</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="text" name="item_promocao[][imagem]">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Se pago vai para</label>
+          <div class="col-sm-10">
+            <select class="form-control" name="item_promocao[][se_pago_vai_para]">
+              <option value="">[Selecione]</option>
+              <% Promocao.all.each do |promocao| %>
+                <% next if @promocao.id == promocao.id %>
+                <option value="<%= promocao.id %>"><%= promocao.nome %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>
+    <div class="item_promocaos">
+      <% @promocao.item_promocoes.each do |item_promocao| %>
+        <div class="item" style="border-bottom: 1px solid #ccc;margin-bottom: 10px;">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Código produto</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="text" name="item_promocao[][codigo_produto]" value="<%= item_promocao.codigo_produto %>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Preco promocional</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="text" name="item_promocao[][preco_promocional]" value="<%= item_promocao.preco_promocional %>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Texto botão negado</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="text" name="item_promocao[][btn_negado]" value="<%= item_promocao.btn_negado %>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Texto botão aceito</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="text" name="item_promocao[][btn_aceito]" value="<%= item_promocao.btn_aceito %>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Url video</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="text" name="item_promocao[][video]" value="<%= item_promocao.video %>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Quantidade</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="number" name="item_promocao[][quantidade]" value="<%= item_promocao.quantidade %>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Url Imagem</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="text" value="<%= item_promocao.imagem %>" name="item_promocao[][imagem]">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Se pago vai para</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="item_promocao[][se_pago_vai_para]">
+                <option value="">[Selecione]</option>
+                <% Upsell.all.each do |upsell| %>
+                  <% next if @upsell.id == upsell.id %>
+                  <option value="<%= upsell.id %>" <%= item_promocao.se_pago_vai_para == upsell.id.to_s ? "selected" : "" %>><%= upsell.nome %></option>
+                <% end %>
+              </select>
+            </div>
+          </div>
+          <br>
+        </div>
+      <% end %>
+    </div>
+    <div style="text-align: right;">
+      <a href="javascript:;" onclick="funil.MaisPromocao(this)" class="btn btn-primary">Mais produtos</a>
+    </div>
+  </div>
+  <hr>
+  <div class="form-group">
+    <%= f.label :tempo_relogio, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.time_select :tempo_relogio, include_seconds:true, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :se_pago_vai_para, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.number_field :se_pago_vai_para, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :se_negou_vai_para, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.number_field :se_negou_vai_para, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :titulo, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :titulo, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :subtitulo, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :subtitulo, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :descricao, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :descricao, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit "Salvar", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

@@ -13,5 +13,14 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require jquery-3.4.1.min
 //= require bootstrap
 //= require_tree .
+
+var funil = {};
+
+funil.MaisPromocao = function(self) {
+  var html = $(self).parents(".jsUpsellProduto").find(".jsmodelo").html();
+  html = html.replace(/display:.*?none/, "display:block");
+  $(self).parents(".jsUpsellProduto").find(".item_promocaos").append(html);
+}

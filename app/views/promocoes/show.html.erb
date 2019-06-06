@@ -1,0 +1,30 @@
+<div class="page-header">
+  <%= link_to produto_upsell_promocoes_path(@produto, @upsell), class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Voltar
+  <% end %>
+  <%= link_to edit_produto_upsell_promocao_path(@produto, @upsell, @promocao), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Editar
+  <% end %>
+  <h1>Mostrar promocao</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Upsell:</dt>
+  <dd><%= @promocao.upsell.nome %></dd>
+  <dt>Nome:</dt>
+  <dd><%= @promocao.nome %></dd>
+  <dt>Tempo relogio:</dt>
+  <dd><%= @promocao.tempo_relogio %></dd>
+  <dt>Se pago vai para:</dt>
+  <dd><%= @promocao.se_pago_vai_para %></dd>
+  <dt>Se negou vai para:</dt>
+  <dd><%= @promocao.se_negou_vai_para %></dd>
+  <dt>Titulo:</dt>
+  <dd><%= @promocao.titulo %></dd>
+  <dt>Subtitulo:</dt>
+  <dd><%= @promocao.subtitulo %></dd>
+  <dt>Descricao:</dt>
+  <dd><%= @promocao.descricao %></dd>
+</dl>

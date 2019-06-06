@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  upsell: one
+  nome: MyString
+  tempo_relogio: 2019-06-06 12:10:24
+  se_pago_vai_para: 1
+  se_negou_vai_para: 1
+  titulo: MyString
+  subtitulo: MyString
+  descricao: MyString
+
+two:
+  upsell: two
+  nome: MyString
+  tempo_relogio: 2019-06-06 12:10:24
+  se_pago_vai_para: 1
+  se_negou_vai_para: 1
+  titulo: MyString
+  subtitulo: MyString
+  descricao: MyString

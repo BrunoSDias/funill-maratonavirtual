@@ -26,8 +26,8 @@
         <td><%= produto.nome %></td>
         <td><%= produto.slug %></td>
         <td><%= produto.url %></td>
-        <td><a href="/produtos/<%= produto.id %>/upsell">Upsell</a></td>
         <td><a href="/produtos/<%= produto.id %>/paginas">Paginas</a></td>
+        <td><a href="/produtos/<%= produto.id %>/upsell">Upsell</a></td>
         <td><%= link_to 'Mostrar', produto %></td>
         <td><%= link_to 'Editar', edit_produto_path(produto) %></td>
         <td><%= link_to 'Apagar', produto, method: :delete, data: { confirm: 'Confirma?' } %></td>

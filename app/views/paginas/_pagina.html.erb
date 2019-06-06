@@ -4,7 +4,9 @@
     <li>
       <div><b>Nome</b> <%= pagina.nome %></div>
       <div><b>Slug</b> <%= pagina.slug %> <a href="/<%= @produto.slug %>/<%= pagina.slug %>" target="_blank">Ver</a></div>
-      <div><b>Próxima pagina</b> <%= pagina.pagina.nome rescue "" %></div>
+      <% if pagina.upsell.present? %>
+        <div><b>Upsell</b> <%= pagina.upsell.nome %> <a href="/produtos/<%= pagina.produto.id %>/upsell/<%= pagina.upsell.id %>/edit">Ir</a></div> 
+      <% end %>
       <div>
         <%= link_to 'Mostrar', produto_pagina_path(@produto, pagina), class:"btn btn-primary" %>
         <%= link_to 'Editar', edit_produto_pagina_path(@produto, pagina), class:"btn btn-warning" %>

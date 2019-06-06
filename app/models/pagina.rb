@@ -9,6 +9,12 @@ class Pagina < ApplicationRecord
   	Pagina.find(self.pagina_id)
   end
 
+  def upsell
+    Upsell.find(self.upsell_id)
+  rescue
+    nil
+  end
+
   def proximas_paginas
   	return [] if self.pagina_id.blank?
     paginas = Pagina.where(id: self.pagina_id)

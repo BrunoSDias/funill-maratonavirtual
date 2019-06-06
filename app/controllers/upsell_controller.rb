@@ -75,6 +75,6 @@ class UpsellController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def upsell_params
-      params.require(:upsell).permit(:produto_id, :data_inicial, :data_final, :somente_boleto, :somente_cartao, :tentar_a_cada_compra, :mostrar_para_compras_acima_de, :mostrar_para_compras_ate)
+      params.require(:upsell).permit(:produto_id, :data_inicial, :data_final, :somente_boleto, :somente_cartao, :tentar_a_cada_compra, :mostrar_para_compras_acima_de, :mostrar_para_compras_ate, :nome)
     end
 end

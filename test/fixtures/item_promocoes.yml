@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  promocao: one
+  codigo_produto: MyString
+  preco_promocional: MyString
+  quantidade: 1
+  imagem: MyString
+  se_pago_vai_para: 1
+  video: MyString
+  btn_negado: MyString
+  btn_aceito: MyString
+
+two:
+  promocao: two
+  codigo_produto: MyString
+  preco_promocional: MyString
+  quantidade: 1
+  imagem: MyString
+  se_pago_vai_para: 1
+  video: MyString
+  btn_negado: MyString
+  btn_aceito: MyString
