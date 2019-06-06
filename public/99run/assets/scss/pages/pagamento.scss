@@ -1,0 +1,192 @@
+header#header-pagamento {
+    margin-bottom: 50px;
+ p{
+     color: $white;
+     line-height: 14px;
+ }
+
+ .avatar{
+     img{
+         @include border-radius(50%);
+         position: relative;
+     }
+     .whatsapp{
+        position: absolute;
+        bottom: 28px;
+        right: 10px;
+        background-image: url("../images/whatsapp-logo.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 27px;
+        height: 27px;
+     }
+
+     .name{
+         color: $white;
+         font-family: 'gotham-bold'!important;
+     }
+ }
+
+ .cart-box{
+     position: fixed;
+     .total{
+         color: $white;
+         text-transform: uppercase;
+         font-family: 'gotham-book';
+         font-size: 1.5em;
+         line-height: 30px;
+         .price{
+            font-size: 2em;
+            font-family: 'gotham-black';
+         }
+    
+         .frete{
+            font-family: 'gotham-bold';
+            text-transform: lowercase;
+             .gratis{
+                text-transform: lowercase;
+                font-family: 'gotham-bold';
+                padding: 5px 10px;
+                @include gradient-orange($orange-1, $orange-2);
+                @include border-radius(10px);
+             }
+         }
+    
+     }
+     
+     .bar-cart{
+         width: 100%;
+     }
+ }
+
+
+ .jp-card-container{
+        width: auto;
+        height: 270px !important;
+    }
+
+    .jp-card-front, .jp-card-back{
+        @include gradient-orange($orange-1, $orange-2);
+    }
+
+    .jp-card .jp-card-front .jp-card-shiny, .jp-card .jp-card-back .jp-card-shiny{
+        @include gradient-orange(#ebba51, #ffcf78);
+        &:before{
+            @include gradient-orange(#ebba51, #ffcf78);
+
+        }
+    }
+
+    form{
+        input{
+            background-color: $white;
+            padding: 30px 25px;
+            border: 0;
+            margin: 10px 0;
+            @include border-radius(100px);
+        }
+    }
+
+    .box-promotion{
+        background-color: #070707;
+        padding: 25px;
+        border: 3px dashed $orange-1;
+        @include border-radius(25px);
+
+        .video{
+            @include border-radius(25px);
+            overflow: hidden;
+            z-index: 1;
+            height: 150px;
+            width: 100%;
+        }
+    }
+    
+    .title-box{
+        text-align: center;
+        color: $white;
+        font-family: 'gotham-bold';
+    }
+
+    .custom-control{
+        position: relative;
+        display: inline-block;
+        &:after{
+            content: '';
+            position: absolute;
+            left: -107px;
+            top: 4px;
+            background-image: url(../images/clique.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 93px;
+            height: 15px;
+        }
+    }
+
+    input{
+        outline: none;
+        box-shadow: none;
+    }
+    .custom-control-label::before{
+        background-color: $gray;
+        width: 1.5rem;
+        height: 1.5rem;
+        @include border-radius(5px);
+    }
+    .custom-control-label::after{
+        background-color: $gray;
+        width: 1.5rem;
+        height: 1.5rem;
+        @include border-radius(5px);
+    }
+
+    .-label-check{
+        font-family: 'gotham-bold';
+        color: $white;
+        margin-left: 10px;
+    }
+
+    .total{
+        margin-top: 20px;
+        margin-bottom: 50px;
+        color: $white;
+        text-transform: uppercase;
+        font-family: 'gotham-book';
+        font-size: 1.5em;
+        line-height: 30px;
+        .price{
+           font-size: 2em;
+           font-family: 'gotham-black';
+        }
+   
+        .frete{
+           font-family: 'gotham-bold';
+           text-transform: lowercase;
+            .badge-gradient{
+               text-transform: lowercase;
+               font-family: 'gotham-bold';
+               padding: 5px 10px;
+               @include gradient-orange($orange-1, $orange-2);
+               @include border-radius(10px);
+            }
+        }
+   
+    }
+    
+    @media (max-width: $screen-xs) {
+        .cart-box{
+            position: static;
+        }
+    }
+
+    @media (max-width: 320px) {
+
+    .custom-control{
+            &:after{
+               display: none;
+            }
+        }
+    }
+}
+

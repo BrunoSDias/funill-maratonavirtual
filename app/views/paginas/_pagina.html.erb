@@ -1,0 +1,17 @@
+<% if paginas.present? %>
+<ul style="padding: 20px;">
+  <% paginas.each do |pagina| %>
+    <li>
+      <div><b>Nome</b> <%= pagina.nome %></div>
+      <div><b>Slug</b> <%= pagina.slug %> <a href="/<%= @produto.slug %>/<%= pagina.slug %>" target="_blank">Ver</a></div>
+      <div><b>Próxima pagina</b> <%= pagina.pagina.nome rescue "" %></div>
+      <div>
+        <%= link_to 'Mostrar', produto_pagina_path(@produto, pagina), class:"btn btn-primary" %>
+        <%= link_to 'Editar', edit_produto_pagina_path(@produto, pagina), class:"btn btn-warning" %>
+        <%= link_to 'Apagar', produto_pagina_path(@produto, pagina), class:"btn btn-danger", method: :delete, data: { confirm: 'Confirma?' } %>
+      </div>
+      <%= render 'pagina', {paginas: pagina.proximas_paginas} %>
+    </li>
+  <% end %>
+</ul>
+<% end %>

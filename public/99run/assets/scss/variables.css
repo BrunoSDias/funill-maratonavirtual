@@ -1,0 +1,25 @@
+/*Color palets*/
+/*Fonts*/
+@font-face {
+  font-family: 'gotham-ultra';
+  src: url("../fontes/gotham-ultra.otf"); }
+@font-face {
+  font-family: 'gotham-book';
+  src: url("../fontes/gotham-book.otf"); }
+@font-face {
+  font-family: 'gotham-bold';
+  src: url("../fontes/gotham-bold.otf"); }
+@font-face {
+  font-family: 'gotham-black';
+  src: url("../fontes/gotham-black.otf"); }
+/*Bootstrap*/
+/* $font-family-sans-serif:      'Open Sans', sans-serif !default;
+$font-family-monospace:       'Open Sans', sans-serif !default;
+$font-family-base:            $font-family-sans-serif !default; */
+/* $modal-content-bg:                  $dark-slide !default;
+$modal-content-border-color:        transparent !default;
+$modal-content-border-width:        0 !default;
+$modal-content-border-radius:       30px !default; */
+/*responsive dynamic system*/
+
+/*# sourceMappingURL=variables.css.map */

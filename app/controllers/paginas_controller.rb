@@ -5,7 +5,7 @@ class PaginasController < ApplicationController
   # GET /paginas
   # GET /paginas.json
   def index
-    @paginas = Pagina.where(produto_id: @produto.id)
+    @paginas = Pagina.iniciais(@produto.id)
   end
 
   # GET /paginas/1
@@ -74,6 +74,6 @@ class PaginasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pagina_params
-      params.require(:pagina).permit(:nome, :slug, :conteudo, :produto_id, :pagina_id)
+      params.require(:pagina).permit(:nome, :slug, :conteudo, :produto_id, :pagina_id, :inicio)
     end
 end

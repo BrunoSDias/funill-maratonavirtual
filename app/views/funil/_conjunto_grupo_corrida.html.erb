@@ -1,0 +1,44 @@
+<% if @conjunto_grupo_corrida.present? %>
+<div class="col-lg-5 offset-lg-2">
+    <h1 class="total">
+        Valor a ser pago<br><span class="price"><%= number_to_currency(@conjunto_grupo_corrida.grupos[0]["preco"]) %></span> <span class="frete">frete <span class="badge-gradient">grátis</span></span>
+    </h1>
+    <div class="box-km">
+        <h3 class="title badge-gradient d-inline-block">Passo 1:</h3>
+        <p class="text">Qual distância você vai correr?</p>
+
+        <div class="btn-group btn-group-toggle sizes mt-4" data-toggle="buttons">
+        	<% @conjunto_grupo_corrida.grupos.each_with_index do |grupo, i| %>
+            <label class="btn btn-size <%= i == 0 ? "active" : "" %>">
+                <input type="radio" name="options" id="option1" autocomplete="off"  <%= i == 0 ? "checked" : "" %>> <%= grupo["desafio"]["distancia"] %>km
+            </label>
+            <% end %>
+        </div>
+    </div>
+
+    <div class="box-km mt-4">
+        <h3 class="title badge-gradient d-inline-block">Passo 2:</h3>
+        <form action="comprar-runflix.php">
+            <div class="form-row form-container mt-4">
+                <div class="col-12">
+                    <i class="fas fa-mobile-alt"></i>
+                    <input class="form-control " placeholder="Insira seu celualr aqui" type="tel" name="number">
+                </div>
+
+                <div class="col-12">
+                    <i class="far fa-envelope"></i>
+                    <input class="form-control" placeholder="Insira seu e-mail aqui" type="text" name="name">
+                </div>
+            </div>
+        </form>
+
+        <div class="link text-center">
+            <a href="#.">Já possui conta 99RUN<br>Clique aqui</a>
+        </div>
+
+        <a href="#" class="button-default-green d-block w-100 -aux">Em até 12x<br><span>no cartão de crédito</span></a>
+        <span class="text-center font-light ou">ou</span>
+        <a href="#" class="d-block w-100 -aux-2">A vista no<br><span>boleto</span></a>
+    </div>
+</div>
+<% end %>

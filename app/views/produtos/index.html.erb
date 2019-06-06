@@ -11,6 +11,7 @@
     <thead>
       <tr>
         <th>Nome</th>
+        <th>Slug</th>
         <th>Url</th>
         <th></th>
         <th></th>
@@ -23,6 +24,7 @@
     <tbody>
       <%= content_tag_for(:tr, @produtos) do |produto| %>
         <td><%= produto.nome %></td>
+        <td><%= produto.slug %></td>
         <td><%= produto.url %></td>
         <td><a href="/produtos/<%= produto.id %>/upsell">Upsell</a></td>
         <td><a href="/produtos/<%= produto.id %>/paginas">Paginas</a></td>
