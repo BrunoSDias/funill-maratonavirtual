@@ -11,6 +11,11 @@ class Pagina < ApplicationRecord
 
   def proximas_paginas
   	return [] if self.pagina_id.blank?
-  	[Pagina.find(self.pagina_id)]
+    paginas = Pagina.where(id: self.pagina_id)
+    if paginas.present?
+  	  return [paginas.first]
+    else
+      return []
+    end
   end
 end
