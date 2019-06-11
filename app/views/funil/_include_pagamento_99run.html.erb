@@ -5,18 +5,18 @@
     <div class="card-wrapper mt-4"></div>
 
     <div class="form-container active mt-4">
-        <form>
+        <form class="cartao">
             <div class="form-row form-container mt-4">
                 <div class="col-12">
-                    <input class="form-control" value="4111111111111111" placeholder="Número do cartão" type="tel" name="numero" id="numeroCartao">
+                    <input class="form-control" value="4111111111111111" placeholder="Número do cartão" type="tel" name="number" id="numeroCartao">
                 </div>
 
                 <div class="col-12">
-                    <input class="form-control" value="Danilo" placeholder="Nome do titular" type="text" name="nome" id="nomeCartao">
+                    <input class="form-control" value="Danilo" placeholder="Nome do titular" type="text" name="name" id="nomeCartao">
                 </div>
                 
                 <div class="col-4">
-                    <input class="form-control" value="09/2022" placeholder="MM/AA" type="tel" name="data" id="mesAnoCartao">
+                    <input class="form-control" value="09/2022" placeholder="MM/AA" type="tel" name="expiry" id="mesAnoCartao">
                 </div>
                 
                 <div class="col-4">
@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="col-4">
-                    <select class="form-control" name="parcelas" id="parcelas">
+                    <select class="form-control" name="parcelas" id="parcelas" style="height: 60px;margin-top: 10px;">
                       <option value="1">1x</option>
                       <option value="2">2x</option>
                       <option value="3">3x</option>
@@ -91,6 +91,19 @@
     overflow: scroll;
   }
 </style>
+<script type="text/javascript" src="/99run/assets/js/jquery.card.js"></script>
+<script>
+    new Card({
+        form: document.querySelector('form.cartao'),
+        container: '.card-wrapper',
+        placeholders: {
+            number: '•••• •••• •••• ••••',
+            name: 'Nome do titular',
+            expiry: '••/••',
+            cvc: '•••'
+        },
+    });
+</script>
 <div class="jsUpsell"></div>
 
 
