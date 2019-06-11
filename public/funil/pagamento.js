@@ -3,6 +3,11 @@ maratonaVirtual.host = 'http://localhost:3001/';
 maratonaVirtual.token = '79hrovrwibfxsrh_TglsoTy*b5sjcht9f5na*53Gmcfjg555Site';
 maratonaVirtual.pg_id = "C49117ED8151463DB189BF82F7AECB67";
 
+var promocao = {};
+promocao.callback = undefined;
+promocao.paginaCorrenteId = undefined;
+promocao.produtoId = undefined;
+
 maratonaVirtual.load = {
   on: function() {
     $("#modal-load").show();
@@ -12,8 +17,10 @@ maratonaVirtual.load = {
   }
 }
 
-var promocao = {};
-promocao.confirmarCompra = function(self, pagina_id){
+promocao.confirmarCompra = function(self, pagina_id, produtoId){
+  promocao.produtoId = produtoId;
+  promocao.paginaCorrenteId = pagina_id;
+
   $(self).html("Carregando ...");
   $(self).attr("disabled", "disabled");
 
@@ -65,7 +72,6 @@ promocao.confirmarCompra = function(self, pagina_id){
   var month = $("#mesAnoCartao").val().split("/")[0];
   var year = $("#mesAnoCartao").val().split("/")[1];
   var cvv = $("#cvvCartao").val();
-  var parcelas = $("#parcelas").val();
 
   var sobrenome = "";
   try{
@@ -148,6 +154,9 @@ promocao.confirmarTransacao = function(){
   maratonaVirtual.load.on();
   var funil = JSON.parse(decodeURIComponent(getCookie("funil")).replace(/\+\:/g, ":"));
 
+  var data = {};
+  data.months = $("#parcelas").val()
+  data.token = promocao.token
   data.usuario_id = funil.usuario_id
   data.pedido = {
     items: funil.carrinho
@@ -163,18 +172,57 @@ promocao.confirmarTransacao = function(){
       'Content-Type': 'application/json; charset=utf-8'
     },
     data: JSON.stringify(data)
-  }).done(function() { 
+  }).done(function(data) { 
     maratonaVirtual.load.off();
-    alert("pago");
-    callback.call();
+
+    eraseCookie("funil");
+
+    var url = '/produtos/' + promocao.produtoId + '/paginas/' + promocao.paginaCorrenteId + '.json';
+    $.ajax({
+      type: 'GET',
+      url: url,
+    }).done(function(data) {
+      window.location.href = "/" + data.slug_produto + "/" + data.slug_proxima + "";
+    });
+
   }).fail(function(jqXHR, textStatus) {
     maratonaVirtual.load.off();
-    alert("Não pago");
+
+
+    var data = jqXHR.responseJSON;
+    var mensagem = data.erro;
+    if(!mensagem){
+      mensagem = data.error
+      if(!mensagem){
+        if(data.pedidos_nao_efetuados && data.pedidos_nao_efetuados.length > 0){
+          for(var i=0; i<data.pedidos_nao_efetuados.length; i++){
+            var pedidos_nao_efetuados = data.pedidos_nao_efetuados[i];
+            var mensagem = pedidos_nao_efetuados.erro;
+            if(!mensagem){
+              mensagem = pedidos_nao_efetuados.error
+            }
+            if(mensagem){
+              mensagem += "<br>";
+            }
+          }
+        }
+
+        if(!mensagem){
+          mensagem = JSON.stringify(data);
+        }
+      }
+    }
+
+    if(mensagem !== "Not Found"){
+      alert('Confira: \n' + mensagem.replace(/<br>/g, "\n"));
+    }
+    else{
+      alert(mensagem);
+    }
+
   });
 }
 
-promocao.callback = undefined;
-promocao.paginaCorrenteId = undefined;
 promocao.showUpsell = function(pagina_corrente_id, callback, idProximaPromocao){
   var funil = JSON.parse(decodeURIComponent(getCookie("funil")).replace(/\+\:/g, ":"));
   promocao.callback = callback;

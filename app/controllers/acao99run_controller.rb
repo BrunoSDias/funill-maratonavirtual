@@ -4,11 +4,8 @@ class Acao99runController < ApplicationController
   def login_compra_grupo_corrida
     usuario = Usuario.find(params[:email], params[:telefone])
     pagina = Pagina.find(params[:pagina_id])
-    grupo_corrida_id = params[:grupo_corrida_id]
-    preco = params[:preco]
 
-    grupo_corrida_id = 42
-    preco = 39
+    grupo_corrida = GrupoCorridaRun.find(params[:grupo_corrida_id])
 
     cookies[:funil] = {
       value: {
@@ -16,8 +13,8 @@ class Acao99runController < ApplicationController
         pagina_id: pagina.id,
         carrinho:[
           grupo_inscricao: {
-            id: grupo_corrida_id,
-            preco: preco
+            id: grupo_corrida.id,
+            preco: grupo_corrida.preco
           }
         ]
       }.to_json,
