@@ -12,6 +12,7 @@
       <tr>
         <th>Nome</th>
         <th>Tempo relogio</th>
+        <th>Rota</th>
         <th></th>
         <th></th>
         <th></th>
@@ -22,6 +23,14 @@
       <%= content_tag_for(:tr, @promocoes) do |promocao| %>
         <td><%= promocao.nome %></td>
         <td><%= promocao.tempo_relogio.strftime("%H:%M:%S") %></td>
+        <td>
+          <% if promocao.promocao_se_pago_vai_para %>
+            <b>Se pagou vai para:</b> <%= promocao.promocao_se_pago_vai_para.nome %><br>
+          <% end %>
+          <% if promocao.promocao_se_negou_vai_para %>
+            <b>Se não pagou vai para:</b> <%= promocao.promocao_se_negou_vai_para.nome %><br>
+          <% end %>
+        </td>
         <td><%= link_to 'Mostrar', produto_upsell_promocao_path(@produto, @upsell, promocao) %></td>
         <td><%= link_to 'Editar', edit_produto_upsell_promocao_path(@produto, @upsell, promocao) %></td>
         <td><%= link_to 'Apagar', produto_upsell_promocao_path(@produto, @upsell, promocao), method: :delete, data: { confirm: 'Confirma?' } %></td>

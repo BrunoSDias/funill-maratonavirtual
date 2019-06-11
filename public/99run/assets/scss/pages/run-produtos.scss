@@ -1,0 +1,66 @@
+header#header-produtos {
+    position: relative;
+    background-image: url("../images/bg-produtos-video.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 684px;
+}
+
+section#section-produtos {
+    margin-top: -520px;
+
+    .produtos-lista {
+        .item {
+            height: 490px;
+
+            .nome-produto {
+                margin-top: 20px;
+                font-size: 26px;
+                color: #fff;
+                margin-bottom: 40px;
+
+                .tipo-produto {
+                    text-transform: uppercase;
+                    margin-right: 30px;
+                    display: inline;
+                    font-weight: bold;
+                }
+
+                .preco-produto {
+                    text-transform: uppercase;
+                    display: inline;
+                    font-weight: bold;
+                }
+            }
+        }
+
+        .box {
+            position: relative;
+
+            .-aux {
+                position: absolute;
+                bottom: -30px;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+            }
+        }
+
+    }
+
+    @media (max-width: 320px) {
+        .produtos-lista {
+            .item {
+                height: 350px !important;
+            }
+        }
+    }
+
+    @media (max-width: $screen-xs) {
+        .produtos-lista {
+            .item {
+                height: 410px;
+            }
+        }
+    }
+}

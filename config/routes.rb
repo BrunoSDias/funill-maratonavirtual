@@ -14,5 +14,7 @@ Rails.application.routes.draw do
 
   get '/login', to: 'login#index'
 
+  get '/upsell/:pagina_id', to: 'funil#upsell'
+  post '/99run/login/comprar/grupo-corrida', to: 'acao99run#login_compra_grupo_corrida'
   get '/:slug_produto/:slug_pagina', to: 'funil#slug'
 end

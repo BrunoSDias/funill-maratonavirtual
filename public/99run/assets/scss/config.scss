@@ -166,6 +166,10 @@ a, p{
   @include border-radius(10px);
 }
 
+.color-green{
+  color: $green;
+}
+
 .button-default-green {
   background-color: $green;
   color: $white;
@@ -196,5 +200,24 @@ a, p{
   transition-property: color;
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s; 
+  @include border-radius(50px);
+}
+
+.btn-default-red {
+  color: $white !important;
+  background-color: $color-dynamic !important;
+  padding: 10px 35px;
+  display: inline-block;
+  margin: 3px;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  overflow: hidden;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
   @include border-radius(50px);
 }

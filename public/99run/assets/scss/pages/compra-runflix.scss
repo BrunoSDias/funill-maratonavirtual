@@ -1,0 +1,390 @@
+header#header-comprar {
+    position: relative;
+    background-color: $white;
+    height: 150px;
+    padding-top: 30px;
+    text-align: center;
+
+    .text-antencao {
+        text-transform: uppercase;
+        font-family: 'gotham-black';
+    }
+
+    .text-descri {
+        font-family: 'gotham-book';
+        margin-top: 10px;
+    }
+
+
+    .progress {
+        height: 1.8rem;
+        margin-left: 33%;
+        font-size: 1rem;
+        background-color: #101010;
+        border-radius: 1rem;
+        max-width: 500px;
+    }
+
+    .assistido {
+        background-color: $green;
+        border-radius: 1rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .progress {
+        margin-left: 12% !important;
+        max-width: 75% !important;
+    }
+}
+
+@media (max-width: $screen-xs) {
+    .progress {
+        margin-left: 12% !important;
+        max-width: 75% !important;
+    }
+}
+
+section#video-especialista {
+    margin-top: 30px;
+
+    .title-header {
+        color: $white;
+        text-transform: uppercase;
+        font-family: 'gotham-black';
+        font-size: 35px;
+        line-height: 40px;
+        margin-bottom: 20px;
+    }
+
+    @media (max-width: $screen-xs) {
+        .title-header {
+            font-size: 2em;
+            line-height: 33px;
+        }
+    }
+
+    @media (max-width: 320px) {
+        .title-header {
+            font-size: 1.7em;
+            line-height: 27px;
+        }
+    }
+
+    iframe {
+        border-radius: 20px;
+    }
+}
+
+section#investimento {
+    .calendario-img {
+        width: 90px;
+        float: left;
+    }
+
+    .papenas {
+        margin-top: 15px;
+        margin-left: 110px !important;
+        font-size: 20px;
+        color: $white;
+
+        span {
+            font-family: 'gotham-bold';
+            font-size: 30px;
+        }
+    }
+
+    .precofixo {
+        margin-top: 10px;
+        margin-left: 110px !important;
+        font-size: 30px;
+        color: $white;
+        text-transform: uppercase;
+        font-family: 'gotham-bold';
+        line-height: 29px;
+
+        span {
+            font-size: 30px;
+        }
+
+        small {
+            font-family: 'gotham-book';
+            font-size: 15px;
+            text-transform: none;
+        }
+    }
+
+    .text-quest{
+        color: #fff;
+        font-size: 30px;
+        margin-top: 10px;
+    }
+
+    .title-red-box{
+        max-width: 350px;
+        font-size: 25px;
+    }
+
+    .text-desc {
+        font-size: 20px;
+        color: $white;
+
+        span {
+            font-family: 'gotham-bold';
+        }
+    }
+
+    .-aux {
+        padding-right: 0px;
+        margin-left: 100px;
+        max-width: 100%;
+    }
+
+    @media (max-width: $screen-xs) {
+        .precofixo {
+            margin-left: 26px !important;
+        }
+
+        .-aux {
+            padding-right: 15px;
+            margin-left: auto;
+            max-width: 100%;
+        }
+    }
+
+    @media (max-width: 320px) {
+        .precofixo {
+            margin-left: 26px !important;
+        }
+
+        .-aux {
+            padding-right: 15px;
+            margin-left: auto;
+            max-width: 100%;
+        }
+    }
+}
+
+section#section-comprar {
+    margin-top: 50px;
+    padding-bottom: 70px;
+
+    .text-subtitle {
+        color: $white;
+        font-size: 30px;
+        font-family: 'gotham-book';
+        margin-bottom: 20px;
+
+        span {
+            font-family: 'gotham-bold';
+        }
+    }
+
+    h3 {
+        font-size: 30px;
+        color: $white;
+        font-family: 'gotham-bold';
+    }
+
+    h4 {
+        font-size: 30px;
+        color: $white;
+        font-family: 'gotham-book';
+
+        span {
+            font-family: 'gotham-bold';
+        }
+    }
+
+    .box-check{
+        background: #101010;
+        border-radius: 30px;
+        padding: 50px;
+        margin-left: 10%;
+        cursor: pointer;
+
+        img{
+            max-height: 300px;
+        }
+    }
+
+    .alinha-ou{
+        padding-top: 155px;
+        padding-left: 77px;
+    }
+
+    .border-selected{
+        border: 5px solid #4ac132;
+    }
+
+    @media (max-width: $screen-xs) {
+        .text-subtitle {
+            font-size: 25px;
+        }
+        .alinha-ou {
+            padding-top: 55px;
+            padding-left: 77px;
+        }
+    }
+
+    @media (max-width: 320px) {
+        .text-subtitle {
+            font-size: 22px;
+        }
+
+        .alinha-ou {
+            padding-top: 55px;
+            padding-left: 77px;
+        }
+    }
+
+    .total {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        color: $white;
+        text-transform: uppercase;
+        font-family: 'gotham-book';
+        font-size: 1.3em;
+        line-height: 33px;
+        letter-spacing: 3px;
+
+        .price {
+            font-size: 3em;
+            font-family: 'gotham-black';
+            letter-spacing: 0;
+        }
+
+        .frete {
+            font-family: 'gotham-bold';
+            text-transform: lowercase;
+            letter-spacing: 0;
+            font-size: 28px;
+
+            .badge-gradient {
+                text-transform: lowercase;
+                font-family: 'gotham-bold';
+                padding: 5px 10px;
+                @include gradient-orange($orange-1, $orange-2);
+                @include border-radius(10px);
+            }
+        }
+    }
+
+    .box-km {
+        background-color: $gray-light;
+        padding: 25px;
+        @include border-radius(25px);
+
+        .text {
+            color: $gray;
+            font-family: 'gotham-bold';
+            font-size: 18px;
+        }
+
+        .sizes {
+            .btn-size {
+                background-color: transparent;
+                margin: 5px 10px;
+                font-family: 'gotham-bold';
+                color: $white;
+                font-size: 18px;
+                text-transform: uppercase;
+                @include border-radius(10px);
+            }
+
+            .active {
+                box-shadow: none !important;
+                outline: none !important;
+                background-color: $color-dynamic;
+                color: $white;
+            }
+        }
+
+        form {
+            input {
+                position: relative;
+                background-color: $white;
+                padding: 30px 70px;
+                border: 0;
+                margin: 5px 0;
+                @include border-radius(100px);
+            }
+
+            i {
+                position: absolute;
+                font-size: 24px;
+                color: $gray-light;
+                top: 50%;
+                margin-top: -12px;
+                left: 35px;
+                z-index: 1;
+                text-align: center;
+            }
+        }
+
+        .link {
+            a {
+                color: $white;
+            }
+        }
+
+        .ou {
+            display: block;
+            margin-top: 30px;
+            font-size: 18px;
+            color: $white;
+        }
+
+        .-aux-2 {
+            border: 1px solid $white;
+            color: $white;
+            font-family: 'gotham-bold';
+            margin-top: 30px;
+            position: relative;
+            font-size: 2em;
+            line-height: 20px;
+            padding: 10px 20px 10px 150px;
+            @include border-radius(100px);
+
+            &:after {
+                content: '\f02a';
+                font-family: "Font Awesome 5 Free";
+                position: absolute;
+                left: 80px;
+                font-size: 2em;
+                color: $white;
+                top: 50%;
+                margin-top: -12px;
+                font-weight: 900;
+
+            }
+
+            span {
+                font-size: .7em;
+                font-family: 'gotham-book';
+            }
+
+            &:hover {
+                color: $white;
+            }
+        }
+    }
+
+    .-aux {
+        width: 350px;
+        text-align: center;
+    }
+
+    .box-btn {
+        margin: 60px auto;
+    }
+
+    .link {
+        color: #939191;
+        text-decoration: underline !important;
+    }
+
+    .link:hover {
+        color: #fff;
+    }
+}

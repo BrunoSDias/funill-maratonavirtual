@@ -13,11 +13,33 @@ class FunilController < ApplicationController
       raise ActionController::RoutingError.new('Not Found') if @conteudo.blank?
     end
 
-    @conteudo = paginas.first.conteudo
+    @pagina = paginas.first
+    @conteudo = @pagina.conteudo
     tag_grupo = @conteudo.scan(/\{\{include_grupo_selecione.*?\}\}/) rescue ""
     if tag_grupo.present?
       slug_grupo = tag_grupo.first.gsub(/\{\{include_grupo_selecione:|\}\}/, '').strip
-      @conjunto_grupo_corrida = ConjuntoGruposCorrida.find(slug_grupo)
+      @conjunto_grupo_corrida = ConjuntoGruposCorridaRun.find(slug_grupo)
+    end
+
+    tag_pagamento = @conteudo.scan(/\{\{include_pagamento_99run.*?\}\}/) rescue ""
+    if tag_pagamento.present?
+      slug_produto = tag_pagamento.first.gsub(/\{\{include_pagamento_99run:|\}\}/, '').strip
+      @produto = ProdutoRun.find(slug_produto)
+    end
+  end
+
+  def upsell
+    @pagina = Pagina.find(params[:pagina_id])
+    @upsell = @pagina.upsell
+    if params[:idProximaPromocao].present?
+      @promocao = @upsell.promocoes.where(id: params[:idProximaPromocao]).first
+    else
+      @promocao = @upsell.promocoes.first
+    end
+
+    if @upsell.blank?
+      render json: {}, status: 204
+      return
     end
 
   end

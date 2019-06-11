@@ -1,8 +1,7 @@
 class Rest
-  def self.all(url, aluno_id=nil, query={})
+  def self.all(url, query={})
     uri = URI.parse(URI.escape(url))
     headers = {"MaratonaKeyAccess" => TOKEN}
-    headers["AlunoId"] = aluno_id.to_s if aluno_id.present?
     request = HTTParty.get(uri, :query => query, :headers => headers)
     
     if (200...300).include?(request.code.to_i)
@@ -15,10 +14,9 @@ class Rest
     return []
   end
 
-  def self.exist?(url, aluno_id=nil, query={})
+  def self.exist?(url, query={})
     uri = URI.parse(URI.escape(url))
     headers = {"MaratonaKeyAccess" => TOKEN}
-    headers["AlunoId"] = aluno_id.to_s if aluno_id.present?
     request = HTTParty.get(uri, :query => query, :headers => headers)
     if (200...300).include?(request.code.to_i)
       return true
@@ -28,10 +26,9 @@ class Rest
     return false
   end
 
-  def self.show(url, aluno_id=nil, query={})
+  def self.show(url, query={})
     uri = URI.parse(URI.escape(url))
     headers = {"MaratonaKeyAccess" => TOKEN}
-    headers["AlunoId"] = aluno_id.to_s if aluno_id.present?
     request = HTTParty.get(uri, :query => query, :headers => headers)
     if (200...300).include?(request.code.to_i)
       if request.body.present?
@@ -48,7 +45,6 @@ class Rest
   def self.post(url, data={})
     uri = URI.parse(URI.escape(url))
     headers = {"MaratonaKeyAccess" => TOKEN}
-    headers["AlunoId"] = data[:id].to_s
     request = HTTParty.post(uri, :body => data, :headers => headers)
     if (200...300).include?(request.code.to_i)
       if request.body.present?
@@ -67,7 +63,6 @@ class Rest
   def self.put(url, data={})
     uri = URI.parse(URI.escape(url))
     headers = {"MaratonaKeyAccess" => TOKEN}
-    headers["AlunoId"] = data[:id].to_s
     request = HTTParty.put(uri, :body => data, :headers => headers)
     if (200...300).include?(request.code.to_i)
       if request.body.present?
