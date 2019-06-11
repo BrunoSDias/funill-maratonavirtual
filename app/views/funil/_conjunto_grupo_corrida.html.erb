@@ -1,7 +1,6 @@
 <% if @conjunto_grupo_corrida.present? && @conjunto_grupo_corrida.instance_variable_get("@table").keys.present? %>
-
-<form action="/99run/login/comprar/grupo-corrida" method="post" id="formPostLogin" style="width:100%">
-    <div class="col-lg-5 offset-lg-2">
+<div class="col-lg-5 offset-lg-2">
+    <form action="/99run/login/comprar/grupo-corrida" method="post" id="formPostLogin">
         <h1 class="total">
             Valor a ser pago<br><span class="price"><%= number_to_currency(@conjunto_grupo_corrida.grupos[0]["preco"]) %></span> <span class="frete">frete <span class="badge-gradient">grátis</span></span>
         </h1>
@@ -10,9 +9,9 @@
             <p class="text">Qual distância você vai correr?</p>
 
             <div class="btn-group btn-group-toggle sizes mt-4" data-toggle="buttons">
-            	<% @conjunto_grupo_corrida.grupos.each_with_index do |grupo, i| %>
+
+                <% @conjunto_grupo_corrida.grupos.each_with_index do |grupo, i| %>
                 <label class="btn btn-size <%= i == 0 ? "active" : "" %>">
-                    <input type="hidden" name="preco" value='<%= grupo["preco"] %>'>
                     <input type="radio" name="grupo_corrida_id" autocomplete="off" value='<%= grupo["id"] %>'  <%= i == 0 ? "checked" : "" %>> <%= grupo["desafio"]["distancia"] %>km
                 </label>
                 <% end %>
@@ -21,7 +20,8 @@
 
         <div class="box-km mt-4">
             <h3 class="title badge-gradient d-inline-block">Passo 2:</h3>
-                <input type="hidden" name="pagina_id" value="<%= @pagina.id %>">
+            <input type="hidden" name="pagina_id" value="<%= @pagina.id %>">
+            <div class="form">
                 <div class="form-row form-container mt-4">
                     <div class="col-12">
                         <i class="fas fa-mobile-alt"></i>
@@ -33,14 +33,11 @@
                         <input class="form-control" placeholder="Insira seu e-mail aqui" type="text" name="email" id="99RunPostLoginEmail">
                     </div>
                 </div>
-
-            <!-- <div class="link text-center">
-                <a href="#.">Já possui conta 99RUN<br>Clique aqui</a>
-            </div> -->
+            </div>
 
             <a href="javascript:;" onclick="postForm()" class="button-default-green d-block w-100 -aux">Em até 12x<br><span>no cartão de crédito</span></a>
             <span class="text-center font-light ou">ou</span>
-            <a href="javascript:;" class="d-block w-100 -aux-2">A vista no<br><span>boleto</span></a>
+            <a href="#" class="d-block w-100 -aux-2">A vista no<br><span>boleto</span></a>
             <script type="text/javascript">
               var postForm = function() {
                 if($("#99RunPostLoginTelefone").val() == ""){
@@ -59,6 +56,6 @@
               }
             </script>
         </div>
-    </div>
-</form>
+    </form>
+</div>
 <% end %>
