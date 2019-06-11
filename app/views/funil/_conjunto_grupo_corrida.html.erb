@@ -37,8 +37,15 @@
 
             <a href="javascript:;" onclick="postForm()" class="button-default-green d-block w-100 -aux">Em até 12x<br><span>no cartão de crédito</span></a>
             <span class="text-center font-light ou">ou</span>
-            <a href="#" class="d-block w-100 -aux-2">A vista no<br><span>boleto</span></a>
+            <a href="javascript:;" onclick="postFormBoleto()" class="d-block w-100 -aux-2">A vista no<br><span>boleto</span></a>
+            <input type="hidden" name="pagar_com_boleto" id="pagar_com_boleto" value="false">
             <script type="text/javascript">
+              var postFormBoleto = function() {
+                debugger
+                $("#pagar_com_boleto").val("true");
+                postForm();
+              }
+
               var postForm = function() {
                 if($("#99RunPostLoginTelefone").val() == ""){
                   alert("Preencha o telefone");

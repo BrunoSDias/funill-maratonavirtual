@@ -4,11 +4,11 @@ class Acao99runController < ApplicationController
   def login_compra_grupo_corrida
     usuario = Usuario.find(params[:email], params[:telefone])
     pagina = Pagina.find(params[:pagina_id])
-
     grupo_corrida = GrupoCorridaRun.find(params[:grupo_corrida_id])
 
     cookies[:funil] = {
       value: {
+        pagar_com_boleto: params[:pagar_com_boleto],
         usuario_id: usuario.id,
         pagina_id: pagina.id,
         carrinho:[

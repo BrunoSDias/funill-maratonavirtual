@@ -17,6 +17,93 @@ maratonaVirtual.load = {
   }
 }
 
+promocao.gerarBoleto = function(self, pagina_id, produtoId){
+  var funil = JSON.parse(decodeURIComponent(getCookie("funil")).replace(/\+\:/g, ":"));
+
+  var cpf = $("#cpf");
+  var cep = $("#cep");
+  var endereco = $("#endereco");
+  var numero = $("#numero");
+  var complemento = $("#complemento");
+  var cidade = $("#cidade");
+  var estado = $("#estado");
+
+  if(!cpf.val() || cpf.val() == ""){
+    cpf.focus();
+    cpf.css("background", "#fbb67a")
+    cpf.attr("placeholder", "CPF obrigatório");
+    setTimeout(function(){ $("#cpf").val(""); }, 200);
+    cpf.blur(function(){
+      $(this).css("background", "#D8D8D8");
+    });
+    return;
+  }
+  else if(!maratonaVirtual.testaCPF(cpf.val())){
+    cpf.focus();
+    setTimeout(function(){ $("#cpf").val(""); }, 200);
+    cpf.css("background", "#fbb67a")
+    cpf.attr("placeholder", "CPF inválido");
+    cpf.blur(function(){
+      $(this).css("background", "#D8D8D8");
+    });
+    return;
+  }
+
+  if(!cep.val() || cep.val() == ""){
+    cep.focus();
+    cep.attr("placeholder", "CEP obrigatório");
+    cep.css("background", "#fbb67a")
+    cep.blur(function(){
+      $(this).css("background", "#D8D8D8");
+    });
+    return;
+  }
+
+  promocao.carregarEndereco(cep.val());
+
+  if(!endereco.val() || endereco.val() == ""){
+    endereco.focus();
+    endereco.attr("placeholder", "Endereço obrigatório");
+    endereco.css("background", "#fbb67a")
+    endereco.blur(function(){
+      $(this).css("background", "#D8D8D8");
+    });
+    return;
+  }
+
+  if(!numero.val() || numero.val() == ""){
+    numero.focus();
+    numero.attr("placeholder", "Número obrigatório");
+    numero.css("background", "#fbb67a")
+    numero.blur(function(){
+      $(this).css("background", "#D8D8D8");
+    });
+    return;
+  }
+
+  if(!cidade.val() || cidade.val() == ""){
+    cidade.focus();
+    cidade.attr("placeholder", "Cidade obrigatório");
+    cidade.css("background", "#fbb67a")
+    cidade.blur(function(){
+      $(this).css("background", "#D8D8D8");
+    });
+    return;
+  }
+
+  if(!estado.val() || estado.val() == ""){
+    estado.focus();
+    estado.attr("placeholder", "Estado obrigatório");
+    estado.css("background", "#fbb67a")
+    estado.blur(function(){
+      $(this).css("background", "#D8D8D8");
+    });
+    return;
+  }
+
+  alert("Gerar boleto");
+}
+
 promocao.confirmarCompra = function(self, pagina_id, produtoId){
   promocao.produtoId = produtoId;
   promocao.paginaCorrenteId = pagina_id;

@@ -26,6 +26,8 @@ class FunilController < ApplicationController
       slug_produto = tag_pagamento.first.gsub(/\{\{include_pagamento_99run:|\}\}/, '').strip
       @produto = ProdutoRun.find(slug_produto)
     end
+
+    @boleto = JSON.parse(cookies[:funil])["pagar_com_boleto"]
   end
 
   def upsell
