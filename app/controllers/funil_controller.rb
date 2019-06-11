@@ -27,7 +27,7 @@ class FunilController < ApplicationController
       @produto = ProdutoRun.find(slug_produto)
     end
 
-    @boleto = JSON.parse(cookies[:funil])["pagar_com_boleto"]
+    @boleto = JSON.parse(cookies[:funil])["pagar_com_boleto"] rescue nil
   end
 
   def upsell
