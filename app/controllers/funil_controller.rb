@@ -33,6 +33,8 @@ class FunilController < ApplicationController
 
     if cookies[:usuario].present?
       @usuario = OpenStruct.new(JSON.parse(cookies[:usuario]))
+    else
+      @usuario = OpenStruct.new
     end
 
     if cookies[:id_pedido].present?
