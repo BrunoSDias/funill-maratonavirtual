@@ -45,15 +45,16 @@ class FunilController < ApplicationController
   def upsell
     @pagina = Pagina.find(params[:pagina_id])
     @upsell = @pagina.upsell
-    if params[:idProximaPromocao].present?
-      @promocao = @upsell.promocoes.where(id: params[:idProximaPromocao]).first
-    else
-      @promocao = @upsell.promocoes.first
-    end
 
     if @upsell.blank?
       render json: {}, status: 204
       return
+    end
+
+    if params[:idProximaPromocao].present?
+      @promocao = @upsell.promocoes.where(id: params[:idProximaPromocao]).first
+    else
+      @promocao = @upsell.promocoes.first
     end
 
   end

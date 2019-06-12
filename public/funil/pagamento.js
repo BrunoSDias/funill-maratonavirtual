@@ -1,5 +1,6 @@
 var maratonaVirtual = {};
-maratonaVirtual.host = 'http://localhost:3001/';
+maratonaVirtual.host = 'https://admin-maratonavirtual.herokuapp.com/';
+// maratonaVirtual.host = 'http://localhost:3001/';
 maratonaVirtual.token = '79hrovrwibfxsrh_TglsoTy*b5sjcht9f5na*53Gmcfjg555Site';
 maratonaVirtual.pg_id = "C49117ED8151463DB189BF82F7AECB67";
 
@@ -507,6 +508,7 @@ promocao.confirmarTransacao = function(){
   }).fail(function(jqXHR, textStatus) {
     maratonaVirtual.load.off();
 
+    debugger
     var data = jqXHR.responseJSON;
     var mensagem = data.erro;
     if(!mensagem){
@@ -548,11 +550,6 @@ promocao.showUpsell = function(pagina_corrente_id, callback, idProximaPromocao){
 
   $('html, body').animate({ scrollTop: 0 }, 100);
 
-  if(!pagina_corrente_id){
-    promocao.callback.call();
-    return;
-  }
-
   var url = "/upsell/" + pagina_corrente_id;
   if(idProximaPromocao){
     url += "?idProximaPromocao=" + idProximaPromocao
@@ -563,8 +560,7 @@ promocao.showUpsell = function(pagina_corrente_id, callback, idProximaPromocao){
     url: url
   }).done(function(html) { 
     maratonaVirtual.load.off();
-    if(html != ""){
-
+    if(html && html != ""){
       var adicionado = false;
       var jsItemProximaId = $(html.match(/jsItemProximaId.*"/))[0].replace(/\"/g,"").replace(/jsItemProximaId.*?=/, "").trim();
       $(html.match(/jsItemProdutoId.*"/)).each(function(){
