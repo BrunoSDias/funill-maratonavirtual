@@ -25,7 +25,7 @@
                 <div class="form-row form-container mt-4">
                     <div class="col-12">
                         <i class="fas fa-mobile-alt"></i>
-                        <input class="form-control " placeholder="Insira seu celular aqui" type="tel" name="telefone" id="99RunPostLoginTelefone">
+                        <input class="form-control telefone" placeholder="Insira seu celular aqui" type="tel" name="telefone" id="99RunPostLoginTelefone">
                     </div>
 
                     <div class="col-12">
@@ -37,12 +37,16 @@
 
             <a href="javascript:;" onclick="postForm()" class="button-default-green d-block w-100 -aux">Em até 12x<br><span>no cartão de crédito</span></a>
             <span class="text-center font-light ou">ou</span>
-            <a href="javascript:;" onclick="postFormBoleto()" class="d-block w-100 -aux-2">A vista no<br><span>boleto</span></a>
+            <a href="javascript:;" onclick="postFormCartao()" class="d-block w-100 -aux-2">A vista no<br><span>boleto</span></a>
             <input type="hidden" name="pagar_com_boleto" id="pagar_com_boleto" value="false">
             <script type="text/javascript">
               var postFormBoleto = function() {
-                debugger
                 $("#pagar_com_boleto").val("true");
+                postForm();
+              }
+
+              var postFormCartao = function() {
+                $("#pagar_com_boleto").val("false");
                 postForm();
               }
 
@@ -61,6 +65,13 @@
 
                 $('#formPostLogin').submit();
               }
+            </script>
+
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+            <script type="text/javascript">
+              $('.cep').mask('99999-999');
+              $('.telefone').mask('(99) 99999-9999');
+              $('.cpf').mask('999.999.999-99');
             </script>
         </div>
     </form>

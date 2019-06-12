@@ -11,43 +11,43 @@
                 <div class="form-row form-container mt-4">
 
                     <div class="col-12">
-                        <input class="form-control" placeholder="CPF" type="text" name="cpf" id="cpf">
+                        <input class="form-control cpf" value="<%= @usuario.cpf %>" placeholder="CPF" type="text" name="cpf" id="cpf">
                     </div>
 
                     <div class="col-12">
-                        <input class="form-control" placeholder="Nome" type="text" name="nome" id="nome">
+                        <input class="form-control" value="<%= @usuario.nome %>" placeholder="Nome" type="text" name="nome" id="nome">
                     </div>
 
                     <div class="col-12">
-                        <input class="form-control" placeholder="Telefone" type="text" name="telefone" id="telefone">
+                        <input class="form-control telefone" value="<%= @usuario.telefone %>" placeholder="Telefone" type="text" name="telefone" id="telefone">
                     </div>
 
                     <div class="col-12">
-                        <input class="form-control" placeholder="E-mail" type="text" name="email" id="email">
+                        <input class="form-control" value="<%= @usuario.email %>" placeholder="E-mail" type="text" name="email" id="email">
                     </div>
 
                     <div class="col-12">
-                        <input class="form-control" placeholder="CEP" type="text" name="cep" id="cep">
+                        <input class="form-control cep" value="<%= @usuario.cep %>" placeholder="CEP" onblur="promocao.carregarEndereco(this.value)" type="text" name="cep" id="cep">
                     </div>
 
                     <div class="col-12">
-                        <input class="form-control" placeholder="Endereço" type="text" name="endereco" id="endereco">
+                        <input class="form-control" value="<%= @usuario.endereco %>" placeholder="Endereço" type="text" name="endereco" id="endereco">
                     </div>
 
                     <div class="col-12">
-                        <input class="form-control" placeholder="Número" type="number" name="numero" id="numero">
+                        <input class="form-control" value="<%= @usuario.numero %>" placeholder="Número" type="number" name="numero" id="numero">
                     </div>
 
                     <div class="col-12">
-                        <input class="form-control" placeholder="Complemento" type="number" name="complemento" id="complemento">
+                        <input class="form-control" value="<%= @usuario.complemento %>" placeholder="Complemento" type="text" name="complemento" id="complemento">
                     </div>
 
                     <div class="col-12">
-                        <input class="form-control" placeholder="Cidade" type="text" name="cidade" id="cidade">
+                        <input class="form-control" value="<%= @usuario.cidade %>" placeholder="Cidade" type="text" name="cidade" id="cidade">
                     </div>
 
                     <div class="col-12">
-                        <input class="form-control" placeholder="Estado" type="text" name="estado" id="estado">
+                        <input class="form-control" value="<%= @usuario.estado %>" placeholder="Estado" type="text" name="estado" id="estado">
                     </div>
                 </div>
             </form>
@@ -87,6 +87,12 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+    <script type="text/javascript">
+      $('.cep').mask('99999-999');
+      $('.telefone').mask('(99) 99999-9999');
+      $('.cpf').mask('999.999.999-99');
+    </script>
 <% else %>
     <div class="col-lg-6 offset-lg-2" id="formCartao">
         <div class="card-wrapper mt-4"></div>
@@ -95,19 +101,19 @@
             <form class="cartao">
                 <div class="form-row form-container mt-4">
                     <div class="col-12">
-                        <input class="form-control" value="4111111111111111" placeholder="Número do cartão" type="tel" name="number" id="numeroCartao">
+                        <input class="form-control" value="" placeholder="Número do cartão" type="tel" name="number" id="numeroCartao">
                     </div>
 
                     <div class="col-12">
-                        <input class="form-control" value="Danilo" placeholder="Nome do titular" type="text" name="name" id="nomeCartao">
+                        <input class="form-control" value="" placeholder="Nome do titular" type="text" name="name" id="nomeCartao">
                     </div>
                     
                     <div class="col-4">
-                        <input class="form-control" value="09/2022" placeholder="MM/AA" type="tel" name="expiry" id="mesAnoCartao">
+                        <input class="form-control" value="" placeholder="MM/AA" type="tel" name="expiry" id="mesAnoCartao">
                     </div>
                     
                     <div class="col-4">
-                        <input class="form-control" value="123" placeholder="CVC" type="number" name="cvc" id="cvvCartao">
+                        <input class="form-control" value="" placeholder="CVC" type="number" name="cvc" id="cvvCartao">
                     </div>
 
                     <div class="col-4">

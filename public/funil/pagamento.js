@@ -17,14 +17,80 @@ maratonaVirtual.load = {
   }
 }
 
+maratonaVirtual.testaCPF = function(strCPF) {
+  strCPF = strCPF.replace(/(\.)|(-)/g, '');
+  if(11!=strCPF.length||"00000000000"==strCPF||"11111111111"==strCPF||"22222222222"==strCPF||"33333333333"==strCPF||"44444444444"==strCPF||"55555555555"==strCPF||"66666666666"==strCPF||"77777777777"==strCPF||"88888888888"==strCPF||"99999999999"==strCPF){
+    return false;
+  }
+
+  var Soma;
+  var Resto;
+  Soma = 0;
+  if (strCPF == "00000000000") return false;
+     
+  for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+  Resto = (Soma * 10) % 11;
+   
+  if ((Resto == 10) || (Resto == 11))  Resto = 0;
+  if (Resto != parseInt(strCPF.substring(9, 10)) ) return false;
+   
+  Soma = 0;
+  for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+  Resto = (Soma * 10) % 11;
+ 
+  if ((Resto == 10) || (Resto == 11))  Resto = 0;
+  if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
+  return true;
+}
+
+promocao.carregarEndereco = function(cep){
+  if(cep == ""){
+    $("#cep").focus();
+    $("#cep").attr("placeholder", "CEP obrigatório");
+    $("#cep").css("background", "#fbb67a")
+    $("#cep").blur(function(){
+      $(this).css("background", "#D8D8D8");
+    });
+    return;
+  }
+
+  if($("#endereco").val() != ""){
+    return;
+  }
+
+  maratonaVirtual.load.on();
+  var url = maratonaVirtual.host + '/busca-cep/' + cep + ".json";
+  $.ajax({
+    type: 'get',
+    url: url,
+    headers: {
+      'MaratonaKeyAccess': maratonaVirtual.token,
+      'Accept': 'application/json; charset=utf-8',
+      'Content-Type': 'application/json; charset=utf-8'
+    }
+  }).done(function(enderecoCorreios) { 
+    maratonaVirtual.load.off();
+    if(enderecoCorreios.tipoDeLogradouro){
+      var endereco = (enderecoCorreios.tipoDeLogradouro + ' ' + enderecoCorreios.logradouro).trim() + ' - ' + enderecoCorreios.bairro;
+      endereco = endereco.replace(/null/g,  "");
+
+      $("#endereco").val(endereco);
+      $("#cidade").val(enderecoCorreios.cidade);
+      $("#estado").val(enderecoCorreios.estado);
+    }
+  }).fail(function(jqXHR, textStatus) { maratonaVirtual.load.off(); });
+}
+
 promocao.gerarBoleto = function(self, pagina_id, produtoId){
+  promocao.produtoId = produtoId;
+  promocao.paginaCorrenteId = pagina_id;
+
   var funil = JSON.parse(decodeURIComponent(getCookie("funil")).replace(/\+\:/g, ":"));
 
   var cpf = $("#cpf");
   var cep = $("#cep");
   var endereco = $("#endereco");
   var numero = $("#numero");
-  var complemento = $("#complemento");
   var cidade = $("#cidade");
   var estado = $("#estado");
 
@@ -34,7 +100,7 @@ promocao.gerarBoleto = function(self, pagina_id, produtoId){
     cpf.attr("placeholder", "CPF obrigatório");
     setTimeout(function(){ $("#cpf").val(""); }, 200);
     cpf.blur(function(){
-      $(this).css("background", "#D8D8D8");
+      $(this).css("background", "#fff");
     });
     return;
   }
@@ -44,7 +110,7 @@ promocao.gerarBoleto = function(self, pagina_id, produtoId){
     cpf.css("background", "#fbb67a")
     cpf.attr("placeholder", "CPF inválido");
     cpf.blur(function(){
-      $(this).css("background", "#D8D8D8");
+      $(this).css("background", "#fff");
     });
     return;
   }
@@ -54,19 +120,17 @@ promocao.gerarBoleto = function(self, pagina_id, produtoId){
     cep.attr("placeholder", "CEP obrigatório");
     cep.css("background", "#fbb67a")
     cep.blur(function(){
-      $(this).css("background", "#D8D8D8");
+      $(this).css("background", "#fff");
     });
     return;
   }
-
-  promocao.carregarEndereco(cep.val());
 
   if(!endereco.val() || endereco.val() == ""){
     endereco.focus();
     endereco.attr("placeholder", "Endereço obrigatório");
     endereco.css("background", "#fbb67a")
     endereco.blur(function(){
-      $(this).css("background", "#D8D8D8");
+      $(this).css("background", "#fff");
     });
     return;
   }
@@ -76,7 +140,7 @@ promocao.gerarBoleto = function(self, pagina_id, produtoId){
     numero.attr("placeholder", "Número obrigatório");
     numero.css("background", "#fbb67a")
     numero.blur(function(){
-      $(this).css("background", "#D8D8D8");
+      $(this).css("background", "#fff");
     });
     return;
   }
@@ -86,7 +150,7 @@ promocao.gerarBoleto = function(self, pagina_id, produtoId){
     cidade.attr("placeholder", "Cidade obrigatório");
     cidade.css("background", "#fbb67a")
     cidade.blur(function(){
-      $(this).css("background", "#D8D8D8");
+      $(this).css("background", "#fff");
     });
     return;
   }
@@ -96,20 +160,19 @@ promocao.gerarBoleto = function(self, pagina_id, produtoId){
     estado.attr("placeholder", "Estado obrigatório");
     estado.css("background", "#fbb67a")
     estado.blur(function(){
-      $(this).css("background", "#D8D8D8");
+      $(this).css("background", "#fff");
     });
     return;
   }
 
-  alert("Gerar boleto");
+  promocao.showUpsell(pagina_id, function(){
+    promocao.confirmarTransacao();
+  });
 }
 
 promocao.confirmarCompra = function(self, pagina_id, produtoId){
   promocao.produtoId = produtoId;
   promocao.paginaCorrenteId = pagina_id;
-
-  $(self).html("Carregando ...");
-  $(self).attr("disabled", "disabled");
 
   if(!$("#numeroCartao").val() || $("#numeroCartao").val() == ""){
     $("#numeroCartao").focus();
@@ -151,6 +214,11 @@ promocao.confirmarCompra = function(self, pagina_id, produtoId){
     return;
   }
 
+
+  $(self).data("texto", $(self).text());
+  $(self).html("Carregando ...");
+  $(self).attr("disabled", "disabled");
+
   Iugu.setAccountID(maratonaVirtual.pg_id);
   Iugu.setup();
 
@@ -172,6 +240,9 @@ promocao.confirmarCompra = function(self, pagina_id, produtoId){
   Iugu.createPaymentToken(cc, function(data) {
     maratonaVirtual.load.off();
     if (data.errors) {
+
+      $(self).html($(self).data("texto"));
+      $(self).removeAttr("disabled");
 
       $("#numeroCartao").focus();
       $("#numeroCartao").val("");
@@ -239,17 +310,37 @@ promocao.checkSeCarrinho = function(self){
 promocao.token = undefined;
 promocao.confirmarTransacao = function(){
   maratonaVirtual.load.on();
+
+  var usuario = JSON.parse(decodeURIComponent(getCookie("usuario")).replace(/\+\:/g, ":"));
   var funil = JSON.parse(decodeURIComponent(getCookie("funil")).replace(/\+\:/g, ":"));
+  
+  if(funil.pagar_com_boleto){
+    usuario.cpf         = $("#cpf").val();
+    usuario.nome        = $("#nome").val();
+    usuario.telefone    = $("#telefone").val();
+    usuario.email       = $("#email").val();
+    usuario.cep         = $("#cep").val();
+    usuario.endereco    = $("#endereco").val();
+    usuario.complemento = $("#complemento").val();
+    usuario.numero      = $("#numero").val();
+    usuario.cidade      = $("#cidade").val();
+    usuario.estado      = $("#estado").val();
+  }
 
   var data = {};
-  data.months = $("#parcelas").val()
-  data.token = promocao.token
-  data.usuario_id = funil.usuario_id
+  if($("#parcelas").val()){
+    data.months = $("#parcelas").val()
+  }
+
+  if(promocao.token){
+    data.token = promocao.token
+  }
+  data.usuario = usuario
   data.pedido = {
     items: funil.carrinho
   }
 
-  var url = maratonaVirtual.host + '/usuarios/' + data.usuario_id + '/comprar.json';
+  var url = maratonaVirtual.host + '/usuarios/' + data.usuario.id + '/comprar.json';
   $.ajax({
     type: 'POST',
     url: url,
@@ -263,6 +354,9 @@ promocao.confirmarTransacao = function(){
     maratonaVirtual.load.off();
 
     eraseCookie("funil");
+    eraseCookie("usuario");
+
+    setCookie("id_pedido", data.pedidos_efetuados[0].id, 2);
 
     var url = '/produtos/' + promocao.produtoId + '/paginas/' + promocao.paginaCorrenteId + '.json';
     $.ajax({
@@ -274,7 +368,6 @@ promocao.confirmarTransacao = function(){
 
   }).fail(function(jqXHR, textStatus) {
     maratonaVirtual.load.off();
-
 
     var data = jqXHR.responseJSON;
     var mensagem = data.erro;

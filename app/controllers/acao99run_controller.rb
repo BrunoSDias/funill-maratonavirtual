@@ -6,6 +6,7 @@ class Acao99runController < ApplicationController
     pagina = Pagina.find(params[:pagina_id])
     grupo_corrida = GrupoCorridaRun.find(params[:grupo_corrida_id])
 
+    cookies[:usuario] = {value: JSON.parse(usuario.to_json)["table"].to_json, expires: 1.year.from_now, httponly: false}
     cookies[:funil] = {
       value: {
         pagar_com_boleto: params[:pagar_com_boleto],

@@ -27,7 +27,17 @@ class FunilController < ApplicationController
       @produto = ProdutoRun.find(slug_produto)
     end
 
-    @boleto = JSON.parse(cookies[:funil])["pagar_com_boleto"] rescue nil
+    if cookies[:funil].present?
+      @boleto = JSON.parse(cookies[:funil])["pagar_com_boleto"].to_boolean rescue nil
+    end
+
+    if cookies[:usuario].present?
+      @usuario = OpenStruct.new(JSON.parse(cookies[:usuario]))
+    end
+
+    if cookies[:id_pedido].present?
+      @pedido = PedidoRun.find(cookies[:id_pedido])
+    end
   end
 
   def upsell
