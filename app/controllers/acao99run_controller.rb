@@ -2,7 +2,7 @@ class Acao99runController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def login_compra_grupo_corrida
-    usuario = Usuario.find(params[:email], params[:telefone])
+    usuario = Usuario.find(params[:email], params[:telefone], params[:cod_marketing])
     pagina = Pagina.find(params[:pagina_id])
     grupo_corrida = GrupoCorridaRun.find(params[:grupo_corrida_id])
 
