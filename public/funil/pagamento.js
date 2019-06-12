@@ -81,6 +81,142 @@ promocao.carregarEndereco = function(cep){
   }).fail(function(jqXHR, textStatus) { maratonaVirtual.load.off(); });
 }
 
+promocao.atualizar = function(self, pagina_id, produtoId){
+  promocao.produtoId = produtoId;
+  promocao.paginaCorrenteId = pagina_id;
+
+  var funil = JSON.parse(decodeURIComponent(getCookie("funil")).replace(/\+\:/g, ":"));
+  var usuario = JSON.parse(decodeURIComponent(getCookie("usuario")).replace(/\+\:/g, ":"));
+
+  var cpf = $("#cpf");
+  var cep = $("#cep");
+  var endereco = $("#endereco");
+  var numero = $("#numero");
+  var cidade = $("#cidade");
+  var estado = $("#estado");
+
+  if(!cpf.val() || cpf.val() == ""){
+    cpf.focus();
+    cpf.css("background", "#fbb67a")
+    cpf.attr("placeholder", "CPF obrigatório");
+    setTimeout(function(){ $("#cpf").val(""); }, 200);
+    cpf.blur(function(){
+      $(this).css("background", "#fff");
+    });
+    return;
+  }
+  else if(!maratonaVirtual.testaCPF(cpf.val())){
+    cpf.focus();
+    setTimeout(function(){ $("#cpf").val(""); }, 200);
+    cpf.css("background", "#fbb67a")
+    cpf.attr("placeholder", "CPF inválido");
+    cpf.blur(function(){
+      $(this).css("background", "#fff");
+    });
+    return;
+  }
+
+  if(!cep.val() || cep.val() == ""){
+    cep.focus();
+    cep.attr("placeholder", "CEP obrigatório");
+    cep.css("background", "#fbb67a")
+    cep.blur(function(){
+      $(this).css("background", "#fff");
+    });
+    return;
+  }
+
+  if(!endereco.val() || endereco.val() == ""){
+    endereco.focus();
+    endereco.attr("placeholder", "Endereço obrigatório");
+    endereco.css("background", "#fbb67a")
+    endereco.blur(function(){
+      $(this).css("background", "#fff");
+    });
+    return;
+  }
+
+  if(!numero.val() || numero.val() == ""){
+    numero.focus();
+    numero.attr("placeholder", "Número obrigatório");
+    numero.css("background", "#fbb67a")
+    numero.blur(function(){
+      $(this).css("background", "#fff");
+    });
+    return;
+  }
+
+  if(!cidade.val() || cidade.val() == ""){
+    cidade.focus();
+    cidade.attr("placeholder", "Cidade obrigatório");
+    cidade.css("background", "#fbb67a")
+    cidade.blur(function(){
+      $(this).css("background", "#fff");
+    });
+    return;
+  }
+
+  if(!estado.val() || estado.val() == ""){
+    estado.focus();
+    estado.attr("placeholder", "Estado obrigatório");
+    estado.css("background", "#fbb67a")
+    estado.blur(function(){
+      $(this).css("background", "#fff");
+    });
+    return;
+  }
+
+  usuario.cpf         = $("#cpf").val();
+  usuario.nome        = $("#nome").val();
+  usuario.telefone    = $("#telefone").val();
+  usuario.email       = $("#email").val();
+  usuario.cep         = $("#cep").val();
+  usuario.endereco    = $("#endereco").val();
+  usuario.complemento = $("#complemento").val();
+  usuario.numero      = $("#numero").val();
+  usuario.cidade      = $("#cidade").val();
+  usuario.estado      = $("#estado").val();
+
+  var url = maratonaVirtual.host + '/usuarios/busca-ou-cria.json';
+  $.ajax({
+    type: 'POST',
+    url: url,
+    headers: {
+      'MaratonaKeyAccess': maratonaVirtual.token,
+      'Accept': 'application/json; charset=utf-8',
+      'Content-Type': 'application/json; charset=utf-8'
+    },
+    data: JSON.stringify({usuario: usuario})
+  }).done(function(data) { 
+    maratonaVirtual.load.off();
+    var url = '/produtos/' + promocao.produtoId + '/paginas/' + promocao.paginaCorrenteId + '.json';
+    $.ajax({
+      type: 'GET',
+      url: url,
+    }).done(function(data) {
+      if(!data.slug_produto || !data.slug_proxima){
+        window.location.reload();
+      }
+      else{
+        window.location.href = "/" + data.slug_produto + "/" + data.slug_proxima + "";
+      }
+    });
+  }).fail(function(jqXHR, textStatus) {
+    var url = '/produtos/' + promocao.produtoId + '/paginas/' + promocao.paginaCorrenteId + '.json';
+    $.ajax({
+      type: 'GET',
+      url: url,
+    }).done(function(data) {
+      if(!data.slug_produto || !data.slug_proxima){
+        window.location.reload();
+      }
+      else{
+        window.location.href = "/" + data.slug_produto + "/" + data.slug_proxima + "";
+      }
+    });
+  });    
+}
+
 promocao.gerarBoleto = function(self, pagina_id, produtoId){
   promocao.produtoId = produtoId;
   promocao.paginaCorrenteId = pagina_id;
@@ -353,9 +489,6 @@ promocao.confirmarTransacao = function(){
   }).done(function(data) { 
     maratonaVirtual.load.off();
 
-    eraseCookie("funil");
-    eraseCookie("usuario");
-
     setCookie("id_pedido", data.pedidos_efetuados[0].id, 2);
 
     var url = '/produtos/' + promocao.produtoId + '/paginas/' + promocao.paginaCorrenteId + '.json';
@@ -363,7 +496,12 @@ promocao.confirmarTransacao = function(){
       type: 'GET',
       url: url,
     }).done(function(data) {
-      window.location.href = "/" + data.slug_produto + "/" + data.slug_proxima + "";
+      if(!data.slug_produto || !data.slug_proxima){
+        window.location.reload();
+      }
+      else{
+        window.location.href = "/" + data.slug_produto + "/" + data.slug_proxima + "";
+      }
     });
 
   }).fail(function(jqXHR, textStatus) {

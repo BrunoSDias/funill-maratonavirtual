@@ -7,6 +7,8 @@ class Pagina < ApplicationRecord
 
   def proxima_pagina
   	Pagina.find(self.pagina_id)
+  rescue
+    nil
   end
 
   def upsell

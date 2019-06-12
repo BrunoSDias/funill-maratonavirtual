@@ -1,3 +1,15 @@
-<%= @pedido.id %><br>
-<%= @pedido.boleto_numero %><br>
-<%= @pedido.boleto_pdf %>
+<% if @pedido.present? && @pedido.id.present? %>
+<div class="container" style="color: #fff">
+    <div class="cols-12">
+      <b>Código do pedido:</b> <%= @pedido.id %>
+    </div>
+    <% if @pedido.boleto_numero.present? %>
+    <div class="cols-12">
+      <b>Número:</b> <%= @pedido.boleto_numero %>
+    </div>
+    <div class="cols-12">
+      <b>Link boleto:</b> <a href="<%= @pedido.boleto_pdf %>" target="_blank"><%= @pedido.boleto_pdf %></a>
+    </div>
+    <% end %>
+</div>
+<% end %>
