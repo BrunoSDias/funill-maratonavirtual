@@ -548,6 +548,11 @@ promocao.showUpsell = function(pagina_corrente_id, callback, idProximaPromocao){
 
   $('html, body').animate({ scrollTop: 0 }, 100);
 
+  if(!pagina_corrente_id){
+    promocao.callback.call();
+    return;
+  }
+
   var url = "/upsell/" + pagina_corrente_id;
   if(idProximaPromocao){
     url += "?idProximaPromocao=" + idProximaPromocao
