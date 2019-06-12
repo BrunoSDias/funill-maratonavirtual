@@ -320,7 +320,9 @@ promocao.gerarBoleto = function(self, pagina_id, produtoId){
   });
 }
 
+promocao.btnCompra = undefined;
 promocao.confirmarCompra = function(self, pagina_id, produtoId){
+  promocao.btnCompra = self;
   promocao.produtoId = produtoId;
   promocao.paginaCorrenteId = pagina_id;
 
@@ -365,9 +367,9 @@ promocao.confirmarCompra = function(self, pagina_id, produtoId){
   }
 
 
-  $(self).data("texto", $(self).text());
-  $(self).html("Carregando ...");
-  $(self).attr("disabled", "disabled");
+  $(promocao.btnCompra).data("texto", $(self).text());
+  $(promocao.btnCompra).html("Carregando ...");
+  $(promocao.btnCompra).attr("disabled", "disabled");
 
   Iugu.setAccountID(maratonaVirtual.pg_id);
   Iugu.setup();
@@ -391,8 +393,8 @@ promocao.confirmarCompra = function(self, pagina_id, produtoId){
     maratonaVirtual.load.off();
     if (data.errors) {
 
-      $(self).html($(self).data("texto"));
-      $(self).removeAttr("disabled");
+      $(promocao.btnCompra).html($(self).data("texto"));
+      $(promocao.btnCompra).removeAttr("disabled");
 
       $("#numeroCartao").focus();
       $("#numeroCartao").val("");
@@ -401,8 +403,6 @@ promocao.confirmarCompra = function(self, pagina_id, produtoId){
       $("#numeroCartao").blur(function(){
         $(this).css("background", "#fff");
       });
-
-      alert(JSON.stringify(data.errors));
 
     } else {
       promocao.token = data.id;
@@ -523,7 +523,9 @@ promocao.confirmarTransacao = function(){
   }).fail(function(jqXHR, textStatus) {
     maratonaVirtual.load.off();
 
-    debugger
+    $(promocao.btnCompra).html($(self).data("texto"));
+    $(promocao.btnCompra).removeAttr("disabled");
+
     var data = jqXHR.responseJSON;
     var mensagem = data.erro;
     if(!mensagem){
