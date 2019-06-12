@@ -190,6 +190,7 @@ promocao.atualizar = function(self, pagina_id, produtoId){
   if($("#estado").val())
     usuario.estado      = $("#estado").val();
 
+  maratonaVirtual.load.on();
   var url = maratonaVirtual.host + '/usuarios/busca-ou-cria.json';
   $.ajax({
     type: 'POST',
@@ -213,6 +214,8 @@ promocao.atualizar = function(self, pagina_id, produtoId){
       else{
         window.location.href = "/" + data.slug_produto + "/" + data.slug_proxima + "";
       }
+    }).fail(function(jqXHR, textStatus) {
+      window.location.reload();
     });
   }).fail(function(jqXHR, textStatus) {
     maratonaVirtual.load.off();
@@ -227,7 +230,9 @@ promocao.atualizar = function(self, pagina_id, produtoId){
       else{
         window.location.href = "/" + data.slug_produto + "/" + data.slug_proxima + "";
       }
-    });
+    }).fail(function(jqXHR, textStatus) {
+      window.location.reload();
+    });;
   });    
 }
 
@@ -393,7 +398,7 @@ promocao.confirmarCompra = function(self, pagina_id, produtoId){
     maratonaVirtual.load.off();
     if (data.errors) {
 
-      $(promocao.btnCompra).html($(self).data("texto"));
+      $(promocao.btnCompra).html($(promocao.btnCompra).data("texto"));
       $(promocao.btnCompra).removeAttr("disabled");
 
       $("#numeroCartao").focus();
@@ -518,12 +523,14 @@ promocao.confirmarTransacao = function(){
       else{
         window.location.href = "/" + data.slug_produto + "/" + data.slug_proxima + "";
       }
-    });
+    }).fail(function(jqXHR, textStatus) {
+      window.location.reload();
+    });;
 
   }).fail(function(jqXHR, textStatus) {
     maratonaVirtual.load.off();
 
-    $(promocao.btnCompra).html($(self).data("texto"));
+    $(promocao.btnCompra).html($(promocao.btnCompra).data("texto"));
     $(promocao.btnCompra).removeAttr("disabled");
 
     var data = jqXHR.responseJSON;
