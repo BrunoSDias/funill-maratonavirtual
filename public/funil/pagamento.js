@@ -402,6 +402,8 @@ promocao.confirmarCompra = function(self, pagina_id, produtoId){
         $(this).css("background", "#fff");
       });
 
+      alert(JSON.stringify(data.errors));
+
     } else {
       promocao.token = data.id;
       promocao.showUpsell(pagina_id, function(){
