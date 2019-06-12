@@ -1,0 +1,81 @@
+<% if @usuario.present? && @usuario.id.present? %>
+  <% if @usuario.cpf.blank? || @usuario.nome.blank? || @usuario.telefone.blank? || @usuario.email.blank? || @usuario.cep.blank? || @usuario.endereco.blank? || @usuario.numero.blank? || @usuario.complemento.blank? || @usuario.cidade.blank? || @usuario.estado.blank?  %>
+  <script src="/funil/pagamento.js?<%= Time.now.to_i %>" ></script>
+  <div class="form-container active mt-4 cadastro">
+     <form class="cadastro">
+        <div class="form-row form-container mt-4">
+
+          <% if @usuario.nome.blank? %>
+            <div class="col-12">
+                <input class="form-control" value="<%= @usuario.nome %>" placeholder="Nome" type="text" name="nome" id="nome">
+            </div>
+          <% end %>
+
+          <% if @usuario.cpf.blank? %>
+            <div class="col-12">
+                <input class="form-control cpf" value="<%= @usuario.cpf %>" placeholder="CPF" type="text" name="cpf" id="cpf">
+            </div>
+          <% end %>
+
+          <% if @usuario.telefone.blank? %>
+            <div class="col-12">
+                <input class="form-control telefone" value="<%= @usuario.telefone %>" placeholder="Telefone" type="text" name="telefone" id="telefone">
+            </div>
+          <% end %>
+
+          <% if @usuario.email.blank? %>
+            <div class="col-12">
+                <input class="form-control" value="<%= @usuario.email %>" placeholder="E-mail" type="text" name="email" id="email">
+            </div>
+          <% end %>
+
+          <% if @usuario.cep.blank? %>
+            <div class="col-12">
+                <input class="form-control cep" value="<%= @usuario.cep %>" placeholder="CEP" onblur="promocao.carregarEndereco(this.value)" type="text" name="cep" id="cep">
+            </div>
+          <% end %>
+
+          <% if @usuario.endereco.blank? %>
+            <div class="col-12">
+                <input class="form-control" value="<%= @usuario.endereco %>" placeholder="Endereço" type="text" name="endereco" id="endereco">
+            </div>
+          <% end %>
+
+          <% if @usuario.numero.blank? %>
+            <div class="col-12">
+                <input class="form-control" value="<%= @usuario.numero %>" placeholder="Número" type="number" name="numero" id="numero">
+            </div>
+          <% end %>
+
+          <% if @usuario.complemento.blank? %>
+            <div class="col-12">
+                <input class="form-control" value="<%= @usuario.complemento %>" placeholder="Complemento" type="text" name="complemento" id="complemento">
+            </div>
+          <% end %>
+
+          <% if @usuario.cidade.blank? %>
+            <div class="col-12">
+                <input class="form-control" value="<%= @usuario.cidade %>" placeholder="Cidade" type="text" name="cidade" id="cidade">
+            </div>
+          <% end %>
+
+          <% if @usuario.estado.blank? %>
+            <div class="col-12">
+                <input class="form-control" value="<%= @usuario.estado %>" placeholder="Estado" type="text" name="estado" id="estado">
+            </div>
+          <% end %>
+
+          <div class="col-12 mt-5 text-center">
+            <a class="button-default-green d-block w-100" href="javascript:;" onclick="promocao.atualizar(this, <%= @pagina.id %>, <%= @pagina.produto_id %>);" placeholder="CVC" >Atualizar cadastro</a>
+          </div>
+        </div>
+    </form>
+  </div>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+  <script type="text/javascript">
+    $('.cep').mask('99999-999');
+    $('.telefone').mask('(99) 99999-9999');
+    $('.cpf').mask('999.999.999-99');
+  </script>
+  <% end %>
+<% end %>
