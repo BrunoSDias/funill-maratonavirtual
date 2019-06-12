@@ -28,7 +28,7 @@ class FunilController < ApplicationController
     end
 
     if cookies[:funil].present?
-      @boleto = JSON.parse(cookies[:funil])["pagar_com_boleto"].to_boolean rescue nil
+      @boleto = JSON.parse(cookies[:funil])["pagar_com_boleto"] rescue nil
     end
 
     if cookies[:usuario].present?

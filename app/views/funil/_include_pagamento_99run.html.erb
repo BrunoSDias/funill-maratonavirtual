@@ -1,8 +1,7 @@
 <script src="/funil/pagamento.js?<%= Time.now.to_i %>" ></script>
 <script src="https://js.iugu.com/v2"></script>
 
-
-<% if @boleto %>
+<% if @boleto == "true" %>
     <div class="col-lg-6 offset-lg-2" id="formCartao">
         <div class="card-wrapper mt-4"></div>
 
