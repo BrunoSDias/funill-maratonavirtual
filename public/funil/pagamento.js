@@ -215,6 +215,7 @@ promocao.atualizar = function(self, pagina_id, produtoId){
       }
     });
   }).fail(function(jqXHR, textStatus) {
+    maratonaVirtual.load.off();
     var url = '/produtos/' + promocao.produtoId + '/paginas/' + promocao.paginaCorrenteId + '.json';
     $.ajax({
       type: 'GET',
