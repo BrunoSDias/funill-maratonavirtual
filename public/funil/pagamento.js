@@ -96,7 +96,7 @@ promocao.atualizar = function(self, pagina_id, produtoId){
   var cidade = $("#cidade");
   var estado = $("#estado");
 
-  if(!cpf.val() || cpf.val() == ""){
+  if(cpf.lenth > 0 && (!cpf.val() || cpf.val() == "")){
     cpf.focus();
     cpf.css("background", "#fbb67a")
     cpf.attr("placeholder", "CPF obrigatório");
@@ -117,7 +117,7 @@ promocao.atualizar = function(self, pagina_id, produtoId){
     return;
   }
 
-  if(!cep.val() || cep.val() == ""){
+  if(cpf.lenth > 0 && (!cep.val() || cep.val() == "")){
     cep.focus();
     cep.attr("placeholder", "CEP obrigatório");
     cep.css("background", "#fbb67a")
@@ -127,7 +127,7 @@ promocao.atualizar = function(self, pagina_id, produtoId){
     return;
   }
 
-  if(!endereco.val() || endereco.val() == ""){
+  if(cpf.lenth > 0 && (!endereco.val() || endereco.val() == "")){
     endereco.focus();
     endereco.attr("placeholder", "Endereço obrigatório");
     endereco.css("background", "#fbb67a")
@@ -137,7 +137,7 @@ promocao.atualizar = function(self, pagina_id, produtoId){
     return;
   }
 
-  if(!numero.val() || numero.val() == ""){
+  if(cpf.lenth > 0 && (!numero.val() || numero.val() == "")){
     numero.focus();
     numero.attr("placeholder", "Número obrigatório");
     numero.css("background", "#fbb67a")
@@ -147,7 +147,7 @@ promocao.atualizar = function(self, pagina_id, produtoId){
     return;
   }
 
-  if(!cidade.val() || cidade.val() == ""){
+  if(cpf.lenth > 0 && (!cidade.val() || cidade.val() == "")){
     cidade.focus();
     cidade.attr("placeholder", "Cidade obrigatório");
     cidade.css("background", "#fbb67a")
@@ -157,7 +157,7 @@ promocao.atualizar = function(self, pagina_id, produtoId){
     return;
   }
 
-  if(!estado.val() || estado.val() == ""){
+  if(cpf.lenth > 0 && (!estado.val() || estado.val() == "")){
     estado.focus();
     estado.attr("placeholder", "Estado obrigatório");
     estado.css("background", "#fbb67a")
