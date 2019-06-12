@@ -39,6 +39,7 @@
             <span class="text-center font-light ou">ou</span>
             <a href="javascript:;" onclick="postFormBoleto()" class="d-block w-100 -aux-2">A vista no<br><span>boleto</span></a>
             <input type="hidden" name="pagar_com_boleto" id="pagar_com_boleto" value="false">
+            <input type="hidden" name="cod_marketing" id="cod_marketing_post" value="">
             <script type="text/javascript">
               var postFormBoleto = function() {
                 $("#pagar_com_boleto").val("true");
@@ -51,6 +52,7 @@
               }
 
               var postForm = function() {
+                $("#cod_marketing_post").val($("#cod_marketing").val());
                 if($("#99RunPostLoginTelefone").val() == ""){
                   alert("Preencha o telefone");
                   $("#99RunPostLoginTelefone").focus();
