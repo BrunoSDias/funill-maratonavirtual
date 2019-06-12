@@ -19,6 +19,8 @@ maratonaVirtual.load = {
 }
 
 maratonaVirtual.testaCPF = function(strCPF) {
+  if(!strCPF) return true
+
   strCPF = strCPF.replace(/(\.)|(-)/g, '');
   if(11!=strCPF.length||"00000000000"==strCPF||"11111111111"==strCPF||"22222222222"==strCPF||"33333333333"==strCPF||"44444444444"==strCPF||"55555555555"==strCPF||"66666666666"==strCPF||"77777777777"==strCPF||"88888888888"==strCPF||"99999999999"==strCPF){
     return false;
@@ -167,16 +169,26 @@ promocao.atualizar = function(self, pagina_id, produtoId){
     return;
   }
 
-  usuario.cpf         = $("#cpf").val();
-  usuario.nome        = $("#nome").val();
-  usuario.telefone    = $("#telefone").val();
-  usuario.email       = $("#email").val();
-  usuario.cep         = $("#cep").val();
-  usuario.endereco    = $("#endereco").val();
-  usuario.complemento = $("#complemento").val();
-  usuario.numero      = $("#numero").val();
-  usuario.cidade      = $("#cidade").val();
-  usuario.estado      = $("#estado").val();
+  if($("#cpf").val())
+    usuario.cpf         = $("#cpf").val();
+  if($("#nome").val())
+    usuario.nome        = $("#nome").val();
+  if($("#telefone").val())
+    usuario.telefone    = $("#telefone").val();
+  if($("#email").val())
+    usuario.email       = $("#email").val();
+  if($("#cep").val())
+    usuario.cep         = $("#cep").val();
+  if($("#endereco").val())
+    usuario.endereco    = $("#endereco").val();
+  if($("#complemento").val())
+    usuario.complemento = $("#complemento").val();
+  if($("#numero").val())
+    usuario.numero      = $("#numero").val();
+  if($("#cidade").val())
+    usuario.cidade      = $("#cidade").val();
+  if($("#estado").val())
+    usuario.estado      = $("#estado").val();
 
   var url = maratonaVirtual.host + '/usuarios/busca-ou-cria.json';
   $.ajax({
