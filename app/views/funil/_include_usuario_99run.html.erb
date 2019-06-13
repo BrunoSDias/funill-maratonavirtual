@@ -1,6 +1,11 @@
 <% if @usuario.present? && @usuario.id.present? %>
   <% if (@usuario.cpf.blank? || @usuario.nome.blank? || @usuario.telefone.blank? || @usuario.email.blank? || @usuario.cep.blank? || @usuario.endereco.blank? || @usuario.numero.blank? || @usuario.complemento.blank? || @usuario.cidade.blank? || @usuario.estado.blank?) || @mudasenha.present?  %>
   <script src="/funil/pagamento.js?<%= Time.now.to_i %>" ></script>
+
+  <h1 style="margin-top: 30px">
+    <span style="color: #fff"> Complete seu cadastro:</span>
+  </h1>
+  
   <div class="form-container active mt-4 cadastro">
      <form class="cadastro">
         <div class="form-row form-container mt-4">
