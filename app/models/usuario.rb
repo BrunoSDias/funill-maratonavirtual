@@ -4,8 +4,8 @@ class Usuario
     OpenStruct.new(grupo)
   end
 
-  def self.find(id)
-    grupo = Rest.show("#{HOST_API}/usuarios/#{id}.json")
+  def self.find_by_id(id)
+    grupo = Rest.show("#{HOST_API}/usuarios/#{id}.json?desafio_id=0")
     OpenStruct.new(grupo)
   end
 end

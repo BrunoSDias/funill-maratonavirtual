@@ -33,6 +33,15 @@ class FunilController < ApplicationController
 
     if cookies[:usuario].present?
       @usuario = Usuario.find_by_id(JSON.parse(cookies[:usuario])["id"])
+      @usuario.cpf = @usuario.cpf_cnpj
+      @usuario.telefone = @usuario.telefone.gsub("+", " ")
+      @usuario.cep = @usuario.endereco["cep"]
+      @usuario.numero = @usuario.endereco["numero"]
+      @usuario.complemento = @usuario.endereco["complemento"]
+      @usuario.cidade = @usuario.endereco["cidade"]
+      @usuario.estado = @usuario.endereco["estado"]
+      @usuario.endereco = @usuario.endereco["endereco"]
+
       cookies[:usuario] = {value: JSON.parse(@usuario.to_json)["table"].to_json, expires: 1.year.from_now, httponly: false}
     else
       @usuario = OpenStruct.new
