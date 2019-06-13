@@ -33,14 +33,14 @@ class FunilController < ApplicationController
 
     if cookies[:usuario].present?
       @usuario = Usuario.find_by_id(JSON.parse(cookies[:usuario])["id"])
-      @usuario.cpf = @usuario.cpf_cnpj
-      @usuario.telefone = @usuario.telefone.gsub("+", " ")
-      @usuario.cep = @usuario.endereco["cep"]
-      @usuario.numero = @usuario.endereco["numero"]
-      @usuario.complemento = @usuario.endereco["complemento"]
-      @usuario.cidade = @usuario.endereco["cidade"]
-      @usuario.estado = @usuario.endereco["estado"]
-      @usuario.endereco = @usuario.endereco["endereco"]
+      @usuario.cpf = @usuario.cpf_cnpj rescue ""
+      @usuario.telefone = @usuario.telefone.gsub("+", " ") rescue ""
+      @usuario.cep = @usuario.endereco["cep"] rescue ""
+      @usuario.numero = @usuario.endereco["numero"] rescue ""
+      @usuario.complemento = @usuario.endereco["complemento"] rescue ""
+      @usuario.cidade = @usuario.endereco["cidade"] rescue ""
+      @usuario.estado = @usuario.endereco["estado"] rescue ""
+      @usuario.endereco = @usuario.endereco["endereco"] rescue ""
 
       cookies[:usuario] = {value: JSON.parse(@usuario.to_json)["table"].to_json, expires: 1.year.from_now, httponly: false}
     else
