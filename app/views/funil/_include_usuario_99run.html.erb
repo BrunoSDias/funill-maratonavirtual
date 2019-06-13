@@ -1,5 +1,5 @@
 <% if @usuario.present? && @usuario.id.present? %>
-  <% if @usuario.cpf.blank? || @usuario.nome.blank? || @usuario.telefone.blank? || @usuario.email.blank? || @usuario.cep.blank? || @usuario.endereco.blank? || @usuario.numero.blank? || @usuario.complemento.blank? || @usuario.cidade.blank? || @usuario.estado.blank?  %>
+  <% if (@usuario.cpf.blank? || @usuario.nome.blank? || @usuario.telefone.blank? || @usuario.email.blank? || @usuario.cep.blank? || @usuario.endereco.blank? || @usuario.numero.blank? || @usuario.complemento.blank? || @usuario.cidade.blank? || @usuario.estado.blank?) || @mudasenha.present?  %>
   <script src="/funil/pagamento.js?<%= Time.now.to_i %>" ></script>
   <div class="form-container active mt-4 cadastro">
      <form class="cadastro">
@@ -67,7 +67,7 @@
 
           <% if @mudasenha.present? %>
             <div class="col-12">
-                <input class="form-control" value="" placeholder="Estado" type="password" name="senha" id="senha">
+                <input class="form-control" value="" placeholder="Senha" type="password" name="senha" id="senha">
             </div>
           <% end %>
 

@@ -41,8 +41,6 @@ class FunilController < ApplicationController
       @usuario.cidade = @usuario.endereco["cidade"] rescue ""
       @usuario.estado = @usuario.endereco["estado"] rescue ""
       @usuario.endereco = @usuario.endereco["endereco"] rescue ""
-      
-      debugger
 
       if @usuario.muda_senha
         @mudasenha = true
