@@ -2,8 +2,10 @@ class ApplicationController < ActionController::Base
   before_action  :authenticate_user!
 
   def authenticate_user!
-    if cookies[:funil_admin].blank?
-      redirect_to "/login"
+    if request.path_parameters[:format] != 'json'
+      if cookies[:funil_admin].blank?
+        redirect_to "/login"
+      end
     end
   end
 
