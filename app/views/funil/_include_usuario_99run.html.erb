@@ -65,6 +65,12 @@
             </div>
           <% end %>
 
+          <% if @mudasenha.present? %>
+            <div class="col-12">
+                <input class="form-control" value="" placeholder="Estado" type="password" name="senha" id="senha">
+            </div>
+          <% end %>
+
           <div class="col-12 mt-5 text-center">
             <a class="button-default-green d-block w-100" href="javascript:;" onclick="promocao.atualizar(this, <%= @pagina.id %>, <%= @pagina.produto_id %>);" placeholder="CVC" >Atualizar cadastro</a>
           </div>

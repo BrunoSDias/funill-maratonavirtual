@@ -41,6 +41,10 @@ class FunilController < ApplicationController
       @usuario.cidade = @usuario.endereco["cidade"] rescue ""
       @usuario.estado = @usuario.endereco["estado"] rescue ""
       @usuario.endereco = @usuario.endereco["endereco"] rescue ""
+      
+      if @usuario.muda_senha
+        @mudasenha = true
+      end
 
       cookies[:usuario] = {value: JSON.parse(@usuario.to_json)["table"].to_json, expires: 1.year.from_now, httponly: false}
     else
