@@ -41,6 +41,11 @@
             <input type="hidden" name="pagar_com_boleto" id="pagar_com_boleto" value="false">
             <input type="hidden" name="cod_marketing" id="cod_marketing_post" value="">
             <script type="text/javascript">
+              function IsEmail(email) {
+                var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+              }
+
               var postFormBoleto = function() {
                 $("#pagar_com_boleto").val("true");
                 postForm();
@@ -79,7 +84,7 @@
                 else if(!IsEmail($("#99RunPostLoginEmail").val())){
                   $("#99RunPostLoginEmail").val("");
                   $("#99RunPostLoginEmail").focus();
-                  $("#99RunPostLoginEmail").attr("placeholder", "Preencha o e-mail");
+                  $("#99RunPostLoginEmail").attr("placeholder", "E-mail inválido tente novamente");
                   $("#99RunPostLoginEmail").css("background", "#fbb67a")
                   $("#99RunPostLoginEmail").blur(function(){
                     $(this).css("background", "#fff");
