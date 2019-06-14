@@ -186,8 +186,21 @@ promocao.atualizar = function(self, pagina_id, produtoId){
     usuario.nome        = $("#nome").val();
   if($("#telefone").val())
     usuario.telefone    = $("#telefone").val();
-  if($("#email").val())
-    usuario.email       = $("#email").val();
+  if($("#email").val()){
+    if(IsEmail($("#email").val())){
+      usuario.email       = $("#email").val();
+    }
+    else{
+      $("#email").val("");
+      $("#email").focus();
+      $("#email").attr("placeholder", "E-mail inválido");
+      $("#email").css("background", "#fbb67a")
+      $("#email").blur(function(){
+        $(this).css("background", "#fff");
+      });
+      return;
+    }
+  }
   if($("#cep").val())
     usuario.cep         = $("#cep").val();
   if($("#endereco").val())
@@ -688,6 +701,14 @@ function getCookie(name) {
 
 function eraseCookie(name) {   
     document.cookie = name+'=; Max-Age=-99999999;';  
+}
+
+function IsEmail(email){
+  var exclude=/[^@-.w]|^[_@.-]|[._-]{2}|[@.]{2}|(@)[^@]*1/;
+  var check=/@[w-]+./;
+  var checkend=/.[a-zA-Z]{2,3}$/;
+  if(((email.search(exclude) != -1)||(email.search(check)) == -1)||(email.search(checkend) == -1)){return false;}
+  else {return true;}
 }
 
 $(function(){

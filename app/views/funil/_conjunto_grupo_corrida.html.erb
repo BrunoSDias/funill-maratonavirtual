@@ -53,15 +53,37 @@
 
               var postForm = function() {
                 $("#cod_marketing_post").val($("#cod_marketing").val());
+
                 if($("#99RunPostLoginTelefone").val() == ""){
-                  alert("Preencha o telefone");
+                  $("#99RunPostLoginTelefone").val("");
+                  $("#99RunPostLoginTelefone").focus();
+                  $("#99RunPostLoginTelefone").attr("placeholder", "Preencha o telefone");
+                  $("#99RunPostLoginTelefone").css("background", "#fbb67a")
+                  $("#99RunPostLoginTelefone").blur(function(){
+                    $(this).css("background", "#fff");
+                  });
                   $("#99RunPostLoginTelefone").focus();
                   return;
                 }
 
                 if($("#99RunPostLoginEmail").val() == ""){
-                  alert("Preencha o email");
+                  $("#99RunPostLoginEmail").val("");
                   $("#99RunPostLoginEmail").focus();
+                  $("#99RunPostLoginEmail").attr("placeholder", "Preencha o e-mail");
+                  $("#99RunPostLoginEmail").css("background", "#fbb67a")
+                  $("#99RunPostLoginEmail").blur(function(){
+                    $(this).css("background", "#fff");
+                  });
+                  return;
+                }
+                else if(!IsEmail($("#99RunPostLoginEmail").val())){
+                  $("#99RunPostLoginEmail").val("");
+                  $("#99RunPostLoginEmail").focus();
+                  $("#99RunPostLoginEmail").attr("placeholder", "Preencha o e-mail");
+                  $("#99RunPostLoginEmail").css("background", "#fbb67a")
+                  $("#99RunPostLoginEmail").blur(function(){
+                    $(this).css("background", "#fff");
+                  });
                   return;
                 }
 
