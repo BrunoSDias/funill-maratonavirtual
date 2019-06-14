@@ -1,6 +1,6 @@
 class Usuario
-  def self.find(email, telefone, cod_marketing)
-    grupo = Rest.show("#{HOST_API}/usuarios/busca-ou-cria.json?email=#{email}&telefone=#{telefone}&cod_marketing=#{cod_marketing}")
+  def self.find(email, telefone, cod_marketing, grupo_corrida_id)
+    grupo = Rest.show("#{HOST_API}/usuarios/busca-ou-cria.json?email=#{email}&telefone=#{telefone}&cod_marketing=#{cod_marketing}&grupo_corrida_id=#{grupo_corrida_id}")
     OpenStruct.new(grupo)
   end
 
