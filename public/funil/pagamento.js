@@ -510,6 +510,11 @@ promocao.confirmarTransacao = function(){
     items: funil.carrinho
   }
 
+  if(!data.usuario || !data.usuario.id){
+    alert("Não foi possível concluir o pedido, por favor habilite os cookies do seu dispositivo ou entre em contato no whatsapp +55 11 96433-5064, para concluir a sua compra")
+    return;
+  }
+
   var url = maratonaVirtual.host + '/usuarios/' + data.usuario.id + '/comprar.json';
   $.ajax({
     type: 'POST',
