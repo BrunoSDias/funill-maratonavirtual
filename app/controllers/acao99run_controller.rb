@@ -7,6 +7,11 @@ class Acao99runController < ApplicationController
     pagina = Pagina.find(params[:pagina_id])
     grupo_corrida = GrupoCorridaRun.find(params[:grupo_corrida_id])
 
+    if usuario.id.blank?
+      redirect_to "/#{pagina.produto.slug}/#{pagina.slug}"
+      return
+    end
+
     cookies[:usuario] = {value: JSON.parse(usuario.to_json)["table"].to_json, expires: 1.year.from_now, httponly: false}
     cookies[:funil] = {
       value: {

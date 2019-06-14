@@ -511,7 +511,7 @@ promocao.confirmarTransacao = function(){
   }
 
   if(!data.usuario || !data.usuario.id){
-    alert("Não foi possível concluir o pedido, por favor habilite os cookies do seu dispositivo ou entre em contato no whatsapp +55 11 96433-5064, para concluir a sua compra")
+    alert("Não foi possível concluir o pedido, por favor entre em contato no whatsapp +55 11 96433-5064, para concluir a sua compra");
     return;
   }
 
