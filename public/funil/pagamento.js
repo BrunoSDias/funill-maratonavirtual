@@ -155,7 +155,7 @@ promocao.atualizar = function(self, pagina_id, produtoId){
     $("#stepcpf").show();
     return;
   }
-  else if(!maratonaVirtual.testaCPF(cpf.val())){
+  else if(cpf.lenth > 0 && !maratonaVirtual.testaCPF(cpf.val())){
     cpf.focus();
     setTimeout(function(){ $("#cpf").val(""); }, 200);
     cpf.css("background", "#fbb67a")
@@ -274,7 +274,7 @@ promocao.gerarBoleto = function(self, pagina_id, produtoId){
     });
     return;
   }
-  else if(!maratonaVirtual.testaCPF(cpf.val())){
+  else if(cpf.lenth > 0 && !maratonaVirtual.testaCPF(cpf.val())){
     cpf.focus();
     setTimeout(function(){ $("#cpf").val(""); }, 200);
     cpf.css("background", "#fbb67a")
