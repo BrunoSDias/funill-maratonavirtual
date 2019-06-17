@@ -46,6 +46,46 @@ maratonaVirtual.testaCPF = function(strCPF) {
   return true;
 }
 
+promocao.updateUsuario = function(usuario_id, field, step, event, fim, callback){
+  event.preventDefault();
+
+  if(!($("#" + field).val()) && $("#" + field).val() == ""){
+    $("#" + field).focus();
+    $("#" + field).attr("placeholder", field + " obrigatório");
+    $("#" + field).css("background", "#fbb67a")
+    $("#" + field).blur(function(){
+      $(this).css("background", "#D8D8D8");
+    });
+    return;
+  }
+
+  usuario = {id: usuario_id}
+  usuario[field] = $("#" + field).val();
+
+  maratonaVirtual.load.on();
+  var url = maratonaVirtual.host + '/usuarios/busca-ou-cria.json';
+  $.ajax({
+    type: 'POST',
+    url: url,
+    headers: {
+      'MaratonaKeyAccess': maratonaVirtual.token,
+      'Accept': 'application/json; charset=utf-8',
+      'Content-Type': 'application/json; charset=utf-8'
+    },
+    data: JSON.stringify({usuario: usuario})
+  });
+
+  $("#step" + field).hide();
+  $("#" + step).show();
+  if(fim){
+    $("#stepFim").show();
+  }
+
+  if(callback){
+    callback.call();
+  }
+}
+
 promocao.carregarEndereco = function(cep){
   if(cep == ""){
     $("#cep").focus();
