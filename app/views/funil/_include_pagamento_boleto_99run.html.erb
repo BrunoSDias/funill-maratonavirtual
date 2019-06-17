@@ -64,6 +64,10 @@
                 </div>
 
                 <div id="stependereco" class="col-12" style="display: none">
+                  <div class="col-12" style="margin-top: 30px">
+                    <a href="javascript:;" onclick="promocao.updateUsuario(<%= @usuario.id %>, 'endereco', 'stepcep', event)" >Digitar CEP novamente</a>
+                  </div>
+
                   <div class="col-12">
                     <label style="color: #fff" for="cep">Endereço</label>
                     <input class="form-control" value="<%= @usuario.endereco %>" placeholder="Endereço" type="text" name="endereco" id="endereco">

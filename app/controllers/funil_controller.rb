@@ -46,6 +46,16 @@ class FunilController < ApplicationController
         @mudasenha = true
       end
 
+      # @usuario.id = 15942
+      # @usuario.cpf =  ""
+      # @usuario.telefone = ""
+      # @usuario.cep = ""
+      # @usuario.numero = ""
+      # @usuario.complemento = ""
+      # @usuario.cidade = ""
+      # @usuario.estado = ""
+      # @usuario.endereco = ""
+
       cookies[:usuario] = {value: JSON.parse(@usuario.to_json)["table"].to_json, expires: 1.year.from_now, httponly: false}
     else
       @usuario = OpenStruct.new

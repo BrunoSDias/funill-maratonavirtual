@@ -80,6 +80,11 @@ promocao.updateUsuario = function(usuario_id, field, step, event, fim, callback)
   if(fim){
     $("#stepFim").show();
   }
+  else{
+    $("#stepFim").hide();
+  }
+
+  $("#" + field).focus();
 
   if(callback){
     callback.call();
@@ -147,6 +152,7 @@ promocao.atualizar = function(self, pagina_id, produtoId){
     cpf.blur(function(){
       $(this).css("background", "#fff");
     });
+    $("#stepcpf").show();
     return;
   }
   else if(!maratonaVirtual.testaCPF(cpf.val())){
@@ -157,66 +163,18 @@ promocao.atualizar = function(self, pagina_id, produtoId){
     cpf.blur(function(){
       $(this).css("background", "#fff");
     });
-    return;
-  }
-
-  if(cep.lenth > 0 && (!cep.val() || cep.val() == "")){
-    cep.focus();
-    cep.attr("placeholder", "CEP obrigatório");
-    cep.css("background", "#fbb67a")
-    cep.blur(function(){
-      $(this).css("background", "#fff");
-    });
-    return;
-  }
-
-  if(endereco.lenth > 0 && (!endereco.val() || endereco.val() == "")){
-    endereco.focus();
-    endereco.attr("placeholder", "Endereço obrigatório");
-    endereco.css("background", "#fbb67a")
-    endereco.blur(function(){
-      $(this).css("background", "#fff");
-    });
-    return;
-  }
-
-  if(numero.lenth > 0 && (!numero.val() || numero.val() == "")){
-    numero.focus();
-    numero.attr("placeholder", "Número obrigatório");
-    numero.css("background", "#fbb67a")
-    numero.blur(function(){
-      $(this).css("background", "#fff");
-    });
-    return;
-  }
-
-  if(cidade.lenth > 0 && (!cidade.val() || cidade.val() == "")){
-    cidade.focus();
-    cidade.attr("placeholder", "Cidade obrigatório");
-    cidade.css("background", "#fbb67a")
-    cidade.blur(function(){
-      $(this).css("background", "#fff");
-    });
-    return;
-  }
-
-  if(estado.lenth > 0 && (!estado.val() || estado.val() == "")){
-    estado.focus();
-    estado.attr("placeholder", "Estado obrigatório");
-    estado.css("background", "#fbb67a")
-    estado.blur(function(){
-      $(this).css("background", "#fff");
-    });
+    $("#stepcpf").show();
     return;
   }
 
   if(senha.lenth > 0 && (!senha.val() || senha.val() == "")){
     senha.focus();
-    senha.attr("placeholder", "Estado obrigatório");
+    senha.attr("placeholder", "Preencha a senha");
     senha.css("background", "#fbb67a")
     senha.blur(function(){
       $(this).css("background", "#fff");
     });
+    $("#stepsenha").show();
     return;
   }
 
@@ -238,23 +196,14 @@ promocao.atualizar = function(self, pagina_id, produtoId){
       $("#email").blur(function(){
         $(this).css("background", "#fff");
       });
+
+      $("#stepemail").show();
       return;
     }
   }
-  if($("#cep").val())
-    usuario.cep         = $("#cep").val();
-  if($("#endereco").val())
-    usuario.endereco    = $("#endereco").val();
-  if($("#complemento").val())
-    usuario.complemento = $("#complemento").val();
-  if($("#numero").val())
-    usuario.numero      = $("#numero").val();
-  if($("#cidade").val())
-    usuario.cidade      = $("#cidade").val();
-  if($("#estado").val())
-    usuario.estado      = $("#estado").val();
+
   if($("#senha").val())
-    usuario.senha      = $("#senha").val();
+    usuario.senha = $("#senha").val();
 
   maratonaVirtual.load.on();
   var url = maratonaVirtual.host + '/usuarios/busca-ou-cria.json';
