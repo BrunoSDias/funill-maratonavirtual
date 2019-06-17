@@ -62,7 +62,6 @@ promocao.updateUsuario = function(usuario_id, field, step, event, fim, callback)
   usuario = {id: usuario_id}
   usuario[field] = $("#" + field).val();
 
-  maratonaVirtual.load.on();
   var url = maratonaVirtual.host + '/usuarios/busca-ou-cria.json';
   $.ajax({
     type: 'POST',
