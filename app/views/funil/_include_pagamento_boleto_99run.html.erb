@@ -26,7 +26,23 @@
                   </div>
 
                   <div class="col-12" style="margin-top: 30px">
-                    <button class="button-default-green d-block w-100" onclick="promocao.updateUsuario(<%= @usuario.id %>, 'cpf', 'steptelefone', event)" >Próximo</button>
+                    <button class="button-default-green d-block w-100" onclick="promocao.updateUsuario(<%= @usuario.id %>, 'cpf', '<%= @mudasenha ? "stepsenha" : "steptelefone" %>', event)" >Próximo</button>
+                  </div>
+                </div>
+
+                <div id="stepsenha" class="col-12" style="display: none">
+                  <div class="col-12">
+                    <label style="color: #fff" for="senha">Senha</label>
+                    <input class="form-control" placeholder="Senha" type="password" name="senha" id="senha">
+                  </div>
+
+                  <div class="col-12">
+                    <label style="color: #fff" for="senha">Confirmação de senha</label>
+                    <input class="form-control" placeholder="Confirmação de senha" type="password" name="csenha" id="csenha">
+                  </div>
+
+                  <div class="col-12" style="margin-top: 30px">
+                    <button class="button-default-green d-block w-100" onclick="promocao.updateUsuario(<%= @usuario.id %>, 'senha', 'steptelefone', event)" >Próximo</button>
                   </div>
                 </div>
 

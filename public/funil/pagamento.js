@@ -59,6 +59,29 @@ promocao.updateUsuario = function(usuario_id, field, step, event, fim, callback)
     return;
   }
 
+  if(field == "senha"){
+    if(!($("#c" + field).val()) && $("#c" + field).val() == ""){
+      $("#c" + field).focus();
+      $("#c" + field).attr("placeholder", field + " obrigatório");
+      $("#c" + field).css("background", "#fbb67a")
+      $("#c" + field).blur(function(){
+        $(this).css("background", "#D8D8D8");
+      });
+      return;
+    }
+
+    if($("#c" + field).val() != $("#" + field).val()){
+      $("#c" + field).focus();
+      $("#c" + field).val("");
+      $("#c" + field).attr("placeholder","Confirmação de senha diferente de senha");
+      $("#c" + field).css("background", "#fbb67a")
+      $("#c" + field).blur(function(){
+        $(this).css("background", "#D8D8D8");
+      });
+      return;
+    }
+  }
+
   usuario = {id: usuario_id}
   usuario[field] = $("#" + field).val();
 

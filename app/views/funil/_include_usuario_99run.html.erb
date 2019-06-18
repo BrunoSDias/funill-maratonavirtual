@@ -1,28 +1,8 @@
 <% if @usuario.present? && @usuario.id.present? %>
+  <% if @usuario.cpf.blank? || @mudasenha.present? %>
   <script src="/funil/pagamento.js?<%= Time.now.to_i %>" ></script>
   <br>
   <br>
-  <% if @usuario.cpf.present? && @mudasenha.present? %>
-  <div class="row" style="width: 100%;display: inline-block;text-align: left;">
-    <h1 style="margin-top: 30px;color: #fff">Confirme os seus dados</h1>
-    <div class="form-container active mt-4 cadastro">
-       <form class="cadastro">
-          <div class="form-row form-container mt-4">
-            <div id="stepsenha" class="col-12">
-              <div class="col-12">
-                <label style="color: #fff" for="senha">Senha</label>
-                <input class="form-control" placeholder="Senha" type="password" name="senha" id="senha">
-              </div>
-            </div>
-
-            <div id="stepFim" class="col-12 mt-5 text-center">
-              <a class="button-default-green d-block w-100" href="javascript:;" onclick="promocao.atualizar(this, <%= @pagina.id %>, <%= @pagina.produto_id %>);" placeholder="CVC" >Atualizar cadastro</a>
-            </div>
-          </div>
-      </form>
-    </div>
-  </div>
-  <% elsif @usuario.cpf.blank? || @mudasenha.present? %>
   <div class="row" style="width: 100%;display: inline-block;text-align: left;">
     <h1 style="margin-top: 30px;color: #fff">Confirme os seus dados</h1>
     <div class="form-container active mt-4 cadastro">
@@ -44,6 +24,11 @@
               <div class="col-12">
                 <label style="color: #fff" for="senha">Senha</label>
                 <input class="form-control" placeholder="Senha" type="password" name="senha" id="senha">
+              </div>
+
+              <div class="col-12">
+                <label style="color: #fff" for="senha">Confirmação de senha</label>
+                <input class="form-control" placeholder="Confirmação de senha" type="password" name="csenha" id="csenha">
               </div>
 
               <div class="col-12" style="margin-top: 30px">
