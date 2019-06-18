@@ -40,11 +40,10 @@
           <div class="form-row form-container mt-4">
 
             <div id="stepnome" class="col-12" style="display: block">
-
               <div class="box-progress">
                 <div class="progress">
-                  <div class="progress-bar" style="width: 20%;"></div>
-                  <span>1 de 5 perguntas</span>
+                  <div class="progress-bar" style="width: 14%;"></div>
+                  <span>1 de 7 perguntas</span>
                 </div>
               </div>
 
@@ -54,7 +53,26 @@
               </div>
 
               <div class="col-12" style="margin-top: 30px">
-                <button class="button-default-green d-block w-100" onclick="promocao.updateUsuario(<%= @usuario.id %>, 'nome', '<%= @mudasenha.present? ? "stepsenha" : "stepcpf" %>', event)" >Próximo</button>
+                <button class="button-default-green d-block w-100" onclick="promocao.updateUsuario(<%= @usuario.id %>, 'nome', 'stepcpf', event)" >Próximo</button>
+              </div>
+            </div>
+            
+            <div id="stepcpf" class="col-12" style="display: none">
+
+              <div class="box-progress">
+                <div class="progress">
+                  <div class="progress-bar" style="width: 28%;"></div>
+                  <span>2 de 7 perguntas</span>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label style="color: #fff" for="cpf">CPF</label>
+                <input class="form-control cpf" value="<%= @usuario.cpf %>" placeholder="CPF" type="text" name="cpf" id="cpf">
+              </div>
+
+              <div class="col-12" style="margin-top: 30px">
+                <button class="button-default-green d-block w-100" onclick="promocao.updateUsuario(<%= @usuario.id %>, 'cpf', '<%= @mudasenha ? "stepsenha" : "steptelefone" %>', event)" >Próximo</button>
               </div>
             </div>
 
@@ -62,19 +80,19 @@
 
               <div class="box-progress">
                 <div class="progress">
-                  <div class="progress-bar" style="width: 40%;"></div>
-                  <span>2 de 5 perguntas</span>
+                  <div class="progress-bar" style="width: 42%;"></div>
+                  <span>3 de 7 perguntas</span>
                 </div>
               </div>
 
               <div class="col-12">
                 <label style="color: #fff" for="senha">Conectar com</label>
-                <button type="button" onclick="promocao.updateFacebook(<%= @usuario.id %>, 'senha', 'stepcpf', event)" class="btn btn-primary" style="width: 100%;font-size: 30px;font-weight: bold;padding: 15px;">Facebook</button>
+                <button type="button" onclick="promocao.updateFacebook(<%= @usuario.id %>, 'senha', 'steptelefone', event)" class="btn btn-primary" style="width: 100%;font-size: 30px;font-weight: bold;padding: 15px;">Facebook</button>
                 <div class="col-12" style="text-align: center;font-size: 40px;color: #fff;font-weight: bold;margin-top: 10px;">
                   OU
                 </div>
               </div>
-              
+
               <div class="col-12">
                 <label style="color: #fff" for="senha">Senha</label>
                 <input class="form-control" placeholder="Senha" type="password" name="senha" id="senha">
@@ -86,26 +104,7 @@
               </div>
 
               <div class="col-12" style="margin-top: 30px">
-                <button class="button-default-green d-block w-100" onclick="promocao.updateUsuario(<%= @usuario.id %>, 'senha', 'stepcpf', event)" >Próximo</button>
-              </div>
-            </div>
-            
-            <div id="stepcpf" class="col-12" style="display: none">
-
-              <div class="box-progress">
-                <div class="progress">
-                  <div class="progress-bar" style="width: 60%;"></div>
-                  <span>3 de 5 perguntas</span>
-                </div>
-              </div>
-
-              <div class="col-12">
-                <label style="color: #fff" for="cpf">CPF</label>
-                <input class="form-control cpf" value="<%= @usuario.cpf %>" placeholder="CPF" type="text" name="cpf" id="cpf">
-              </div>
-
-              <div class="col-12" style="margin-top: 30px">
-                <button class="button-default-green d-block w-100" onclick="promocao.updateUsuario(<%= @usuario.id %>, 'cpf', 'steptelefone', event)" >Próximo</button>
+                <button class="button-default-green d-block w-100" onclick="promocao.updateUsuario(<%= @usuario.id %>, 'senha', 'steptelefone', event)" >Próximo</button>
               </div>
             </div>
 
@@ -113,8 +112,8 @@
 
               <div class="box-progress">
                 <div class="progress">
-                  <div class="progress-bar" style="width: 80%;"></div>
-                  <span>4 de 5 perguntas</span>
+                  <div class="progress-bar" style="width: 56%;"></div>
+                  <span>4 de 7 perguntas</span>
                 </div>
               </div>
 
@@ -124,7 +123,7 @@
               </div>
 
               <div class="col-12" style="margin-top: 30px">
-                <button class="button-default-green d-block w-100" onclick="promocao.updateUsuario(<%= @usuario.id %>, 'telefone', 'stepemail', event, true)" >Próximo</button>
+                <button class="button-default-green d-block w-100" onclick="promocao.updateUsuario(<%= @usuario.id %>, 'telefone', 'stepemail', event)" >Próximo</button>
               </div>
             </div>
 
@@ -132,14 +131,76 @@
 
               <div class="box-progress">
                 <div class="progress">
-                  <div class="progress-bar" style="width: 100%;"></div>
-                  <span>5 de 5 perguntas</span>
+                  <div class="progress-bar" style="width: 70%;"></div>
+                  <span>5 de 7 perguntas</span>
                 </div>
               </div>
 
               <div class="col-12">
                 <label style="color: #fff" for="email">E-mail</label>
                 <input class="form-control" value="<%= @usuario.email %>" placeholder="E-mail" type="text" name="email" id="email">
+              </div>
+
+              <div class="col-12" style="margin-top: 30px">
+                <button class="button-default-green d-block w-100" onclick="promocao.updateUsuario(<%= @usuario.id %>, 'email', 'stepcep', event)" >Próximo</button>
+              </div>
+            </div>
+
+            <div id="stepcep" class="col-12" style="display: none">
+
+              <div class="box-progress">
+                <div class="progress">
+                  <div class="progress-bar" style="width: 84%;"></div>
+                  <span>6 de 7 perguntas</span>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label style="color: #fff" for="cep">CEP</label>
+                <input class="form-control cep" value="<%= @usuario.cep %>" placeholder="CEP" onblur="promocao.carregarEndereco(this.value)" type="text" name="cep" id="cep">
+              </div>
+
+              <div class="col-12" style="margin-top: 30px">
+                <button class="button-default-green d-block w-100" onclick="promocao.updateUsuario(<%= @usuario.id %>, 'cep', 'stependereco', event, true, function(){ promocao.carregarEndereco($('#cep').val()); })" >Próximo</button>
+              </div>
+            </div>
+
+            <div id="stependereco" class="col-12" style="display: none">
+
+              <div class="box-progress">
+                <div class="progress">
+                  <div class="progress-bar" style="width: 98%;"></div>
+                  <span>7 de 7 perguntas</span>
+                </div>
+              </div>
+
+              <div class="col-12" style="margin-top: 30px">
+                <a href="javascript:;" onclick="promocao.updateUsuario(<%= @usuario.id %>, 'endereco', 'stepcep', event)" >Digitar CEP novamente</a>
+              </div>
+
+              <div class="col-12">
+                <label style="color: #fff" for="cep">Endereço</label>
+                <input class="form-control" value="<%= @usuario.endereco %>" placeholder="Endereço" type="text" name="endereco" id="endereco">
+              </div>
+
+              <div class="col-12">
+                <label style="color: #fff" for="cep">Número</label>
+                <input class="form-control" value="<%= @usuario.numero %>" placeholder="Número" type="number" name="numero" id="numero">
+              </div>
+
+              <div class="col-12">
+                <label style="color: #fff" for="cep">Complemento</label>
+                <input class="form-control" value="<%= @usuario.complemento %>" placeholder="Complemento" type="text" name="complemento" id="complemento">
+              </div>
+
+              <div class="col-12">
+                <label style="color: #fff" for="cep">Cidade</label>
+                <input class="form-control" value="<%= @usuario.cidade %>" placeholder="Cidade" type="text" name="cidade" id="cidade">
+              </div>
+
+              <div class="col-12">
+                <label style="color: #fff" for="cep">Estado</label>
+                <input class="form-control" value="<%= @usuario.estado %>" placeholder="Estado" type="text" name="estado" id="estado">
               </div>
             </div>
 
