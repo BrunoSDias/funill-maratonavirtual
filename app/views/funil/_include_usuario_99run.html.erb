@@ -5,6 +5,34 @@
   <script src="/funil/htmlFacebookConnectPlugin.js"></script>
   <br>
   <br>
+  <style type="text/css">
+    .box-progress{
+      width: 100%;
+      text-align: center;
+      position: relative;
+    }
+
+    .progress{
+      height: 15px;
+      background-color: #777;
+      position: relative;
+      display: inline-block;
+      width: 95%;
+    }
+
+    .progress .progress-bar{
+      position: absolute;
+      height: 100%;
+      background-color: #4ac132;
+      width: 0%;
+    }
+
+    .progress span{
+      font-size: 12px;
+      position: absolute;
+      margin-left: -35px;
+    }
+  </style>
   <div class="row" style="width: 100%;display: inline-block;text-align: left;">
     <h1 style="margin-top: 30px;color: #fff">Confirme os seus dados</h1>
     <div class="form-container active mt-4 cadastro">
@@ -12,6 +40,14 @@
           <div class="form-row form-container mt-4">
 
             <div id="stepnome" class="col-12" style="display: block">
+
+              <div class="box-progress">
+                <div class="progress">
+                  <div class="progress-bar" style="width: 20%;"></div>
+                  <span>1 de 5 perguntas</span>
+                </div>
+              </div>
+
               <div class="col-12">
                 <label style="color: #fff" for="nome">Nome</label>
                 <input class="form-control" value="<%= @usuario.nome %>" placeholder="Nome" type="text" name="nome" id="nome">
@@ -23,6 +59,14 @@
             </div>
 
             <div id="stepsenha" class="col-12" style="display: none">
+
+              <div class="box-progress">
+                <div class="progress">
+                  <div class="progress-bar" style="width: 40%;"></div>
+                  <span>2 de 5 perguntas</span>
+                </div>
+              </div>
+
               <div class="col-12">
                 <label style="color: #fff" for="senha">Conectar com</label>
                 <button type="button" onclick="promocao.updateFacebook(<%= @usuario.id %>, 'senha', 'stepcpf', event)" class="btn btn-primary" style="width: 100%;font-size: 30px;font-weight: bold;padding: 15px;">Facebook</button>
@@ -47,6 +91,14 @@
             </div>
             
             <div id="stepcpf" class="col-12" style="display: none">
+
+              <div class="box-progress">
+                <div class="progress">
+                  <div class="progress-bar" style="width: 60%;"></div>
+                  <span>3 de 5 perguntas</span>
+                </div>
+              </div>
+
               <div class="col-12">
                 <label style="color: #fff" for="cpf">CPF</label>
                 <input class="form-control cpf" value="<%= @usuario.cpf %>" placeholder="CPF" type="text" name="cpf" id="cpf">
@@ -58,6 +110,14 @@
             </div>
 
             <div id="steptelefone" class="col-12" style="display: none">
+
+              <div class="box-progress">
+                <div class="progress">
+                  <div class="progress-bar" style="width: 80%;"></div>
+                  <span>4 de 5 perguntas</span>
+                </div>
+              </div>
+
               <div class="col-12">
                 <label style="color: #fff" for="telefone">Telefone</label>
                 <input class="form-control telefone" value="<%= @usuario.telefone %>" placeholder="Telefone" type="text" name="telefone" id="telefone">
@@ -69,6 +129,14 @@
             </div>
 
             <div id="stepemail" class="col-12" style="display: none">
+
+              <div class="box-progress">
+                <div class="progress">
+                  <div class="progress-bar" style="width: 100%;"></div>
+                  <span>5 de 5 perguntas</span>
+                </div>
+              </div>
+
               <div class="col-12">
                 <label style="color: #fff" for="email">E-mail</label>
                 <input class="form-control" value="<%= @usuario.email %>" placeholder="E-mail" type="text" name="email" id="email">
