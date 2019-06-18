@@ -144,6 +144,7 @@ promocao.updateFacebook = function(usuario_id, field, step, event){
 
           $("#step" + field).hide();
           $("#" + step).show();
+          maratonaVirtual.load.off();
         }, function onError (error) {
           alert("Não foi possível fazer a conexão com o Facebook")
           maratonaVirtual.load.off();
