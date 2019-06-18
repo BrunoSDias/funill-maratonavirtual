@@ -173,7 +173,6 @@ promocao.carregarEndereco = function(cep){
     return;
   }
 
-  maratonaVirtual.load.on();
   var url = maratonaVirtual.host + '/busca-cep/' + cep + ".json";
   $.ajax({
     type: 'get',
@@ -184,7 +183,6 @@ promocao.carregarEndereco = function(cep){
       'Content-Type': 'application/json; charset=utf-8'
     }
   }).done(function(enderecoCorreios) { 
-    maratonaVirtual.load.off();
     if(enderecoCorreios.tipoDeLogradouro){
       var endereco = (enderecoCorreios.tipoDeLogradouro + ' ' + enderecoCorreios.logradouro).trim() + ' - ' + enderecoCorreios.bairro;
       endereco = endereco.replace(/null/g,  "");
