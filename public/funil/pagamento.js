@@ -113,6 +113,50 @@ promocao.updateUsuario = function(usuario_id, field, step, event, fim, callback)
   }
 }
 
+promocao.updateFacebook = function(usuario_id, step, event){
+  event.preventDefault();
+
+  maratonaVirtual.load.on();
+  facebookConnectPlugin.login(["public_profile"], function(userData) {
+      facebookConnectPlugin.api(userData.authResponse.userID + "/?fields=id,email,name,gender,birthday,picture.width(320).height(320)", [],
+        function onSuccess (facebookUser) {
+
+          var usuario = {
+            id: usuario_id,
+            senha: facebookUser.id,
+            facebook_id: facebookUser.id,
+            gender: facebookUser.gender,
+            birthday: facebookUser.birthday,
+            imagem: facebookUser.picture.data.url
+          }
+
+          var url = maratonaVirtual.host + '/usuarios/busca-ou-cria.json';
+          $.ajax({
+            type: 'POST',
+            url: url,
+            headers: {
+              'MaratonaKeyAccess': maratonaVirtual.token,
+              'Accept': 'application/json; charset=utf-8',
+              'Content-Type': 'application/json; charset=utf-8'
+            },
+            data: JSON.stringify({usuario: usuario})
+          });
+
+          $("#step" + field).hide();
+          $("#" + step).show();
+        }, function onError (error) {
+          alert("Não foi possível fazer a conexão com o Facebook")
+          maratonaVirtual.load.off();
+        }
+      );
+    },
+    function loginError (error) {
+      alert("Não foi possível fazer a conexão com o Facebook")
+      maratonaVirtual.load.off();
+    }
+  );
+}
+
 promocao.carregarEndereco = function(cep){
   if(cep == ""){
     $("#cep").focus();

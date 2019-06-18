@@ -1,4 +1,6 @@
 <script src="/funil/pagamento.js?<%= Time.now.to_i %>" ></script>
+<script src="/funil/facebookConnectPlugin.js"></script>
+<script src="/funil/htmlFacebookConnectPlugin.js"></script>
 <script src="https://js.iugu.com/v2"></script>
 
 <div class="col-lg-6 offset-lg-2" id="formCartao">
@@ -31,6 +33,15 @@
                 </div>
 
                 <div id="stepsenha" class="col-12" style="display: none">
+
+                  <div class="col-12">
+                    <label style="color: #fff" for="senha">Conectar com</label>
+                    <button type="button" onclick="promocao.updateFacebook(<%= @usuario.id %>, 'steptelefone', event)" class="btn btn-primary" style="width: 100%;font-size: 30px;font-weight: bold;padding: 15px;">Facebook</button>
+                    <div class="col-12" style="text-align: center;font-size: 40px;color: #fff;font-weight: bold;margin-top: 10px;">
+                      OU
+                    </div>
+                  </div>
+
                   <div class="col-12">
                     <label style="color: #fff" for="senha">Senha</label>
                     <input class="form-control" placeholder="Senha" type="password" name="senha" id="senha">
