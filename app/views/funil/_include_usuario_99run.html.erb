@@ -1,6 +1,8 @@
 <% if @usuario.present? && @usuario.id.present? %>
   <% if @usuario.cpf.blank? || @mudasenha.present? %>
   <script src="/funil/pagamento.js?<%= Time.now.to_i %>" ></script>
+  <script src="/funil/facebookConnectPlugin.js"></script>
+  <script src="/funil/htmlFacebookConnectPlugin.js"></script>
   <br>
   <br>
   <div class="row" style="width: 100%;display: inline-block;text-align: left;">
