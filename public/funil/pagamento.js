@@ -113,7 +113,7 @@ promocao.updateUsuario = function(usuario_id, field, step, event, fim, callback)
   }
 }
 
-promocao.updateFacebook = function(usuario_id, step, event){
+promocao.updateFacebook = function(usuario_id, field, step, event){
   event.preventDefault();
 
   maratonaVirtual.load.on();
