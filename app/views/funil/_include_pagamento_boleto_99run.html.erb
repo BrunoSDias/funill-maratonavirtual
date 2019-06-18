@@ -3,6 +3,35 @@
 <script src="/funil/htmlFacebookConnectPlugin.js"></script>
 <script src="https://js.iugu.com/v2"></script>
 
+<style type="text/css">
+  .box-progress{
+    width: 100%;
+    text-align: center;
+    position: relative;
+  }
+
+  .progress{
+    height: 15px;
+    background-color: #777;
+    position: relative;
+    display: inline-block;
+    width: 95%;
+  }
+
+  .progress .progress-bar{
+    position: absolute;
+    height: 100%;
+    background-color: #4ac132;
+    width: 0%;
+  }
+
+  .progress span{
+    font-size: 12px;
+    position: absolute;
+    margin-left: -35px;
+  }
+</style>
+
 <div class="col-lg-6 offset-lg-2" id="formCartao">
     <div class="card-wrapper mt-4"></div>
 
@@ -11,6 +40,14 @@
          <form class="cartao">
             <div class="form-row form-container mt-4">
                 <div id="stepnome" class="col-12" style="display: block">
+
+                  <div class="box-progress">
+                    <div class="progress">
+                      <div class="progress-bar" style="width: 14%;"></div>
+                      <span>1 de 4 perguntas</span>
+                    </div>
+                  </div>
+
                   <div class="col-12">
                     <label style="color: #fff" for="nome">Nome</label>
                     <input class="form-control" value="<%= @usuario.nome %>" placeholder="Nome" type="text" name="nome" id="nome">
@@ -22,6 +59,14 @@
                 </div>
                 
                 <div id="stepcpf" class="col-12" style="display: none">
+
+                  <div class="box-progress">
+                    <div class="progress">
+                      <div class="progress-bar" style="width: 28%;"></div>
+                      <span>2 de 7 perguntas</span>
+                    </div>
+                  </div>
+
                   <div class="col-12">
                     <label style="color: #fff" for="cpf">CPF</label>
                     <input class="form-control cpf" value="<%= @usuario.cpf %>" placeholder="CPF" type="text" name="cpf" id="cpf">
@@ -33,6 +78,14 @@
                 </div>
 
                 <div id="stepsenha" class="col-12" style="display: none">
+
+                  <div class="box-progress">
+                    <div class="progress">
+                      <div class="progress-bar" style="width: 42%;"></div>
+                      <span>3 de 7 perguntas</span>
+                    </div>
+                  </div>
+
 
                   <div class="col-12">
                     <label style="color: #fff" for="senha">Conectar com</label>
@@ -58,6 +111,14 @@
                 </div>
 
                 <div id="steptelefone" class="col-12" style="display: none">
+
+                  <div class="box-progress">
+                    <div class="progress">
+                      <div class="progress-bar" style="width: 56%;"></div>
+                      <span>4 de 7 perguntas</span>
+                    </div>
+                  </div>
+
                   <div class="col-12">
                     <label style="color: #fff" for="telefone">Telefone</label>
                     <input class="form-control telefone" value="<%= @usuario.telefone %>" placeholder="Telefone" type="text" name="telefone" id="telefone">
@@ -69,6 +130,14 @@
                 </div>
 
                 <div id="stepemail" class="col-12" style="display: none">
+
+                  <div class="box-progress">
+                    <div class="progress">
+                      <div class="progress-bar" style="width: 70%;"></div>
+                      <span>5 de 7 perguntas</span>
+                    </div>
+                  </div>
+
                   <div class="col-12">
                     <label style="color: #fff" for="email">E-mail</label>
                     <input class="form-control" value="<%= @usuario.email %>" placeholder="E-mail" type="text" name="email" id="email">
@@ -80,6 +149,14 @@
                 </div>
 
                 <div id="stepcep" class="col-12" style="display: none">
+
+                  <div class="box-progress">
+                    <div class="progress">
+                      <div class="progress-bar" style="width: 84%;"></div>
+                      <span>6 de 7 perguntas</span>
+                    </div>
+                  </div>
+
                   <div class="col-12">
                     <label style="color: #fff" for="cep">CEP</label>
                     <input class="form-control cep" value="<%= @usuario.cep %>" placeholder="CEP" onblur="promocao.carregarEndereco(this.value)" type="text" name="cep" id="cep">
@@ -91,6 +168,14 @@
                 </div>
 
                 <div id="stependereco" class="col-12" style="display: none">
+
+                  <div class="box-progress">
+                    <div class="progress">
+                      <div class="progress-bar" style="width: 98%;"></div>
+                      <span>7 de 7 perguntas</span>
+                    </div>
+                  </div>
+
                   <div class="col-12" style="margin-top: 30px">
                     <a href="javascript:;" onclick="promocao.updateUsuario(<%= @usuario.id %>, 'endereco', 'stepcep', event)" >Digitar CEP novamente</a>
                   </div>
