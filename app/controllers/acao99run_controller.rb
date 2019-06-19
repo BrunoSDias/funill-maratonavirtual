@@ -21,7 +21,7 @@ class Acao99runController < ApplicationController
         carrinho:[
           grupo_inscricao: {
             id: grupo_corrida.id,
-            preco: grupo_corrida.preco
+            preco: params[:preco] || grupo_corrida.preco
           }
         ]
       }.to_json,
