@@ -41,7 +41,7 @@
             <input type="hidden" name="pagar_com_boleto" id="pagar_com_boleto" value="false">
             <input type="hidden" name="cod_marketing" id="cod_marketing_post" value="">
             <input type="hidden" name="preco" id="preco" value="
-            <%= number_to_currency(@conjunto_grupo_corrida.valor || @conjunto_grupo_corrida.grupos[0]["preco"]) %>">
+            <%= @conjunto_grupo_corrida.valor || @conjunto_grupo_corrida.grupos[0]["preco"] %>">
             <script type="text/javascript">
               function IsEmail(email) {
                 var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
