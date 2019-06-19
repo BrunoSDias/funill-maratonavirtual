@@ -101,9 +101,12 @@ promocao.updateUsuario = function(usuario_id, field, step, event, fim, callback)
   $("#" + step).show();
   if(fim){
     $("#stepFim").show();
+    $(".escondeNoPassoCadastro").show();
+
   }
   else{
     $("#stepFim").hide();
+    $(".escondeNoPassoCadastro").hide();
   }
 
   $("#" + field).focus();
