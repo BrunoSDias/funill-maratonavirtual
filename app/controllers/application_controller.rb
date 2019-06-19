@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action  :authenticate_user!
+  before_action :add_www_subdomain
 
   def authenticate_user!
     if request.path_parameters[:format] != 'json'
@@ -17,4 +18,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def add_www_subdomain
+    if Rails.env == "production"
+      if /^http:/.match(request.original_url)
+        redirect_to(request.original_url.gsub("http:", "https:"), :status => 301)
+      elsif /herokuapp/.match(request.original_url)
+        redirect_to(request.original_url.gsub("https://funil-99run.herokuapp.com", "https://funil.99run.com"), :status => 301)
+      end
+    end
+  end
 end
