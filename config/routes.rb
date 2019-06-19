@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   	resources :paginas
   end
   resources :administradores
-  root to: 'administradores#index'
+  root to: 'produtos#index'
 
   get '/login', to: 'login#index'
   post '/login', to: 'login#logar'
