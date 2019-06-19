@@ -30,7 +30,7 @@ class PaginasController < ApplicationController
 
     respond_to do |format|
       if @pagina.save
-        format.html { redirect_to produto_paginas_path(@produto), notice: 'Pagina was successfully created.' }
+        format.html { redirect_to produto_pagina_path(@produto, @pagina), notice: 'Pagina was successfully created.' }
         format.json { render :show, status: :created, location: @pagina }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class PaginasController < ApplicationController
   def update
     respond_to do |format|
       if @pagina.update(pagina_params)
-        format.html { redirect_to produto_paginas_path(@produto), notice: 'Pagina was successfully updated.' }
+        format.html { redirect_to produto_pagina_path(@produto, @pagina), notice: 'Pagina was successfully updated.' }
         format.json { render :show, status: :ok, location: @pagina }
       else
         format.html { render :edit }
