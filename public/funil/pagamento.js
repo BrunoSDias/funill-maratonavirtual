@@ -633,7 +633,7 @@ promocao.confirmarTransacao = function(){
     usuario.estado      = $("#estado").val();
   }
 
-  var data = {};
+  var data = {funil_zera_frete: true};
   if($("#parcelas").val()){
     data.months = $("#parcelas").val()
   }
