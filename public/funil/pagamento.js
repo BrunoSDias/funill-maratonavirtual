@@ -97,6 +97,8 @@ promocao.updateUsuario = function(usuario_id, field, step, event, fim, callback)
     data: JSON.stringify({usuario: usuario})
   });
 
+  promocao.motivoIntencao("Atualizou o cadastro campo: " + field);
+
   $("#step" + field).hide();
   $("#" + step).show();
   if(fim){
@@ -352,6 +354,8 @@ promocao.atualizar = function(self, pagina_id, produtoId){
     data: JSON.stringify({usuario: usuario})
   }).done(function(data) { 
     maratonaVirtual.load.off();
+    promocao.motivoIntencao("Atualizou o cadastro completo");
+
     var url = '/produtos/' + promocao.produtoId + '/paginas/' + promocao.paginaCorrenteId + '.json';
     $.ajax({
       type: 'GET',
@@ -368,6 +372,8 @@ promocao.atualizar = function(self, pagina_id, produtoId){
     });
   }).fail(function(jqXHR, textStatus) {
     maratonaVirtual.load.off();
+    promocao.motivoIntencao("Deu erro ao atualizar o cadastro completo");
+
     var url = '/produtos/' + promocao.produtoId + '/paginas/' + promocao.paginaCorrenteId + '.json';
     $.ajax({
       type: 'GET',
@@ -520,7 +526,6 @@ promocao.confirmarCompra = function(self, pagina_id, produtoId){
     return;
   }
 
-
   $(promocao.btnCompra).data("texto", $(self).text());
   $(promocao.btnCompra).html("Carregando ...");
   $(promocao.btnCompra).attr("disabled", "disabled");
@@ -546,6 +551,7 @@ promocao.confirmarCompra = function(self, pagina_id, produtoId){
   Iugu.createPaymentToken(cc, function(data) {
     maratonaVirtual.load.off();
     if (data.errors) {
+      promocao.motivoIntencao("Numero de cartão inválido - createPaymentToken: " + JSON.stringify(data.errors));
 
       $(promocao.btnCompra).html($(promocao.btnCompra).data("texto"));
       $(promocao.btnCompra).removeAttr("disabled");
@@ -567,6 +573,33 @@ promocao.confirmarCompra = function(self, pagina_id, produtoId){
   });
 
 }
+
+promocao.motivoIntencao = function(mensagem){
+  var funil = JSON.parse(decodeURIComponent(getCookie("funil")).replace(/\+\:/g, ":"));
+  var usuario_id = funil.usuario_id;
+  var grupo_corrida_id = undefined;
+
+  for(var i=0;i<funil.carrinho.length; i++){
+    if(funil.carrinho[i].grupo_inscricao){
+      grupo_corrida_id = funil.carrinho[i].grupo_inscricao.id;
+    }
+  }
+
+  if(grupo_corrida_id && usuario_id){
+    var url = maratonaVirtual.host + '/usuarios/busca-ou-cria.json';
+    $.ajax({
+      type: 'POST',
+      url: url,
+      headers: {
+        'MaratonaKeyAccess': maratonaVirtual.token,
+        'Accept': 'application/json; charset=utf-8',
+        'Content-Type': 'application/json; charset=utf-8'
+      },
+      data: JSON.stringify({usuario: {id: usuario_id} , grupo_corrida_id: grupo_corrida_id, motivo_intencao: mensagem })
+    });
+  }
+}
+
 
 promocao.addCarrinhoCheckBox = function(self){
   var funil = JSON.parse(decodeURIComponent(getCookie("funil")).replace(/\+\:/g, ":"));
@@ -631,6 +664,8 @@ promocao.confirmarTransacao = function(){
     usuario.numero      = $("#numero").val();
     usuario.cidade      = $("#cidade").val();
     usuario.estado      = $("#estado").val();
+
+    promocao.motivoIntencao("Clicou no botão comprar para boleto");
   }
 
   var data = {funil_zera_frete: true};
@@ -640,6 +675,7 @@ promocao.confirmarTransacao = function(){
 
   if(promocao.token){
     data.token = promocao.token
+    promocao.motivoIntencao("Clicou no botão comprar para cartão");
   }
   data.usuario = usuario
   data.pedido = {
@@ -686,6 +722,8 @@ promocao.confirmarTransacao = function(){
 
     $(promocao.btnCompra).html($(promocao.btnCompra).data("texto"));
     $(promocao.btnCompra).removeAttr("disabled");
+
+    promocao.motivoIntencao("Erro ao tentar passar cartão ou boleto - " + jqXHR.responseText);
 
     var data = jqXHR.responseJSON;
     var mensagem = data.erro;
@@ -739,12 +777,14 @@ promocao.showUpsell = function(pagina_corrente_id, callback, idProximaPromocao){
   }).done(function(html) { 
     maratonaVirtual.load.off();
     if(html && html != ""){
+      var produtosId = [];
       var adicionado = false;
       var jsItemProximaId = $(html.match(/jsItemProximaId.*"/))[0].replace(/\"/g,"").replace(/jsItemProximaId.*?=/, "").trim();
       $(html.match(/jsItemProdutoId.*"/)).each(function(){
         if(!adicionado){
           var jsItemProdutoId = this.replace(/\"/g,"").replace(/jsItemProdutoId.*?=/, "").trim();
           $(funil.carrinho).each(function(){
+            produtosId.push(jsItemProdutoId);
             if(this.id == jsItemProdutoId){
               adicionado = true
             }
@@ -756,6 +796,8 @@ promocao.showUpsell = function(pagina_corrente_id, callback, idProximaPromocao){
         $(".jsUpsell").html(html);
         $(".jsUpsell").show();
         $(".jsUpsell").css("min-height", $(window).width() + "px");
+
+        promocao.motivoIntencao("Viu o upsell dos produtos " + JSON.stringify(produtosId));
       }
       else{
         if(parseInt(jsItemProximaId) > 0){
