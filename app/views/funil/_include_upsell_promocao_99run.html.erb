@@ -1,0 +1,40 @@
+<% if @promocao.present? %>
+  <div class="row mt-5">
+    <% @promocao.item_promocoes.each_with_index do |item, i| %>
+      <div class="col-md-5 jsItensPromocao">
+        <input type="hidden" class="jsItemProdutoId" value="<%= item.codigo_produto %>" >
+        <div class="box-check <% if i == 0 %>border-selected<% end %>" onclick="upsell.selecionaItem(this)" >
+          <img src="<%= item.imagem %>" class="">
+        </div>
+      </div>
+      <% if @promocao.item_promocoes.count > 0 && (i+1) != @promocao.item_promocoes.count %> 
+        <div class="col-md-2">
+          <h3 class="alinha-ou">OU</h3>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <% if @promocao.item_promocoes.count > 0 %>
+  <div class="row box-btn">
+    <div class="col-md-12">
+      <div class="d-flex justify-content-center ">
+        <input type="hidden" class="jsItemProximaId" value="<%= @promocao.se_pago_vai_para %>" >
+        <a href="javascript:;" onclick="upsell.adicionar(<%= @promocao.se_pago_vai_para %>)" class="button-default-green d-block -aux">
+          <% texto = @promocao.item_promocoes.first.btn_aceito rescue "Comprar por apenas R$#{@promocao.item_promocoes.first.preco_promocional}" %>
+          <%= texto.present? ? texto : "Comprar por apenas R$#{@promocao.item_promocoes.first.preco_promocional}" %>
+        </a>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <a class="link" href="javascript:;" onclick="upsell.naoAdicionar(<%= @promocao.se_negou_vai_para %>)">
+        <% texto = @promocao.item_promocoes.first.btn_negado rescue "Eu não quero." %>
+        <%= texto.present? ? texto : "Eu não quero." %>
+      </a><br>
+    </div>
+  </div>
+<% end %>
