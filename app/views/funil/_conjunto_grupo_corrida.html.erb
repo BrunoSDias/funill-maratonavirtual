@@ -1,4 +1,5 @@
 <% if @conjunto_grupo_corrida.present? && @conjunto_grupo_corrida.instance_variable_get("@table").keys.present? %>
+<script src="/funil/pagamento.js?<%= Time.now.to_i %>" ></script>
 <div class="col-lg-5 offset-lg-2">
     <form action="/99run/login/comprar/grupo-corrida" method="post" id="formPostLogin">
         <h1 class="total">
@@ -25,12 +26,12 @@
                 <div class="form-row form-container mt-4">
                     <div class="col-12">
                         <i class="fas fa-mobile-alt"></i>
-                        <input class="form-control telefone" placeholder="Insira seu celular aqui" type="tel" name="telefone" id="99RunPostLoginTelefone">
+                        <input class="form-control telefone" placeholder="Insira seu celular aqui" type="tel" name="telefone" id="99RunPostLoginTelefone" value="<%= cookies[:telefone] %>">
                     </div>
 
                     <div class="col-12">
                         <i class="far fa-envelope"></i>
-                        <input class="form-control" placeholder="Insira seu e-mail aqui" type="text" name="email" id="99RunPostLoginEmail">
+                        <input class="form-control" placeholder="Insira seu e-mail aqui" type="text" name="email" id="99RunPostLoginEmail" value="<%= cookies[:email] %>">
                     </div>
                 </div>
             </div>
@@ -57,6 +58,22 @@
                 $("#pagar_com_boleto").val("false");
                 postForm();
               }
+
+              var setSalvarDadosCookie = function() {
+                $("#99RunPostLoginTelefone").blur(function(){
+                  if(this.value != ""){
+                    setCookie("telefone", this.value, 365);
+                  }
+                });
+                
+                $("#99RunPostLoginEmail").blur(function(){
+                  if(this.value != ""){
+                    setCookie("email", this.value, 365);
+                  }
+                });
+              }
+
+              setSalvarDadosCookie();
 
               var postForm = function() {
                 $("#cod_marketing_post").val($("#cod_marketing").val());
