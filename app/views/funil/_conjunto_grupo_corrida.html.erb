@@ -71,13 +71,13 @@
 
               var setSalvarDadosCookie = function() {
                 $("#99RunPostLoginTelefone").blur(function(){
-                  if(this.value != ""){
+                  if(this.value != "" && this.value.length >= 15){
                     setCookie("telefone", this.value, 365);
                   }
                 });
                 
                 $("#99RunPostLoginEmail").blur(function(){
-                  if(this.value != ""){
+                  if(this.value != "" && IsEmail(this.value)){
                     setCookie("email", this.value, 365);
                   }
                 });
