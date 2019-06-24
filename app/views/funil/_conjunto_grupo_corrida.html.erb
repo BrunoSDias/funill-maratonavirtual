@@ -12,9 +12,9 @@
             <div class="btn-group btn-group-toggle sizes mt-4" data-toggle="buttons">
 
                 <% @conjunto_grupo_corrida.grupos.each_with_index do |grupo, i|
-                  if cookies[:grupo_corrida_id_selecionado].present? 
-                    if @conjunto_grupo_corrida.grupos.map{|g|g["id"].to_i}.include?(cookies[:grupo_corrida_id_selecionado].to_i)
-                      ativo = cookies[:grupo_corrida_id_selecionado].to_i == grupo["id"].to_i
+                  if cookies[:km].present? 
+                    if @conjunto_grupo_corrida.grupos.map{|g|g["desafio"]["distancia"]}.include?(cookies[:km])
+                      ativo = cookies[:km] == grupo["desafio"]["distancia"]
                     else
                       ativo = (i == 0)
                     end  
@@ -23,7 +23,7 @@
                   end
                   %>
                 <label class="btn btn-size <%= ativo ? "active" : "" %>">
-                    <input type="radio" name="grupo_corrida_id" autocomplete="off" value='<%= grupo["id"] %>'  <%= ativo ? "checked" : "" %>> <%= grupo["desafio"]["distancia"] %>km
+                    <input type="radio" name="grupo_corrida_id" data-km="<%= grupo["desafio"]["distancia"] %>" autocomplete="off" value='<%= grupo["id"] %>'  <%= ativo ? "checked" : "" %>> <%= grupo["desafio"]["distancia"] %>km
                 </label>
                 <% end %>
             </div>
@@ -85,7 +85,7 @@
                 $(".btn-group .btn").click(function(){
                   var input = $(this).find("input")
                   if(input.val() != ""){
-                    setCookie("grupo_corrida_id_selecionado", input.val(), 365);
+                    setCookie("km", input.data("km"), 365);
                   }
                 });
               }
