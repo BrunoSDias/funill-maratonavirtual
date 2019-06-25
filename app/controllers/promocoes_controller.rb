@@ -32,7 +32,7 @@ class PromocoesController < ApplicationController
     respond_to do |format|
       if @promocao.save
         upsell_produto_save
-        format.html { redirect_to edit_produto_upsell_promocoe_path(@produto, @upsell, @promocao), notice: 'Promocao was successfully created.' }
+        format.html { redirect_to edit_produto_upsell_promocao_path(@produto, @upsell, @promocao), notice: 'Promocao was successfully created.' }
         format.json { render :show, status: :created, location: @promocao }
       else
         format.html { render :new }
@@ -47,7 +47,7 @@ class PromocoesController < ApplicationController
     respond_to do |format|
       if @promocao.update(promocao_params)
         upsell_produto_save
-        format.html { redirect_to edit_produto_upsell_promocoe_path(@produto, @upsell, @promocao), notice: 'Promocao was successfully updated.' }
+        format.html { redirect_to edit_produto_upsell_promocao_path(@produto, @upsell, @promocao), notice: 'Promocao was successfully updated.' }
         format.json { render :show, status: :ok, location: @promocao }
       else
         format.html { render :edit }
