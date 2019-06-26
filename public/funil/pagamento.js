@@ -795,7 +795,7 @@ promocao.showUpsell = function(pagina_corrente_id, callback, idProximaPromocao){
       if(!adicionado){
         $(".jsUpsell").html(html);
         $(".jsUpsell").show();
-        $(".jsUpsell").css("min-height", $(window).width() + "px");
+        $(".jsUpsell").css("min-height", (document.body.offsetHeight + 1000) + "px");
 
         promocao.motivoIntencao("Viu o upsell dos produtos " + JSON.stringify(produtosId));
       }
