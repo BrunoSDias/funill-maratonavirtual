@@ -1,0 +1,182 @@
+
+header#header-receitas {
+    position: relative;
+    background-image: url("../images/bg-receita-video.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 684px;
+
+    .title-header {
+        margin-top: 120px;
+        color: $white;
+        text-transform: uppercase;
+        font-family: 'gotham-book';
+        font-size: 3em;
+        line-height: 48px;
+        
+        span{
+            font-family: 'gotham-black';
+            font-size: 1.7em;
+        }
+    }
+
+    .subtitle{
+        color: $white;
+        font-size: 1.8em;
+        font-family: 'gotham-bold';
+    }
+
+    .play {
+        position: absolute;
+        top: 50%;
+        right: 360px;
+        margin-top: -194.5px;
+    } 
+
+    @media (max-width: $screen-xs) {
+        .navbar-brand{
+            text-align: center;
+            margin: 0 auto;
+            display: block;
+            img{
+                width: 230px;
+            }
+        }
+        .title-header {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 2em;
+            line-height: 33px;
+            span{
+                font-size: 1.5em;
+            }
+        }
+
+        .subtitle{
+            font-size: 1.2em;
+        }
+
+        .play {
+            top: 50%;
+            right: 0;
+            left: 0;
+            margin: -190px auto;
+            text-align: center;
+        } 
+    }
+
+    @media (max-width: 320px) {
+        .title-header {
+            font-size: 1.7em;
+            line-height: 27px;
+            span{
+                font-size: 1.3em;
+            }
+        }
+
+        .subtitle{
+            font-size: 1em;
+        }
+
+        .play {
+            top: 50%;
+            right: 0;
+            left: 0;
+            margin: -210px auto;
+            text-align: center;
+        } 
+    }
+}
+
+
+
+section#section-register-receita {
+    margin-top: -150px;
+   
+    .title-defaut{
+        line-height: 30px;
+        position: relative;
+        /* &:after{
+            content: '';
+            position: absolute;
+            left: -55px;
+            top: 55px;
+            background-image: url("../images/arrow-input.png");
+            width: 38px;
+            height: 98px;
+            background-size: cover;
+        } */
+    }
+
+    .bg-red{
+        font-family: 'gotham-bold';
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    form{
+        position: relative;
+        .input{
+            position: relative;
+            background-color: $white;
+            padding: 45px 70px;
+            border: 0;
+            margin: 5px 0;
+            @include border-radius(100px);
+        }
+
+        i{
+            position: absolute;
+            font-size: 24px;
+            color: $gray-light;
+            top: 50%;
+            margin-top: -12px;
+            left: 35px;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .-aux{
+            padding: 13px 30px;
+            position: absolute;
+            right: 120px;
+            top: 50%;
+            margin-top: -23px;
+        }
+    }
+}
+
+@media (max-width: $screen-sm) {
+    section#section-register-receita {
+        margin-top: -300px;
+        &:after{
+            display: none;
+        }
+        .title-defaut{
+            line-height: 26px;
+            font-size: 1.7em;
+            text-align: center;
+            &:after{
+                display: none;
+            }
+
+            .bold-text{
+                font-size: 1.1em;
+            }
+        }
+
+        form{
+            .input{
+                padding: 35px 70px;
+            }
+    
+            .-aux{
+                position: static;
+                margin-top: 15px;
+                margin-bottom: 15px;
+            }
+        }
+    }
+    
+}
+

@@ -42,6 +42,18 @@ header#header-episodio {
     }
 }
 
+@media (max-width: $screen-xs) {
+    header#header-episodio {
+        height: 384px;
+    }
+}
+
+@media (max-width: 320px) {
+    header#header-episodio {
+        height: 384px;
+    }
+}
+
 section#lista-episodios-detalhe {
     margin-top: -200px;
     font-family: 'gotham-bold';

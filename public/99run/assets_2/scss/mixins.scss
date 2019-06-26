@@ -1,0 +1,31 @@
+@mixin border-radius($radius) {
+	border-radius: $radius;
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-o-border-radius: $radius;
+}
+
+
+@mixin transform-rotate($val){
+	-webkit-transform: rotate($val);
+	-ms-transform: rotate($val);  
+		transform: rotate($val);  
+}
+
+@mixin transition($val){
+	-webkit-transition: $val;
+    -moz-transition:    $val;
+    -o-transition:      $val;
+    -ms-transition:     $val;
+    transition:         $val;
+}
+
+@mixin gradient-orange($color1, $color2){
+  background: $color2;
+  background: -moz-linear-gradient(45deg, $color1 0%, $color2 100%);
+  background: -webkit-linear-gradient(45deg, $color1 0%,$color2 100%);
+  background: linear-gradient(45deg, $color1 0%,$color2 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color1', endColorstr='$color2',GradientType=1 );
+}
+
+

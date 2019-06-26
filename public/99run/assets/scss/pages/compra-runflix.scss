@@ -208,6 +208,16 @@ section#section-comprar {
         }
     }
 
+    @media (max-width: 700px) {
+        .alinha-ou{
+            padding: 15px 0!important;
+            text-align: center!important;
+        }
+        .box-check {
+            margin-left: 0;
+        }
+    }
+
     .alinha-ou{
         padding-top: 155px;
         padding-left: 77px;

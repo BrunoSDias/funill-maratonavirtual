@@ -143,6 +143,10 @@ section#lista-series {
     #eplist{
         position: relative;
 
+        .item{
+            text-align: center;
+        }
+
         &:after{
             content: "";
             position: absolute;
@@ -161,6 +165,22 @@ section#lista-series {
             margin-left: auto;
             max-width: 100%;
         }
+
+        #eplist {
+            position: relative;
+
+            .item {
+                text-align: left;
+
+                h3{
+                    margin-left: 58px;
+                }
+
+                p {
+                    margin-left: 58px;
+                }
+            }
+        }
     }
 
     @media (max-width: 320px) {
@@ -169,7 +189,33 @@ section#lista-series {
             margin-left: auto;
             max-width: 100%;
         }
+
+        #eplist {
+            position: relative;
+
+            .item {
+                text-align: left;
+
+                h3 {
+                    margin-left: 58px;
+                }
+
+                p {
+                    margin-left: 58px;
+                }
+            }
+        }
     }
-
-
 }
+
+ @media (max-width: $screen-xs) {
+     section#lista-series {
+         margin-top: 50px;
+     }
+ }
+
+ @media (max-width: 320px) {
+    section#lista-series {
+        margin-top: 50px;
+    }
+ }

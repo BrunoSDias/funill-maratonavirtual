@@ -105,11 +105,18 @@ section#painel {
 
 }
 
-section#data{
+section#data {
+    margin-top: 70px;
+    .name-perfil {
+        color: $white;
+        font-size: 1.5em;
+        margin-top: 15px;
+        text-transform: none;
+    }
     .widget {
         text-align: left;
         overflow: hidden;
-        margin: 64px;
+        margin: 64px auto;
         background: transparent;
         border-radius: 9px;
         height: 260px;
@@ -144,9 +151,103 @@ section#data{
             }
         }
     }
+
+    .legenda{
+        color: $white;
+    }
+
+    .color-1{
+        background: #f83131;
+        width: 36px;
+
+        border-radius: 10px;
+
+        height: 10px;
+
+        display: block;
+
+        float: left;
+
+        margin-top: 6px;
+
+        margin-right: 4px;
+    }
+
+    .color-2 {
+        background: #ff5a5a;
+        width: 36px;
+
+        border-radius: 10px;
+
+        height: 10px;
+
+        display: block;
+
+        float: left;
+
+        margin-top: 6px;
+
+        margin-right: 4px;
+    }
+
+    .color-3 {
+        background: #313131;
+        width: 36px;
+
+        border-radius: 10px;
+
+        height: 10px;
+
+        display: block;
+
+        float: left;
+
+        margin-top: 6px;
+
+        margin-right: 4px;
+    }
+
+
+
+    .ct-series-a .ct-line {
+        stroke: #313131;
+        stroke-width: 4px;
+    }
+
+    .ct-series-b .ct-line {
+        stroke: #f83131;
+        stroke-width: 4px;
+    }
+
+    .ct-series-c .ct-line {
+        stroke: #ff5a5a;
+        stroke-width: 4px;
+    }
+
+    .ct-series-a .ct-area,
+    .ct-series-a .ct-slice-donut-solid,
+    .ct-series-a .ct-slice-pie {
+        fill: #313131;
+    }
+
+    .ct-series-a .ct-point {
+        stroke: #313131;
+        stroke-width: 12px;
+    }
+
+    .ct-chart .ct-label.ct-horizontal.ct-end {
+        color: #313131;
+        font-family: 'gotham-bold';
+        position: relative;
+        justify-content: flex-end;
+        text-align: right;
+        transform-origin: 100% 0;
+        transform: translate(-100%) rotate(-45deg);
+        white-space: nowrap;
+    }
 }
 
-section#lista-series-assistidas {
+section#lista-series-assistidas-dash {
     margin-top: 50px;
     font-family: 'gotham-bold';
     padding-bottom: 70px;
@@ -166,18 +267,18 @@ section#lista-series-assistidas {
             transition: .5s ease;
             background: linear-gradient(to bottom, rgba(57, 194, 218, 0), rgba(0, 0, 0, 1) 100%, rgba(0, 0, 0, 0));
             z-index: 999;
-            border-radius: 19px;
+            border-radius: 27px;
         }
 
         span {
             position: absolute;
             font-family: 'gotham-bold';
-            font-size: 30px;
+            font-size: 40px;
             z-index: 9999;
             opacity: 1;
             bottom: 40px;
             color: #fff;
-            left: 39%;
+            left: 41%;
         }
     }
 

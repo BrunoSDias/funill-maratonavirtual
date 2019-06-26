@@ -1,0 +1,175 @@
+header#header-serie {
+    position: relative;
+    background-image: url("../images/bg-serie-detalhe-video.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 684px;
+
+    .title-header {
+        color: $white;
+        text-transform: capitalize;
+        font-family: 'gotham-bold';
+        font-size: 3em;
+        line-height: 40px;
+        margin-bottom: 10px;
+    }
+
+    .class{
+        font-family: 'gotham-bold';
+        font-size: 12px;
+        color: $white;
+    }
+
+    .director {
+        color: $white;
+        font-family: 'gotham-book';
+        font-size: 18px;
+
+    }
+
+    .subtitle {
+        color: $white;
+        font-size: 1.7em;
+        font-family: 'gotham-bold';
+        line-height: 22px;
+        margin-top: 5px;
+    }
+
+
+    .description {
+        color: $white;
+        font-size: 12px;
+        font-family: 'gotham-book';
+        max-width: 360px;
+        margin-top: 10px;
+    }
+
+    @media (max-width: $screen-xs) {
+        .title-header {
+            font-size: 2em;
+            line-height: 33px;
+
+            span {
+                font-size: 1.5em;
+            }
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+        }
+    }
+
+    @media (max-width: 320px) {
+        .title-header {
+            font-size: 1.7em;
+            line-height: 27px;
+
+            span {
+                font-size: 1.3em;
+            }
+        }
+
+        .subtitle {
+            font-size: 1em;
+        }
+    }
+}
+
+section#lista-series {
+    margin-top: -150px;
+    font-family: 'gotham-bold';
+
+    .-aux {
+        padding-right: 0px;
+        margin-left: 100px;
+        max-width: 100%;
+        margin-top: 100px !important;
+    }
+
+    .btn-temporada{
+        background-color: transparent;
+        border: 1px solid #fff;
+        border-radius: 108px;
+        font-family: 'gotham-book';
+    }
+
+    .progress {
+        height: 1.8rem;
+        font-size: 1rem;
+        background-color: #101010;
+        border-radius: 1rem;
+        max-width: 200px;
+
+    }
+
+    .assistido{
+        background-color: $green;
+        border-radius: 1rem;
+    }
+
+    .ml-60 {
+        margin-left: 60px;
+    }
+
+    .play-box{
+        height: 90px;
+        width: 90px;
+        font-size: 3rem;
+        border-radius: 100%;
+        color: $white;
+        padding: 23px 32px;
+        margin-bottom: 10px;
+    }
+
+    .title-ep{
+        span {
+            font-family: 'gotham-book';
+        }
+    }
+
+    .data-ep {
+        font-family: 'gotham-book';
+        color: $white;
+    }
+
+    .play-assistido {
+        background-color: #4ac132;
+    }
+
+    .play-naovisto {
+        background-color: #101010;
+    }
+
+    #eplist{
+        position: relative;
+
+        &:after{
+            content: "";
+            position: absolute;
+            top: 45px;
+            background-color: $white;
+            height: 2px;
+            width: 100%;
+            left: 70px;
+            z-index: -1;
+        }
+    }
+
+    @media (max-width: $screen-xs) {
+        .-aux {
+            padding-right: 15px;
+            margin-left: auto;
+            max-width: 100%;
+        }
+    }
+
+    @media (max-width: 320px) {
+        .-aux {
+            padding-right: 15px;
+            margin-left: auto;
+            max-width: 100%;
+        }
+    }
+
+
+}

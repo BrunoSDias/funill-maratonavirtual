@@ -1,0 +1,487 @@
+header#header-corrida {
+    position: relative;
+    background-image: url("../images/bg-corrida-video.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 684px;
+
+    .title-header {
+        color: $white;
+        text-transform: uppercase;
+        font-family: 'gotham-book';
+        font-size: 3em;
+        line-height: 48px;
+        
+        span{
+            font-family: 'gotham-black';
+            font-size: 1.7em;
+        }
+        .gradient-text{
+            @include gradient-orange($orange-1, $orange-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; 
+        }
+    }
+
+    .subtitle{
+        color: $white;
+        font-size: 1.8em;
+        font-family: 'gotham-bold';
+    }
+
+    .play {
+        position: absolute;
+        top: 50%;
+        right: 360px;
+        margin-top: -194.5px;
+    } 
+
+    @media (max-width: $screen-xs) {
+        .title-header {
+            font-size: 2em;
+            line-height: 33px;
+            span{
+                font-size: 1.5em;
+            }
+        }
+
+        .subtitle{
+            font-size: 1.2em;
+        }
+
+        .play {
+            top: 50%;
+            right: 0;
+            left: 0;
+            margin: -95px auto;
+            text-align: center;
+        } 
+    }
+
+    @media (max-width: 320px) {
+        .title-header {
+            font-size: 1.7em;
+            line-height: 27px;
+            span{
+                font-size: 1.3em;
+            }
+        }
+
+        .subtitle{
+            font-size: 1em;
+        }
+        .play {
+            top: 50%;
+            right: 0;
+            left: 0;
+            margin: -100px auto;
+            text-align: center;
+        } 
+    }
+}
+
+section#section-slide-corrida{
+    margin-top: -200px;
+    .slide-corrida{
+        .item{
+            height: 390px;  
+        }
+        .box{
+            position: relative;
+            .-aux{
+                position: absolute;
+                bottom: -30px;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+            }
+        }
+        .owl-nav{
+            .owl-prev{
+                position: absolute;
+                color: $white;
+                left: -18px;
+                top: 150px;
+                width: 40px;
+                height: 40px;
+                text-align: center;
+                line-height: 40px;
+                margin-top: -20px;
+                @include gradient-orange($orange-1, $orange-2);
+                @include border-radius(50%);
+            }
+
+            .owl-next{
+                position: absolute;
+                color: $white;
+                right: -18px;
+                top: 150px;
+                width: 40px;
+                height: 40px;
+                text-align: center;
+                line-height: 40px;
+                margin-top: -20px;
+                @include gradient-orange($orange-1, $orange-2);
+                @include border-radius(50%);
+            }
+        }
+
+        .owl-dots{
+            .active{
+                width: 35px!important;
+                height: 15px;
+                border-radius: (50px)!important;
+                @include gradient-orange($orange-1, $orange-2);
+                
+            }
+            .owl-dot{
+                margin: auto 5px;
+                width: 15px;
+                height: 15px;
+                background-color: $gray-light;
+                @include border-radius(50%);
+            }
+        }
+
+    }
+
+    @media (max-width: 320px) {
+        .slide-corrida{
+            .item{
+                height: 250px!important;
+            }
+        }
+    }
+
+    @media (max-width: $screen-xs) {
+        .slide-corrida{
+            .item{
+                height: 310px;
+            }
+        }
+    }
+}
+
+section#section-price-corrida{
+    margin-top: 50px;
+    .total{
+        margin-top: 20px;
+        margin-bottom: 50px;
+        color: $white;
+        text-transform: uppercase;
+        font-family: 'gotham-book';
+        font-size: 1.3em;
+        line-height: 18px;
+        letter-spacing: 3px;
+        .price{
+           font-size: 3em;
+           font-family: 'gotham-black';
+           letter-spacing: 0;
+           margin-top: 15px;
+           display: block;
+        }
+   
+        .frete{
+           font-family: 'gotham-bold';
+           text-transform: lowercase;
+           letter-spacing: 0;
+           font-size: 28px;
+            margin-top: 15px;
+            display: block;
+            .badge-gradient{
+               text-transform: lowercase;
+               font-family: 'gotham-bold';
+               padding: 5px 10px;
+               @include gradient-orange($orange-1, $orange-2);
+               @include border-radius(10px);
+            }
+        }
+   
+    }
+
+    .title-list{
+        color: $white;
+        font-family: 'gotham-bold';
+        line-height: 24px;
+    }
+
+    .list-premium{
+        li{
+            p{
+                position: relative;
+                margin: 0;
+                color: $white;
+                i{
+                    padding-right: 5px;
+                    color: $green;
+                }
+                /* &:after{
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    color: $green;
+                    font-size: 16px;
+                } */
+            }
+        }
+    }
+
+    .video{
+        @include border-radius(25px);
+        overflow: hidden;
+        z-index: 1;
+        height: 200px;
+        width: 100%;
+        border: 4px solid $orange-1;
+    }
+}
+
+@media (max-width: $screen-xs) {
+    section#section-price-corrida{
+        text-align: center;
+
+        .video{
+            margin-top: 30px;
+        }
+    }
+}
+
+section#section-help-corrida{
+    margin-top: 50px;
+    background-image: url("../images/bg-help.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 203px;
+    padding: 50px 0;
+    /* background-position-x: -215px; */
+    .title{
+        color: $white;
+    }
+
+    .avatar{
+        img{
+            @include border-radius(50%);
+            position: relative;
+        }
+        .whatsapp{
+           position: absolute;
+           bottom: 35px;
+           right: 10px;
+           background-image: url("../images/whatsapp-logo.png");
+           background-size: cover;
+           background-repeat: no-repeat;
+           width: 27px;
+           height: 27px;
+        }
+   
+        .name{
+            color: $white;
+            font-family: 'gotham-bold'!important;
+        }
+    }
+}
+
+@media (max-width: $screen-xs) {
+    section#section-help-corrida{
+        background-image: none;
+        background-color: $gray-light;
+        text-align: center;
+        height: auto;
+        .avatar{
+            .whatsapp{
+               bottom: 35px;
+               right: 25px;
+            }
+        }
+    }
+}
+
+section#section-medal-corrida{
+    margin-top: 50px;
+    .total{
+        margin-top: 30px;
+        margin-bottom: 30px;
+        color: $white;
+        text-transform: uppercase;
+        font-family: 'gotham-book';
+        font-size: 1.3em;
+        line-height: 33px;
+        letter-spacing: 3px;
+        .price{
+           font-size: 3em;
+           font-family: 'gotham-black';
+           letter-spacing: 0;
+        }
+   
+        .frete{
+           font-family: 'gotham-bold';
+           text-transform: lowercase;
+           letter-spacing: 0;
+           font-size: 28px;
+            .badge-gradient{
+               text-transform: lowercase;
+               font-family: 'gotham-bold';
+               padding: 5px 10px;
+               @include gradient-orange($orange-1, $orange-2);
+               @include border-radius(10px);
+            }
+        }
+    }
+
+    .box-km{
+        background-color: $gray-light;
+        padding: 25px;
+        @include border-radius(25px);
+        .text{
+            color: $gray;
+            font-family: 'gotham-bold';
+            font-size: 18px;
+        }
+
+        .sizes{
+            .btn-size{
+                background-color: transparent;
+                margin: 5px;
+                font-family: 'gotham-bold';
+                color: $white;
+                font-size: 18px;
+                @include border-radius(10px);
+            }
+    
+            .active{
+                box-shadow: none!important;
+                outline: none!important;
+                @include gradient-orange($orange-1, $orange-2);
+                color: $white;
+            }
+        }
+
+        .form{
+            input{
+                position: relative;
+                background-color: $white;
+                padding: 30px 70px;
+                border: 0;
+                margin: 5px 0;
+                @include border-radius(100px);
+            }
+
+            i{
+                position: absolute;
+                font-size: 24px;
+                color: $gray-light;
+                top: 50%;
+                margin-top: -12px;
+                left: 35px;
+                z-index: 1;
+                text-align: center;
+            }
+        }
+
+        .link{
+            a{
+                color: $white;
+            }
+        }
+
+        .-aux{
+            margin-top: 30px;
+            position: relative;
+            font-size: 2em;
+            font-family: 'gotham-bold';
+            line-height: 20px;
+            padding-left: 140px;
+            &:after{
+                content: '\f09d';
+                font-family: "Font Awesome 5 Free";
+                position: absolute;
+                left: 60px;
+                font-size: 2em;
+                color: $white;
+                top: 50%;
+                margin-top: -12px;
+
+            }
+            span{
+                font-size: .7em;
+                font-family: 'gotham-book';
+            }
+
+            &:hover{
+                color: $white;
+            }
+        }
+
+        .ou{
+            display: block;
+            margin-top: 30px;
+            font-size: 18px;
+            color: $white;
+        }
+
+        .-aux-2{
+            border: 1px solid $white;
+            color: $white;
+            font-family: 'gotham-bold';
+            margin-top: 30px;
+            position: relative;
+            font-size: 2em;
+            line-height: 20px;
+            padding: 10px 20px 10px 150px;
+            @include border-radius(100px);
+ 
+            &:after{
+                content: '\f02a';
+                font-family: "Font Awesome 5 Free";
+                position: absolute;
+                left: 80px;
+                font-size: 2em;
+                color: $white;
+                top: 50%;
+                margin-top: -12px;
+                font-weight: 900;
+
+            }
+            span{
+                font-size: .7em;
+                font-family: 'gotham-book';
+            }
+
+            &:hover{
+                color: $white;
+            }
+        }
+    }
+}
+
+@media (max-width: $screen-xs) {
+    section#section-medal-corrida{
+        .sizes{
+            .btn-size{
+                font-size: 14px!important;
+                margin: 0!important;
+            }
+        }
+
+        .-aux, .-aux-2{
+            font-size: 1.4em!important;
+            line-height: 15px!important;
+            padding-left: 20px!important;
+            text-align: center;
+            &:after{
+               display: none;
+
+            }
+            span{
+                font-size: .7em;
+                font-family: 'gotham-book';
+            }
+
+            &:hover{
+                color: $white;
+            }
+        }
+    }
+}

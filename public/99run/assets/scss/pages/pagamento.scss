@@ -100,12 +100,25 @@ header#header-pagamento {
             height: 150px;
             width: 100%;
         }
+
+        .title{
+            color: $white;
+            font-family: 'gotham-bold';
+            text-align: center;
+        }
     }
     
     .title-box{
         text-align: center;
         color: $white;
         font-family: 'gotham-bold';
+    }
+
+    .custom-control-label::before, 
+        .custom-control-label::after {
+        top: .8rem;
+        width: 2.25rem;
+        height: 2.25rem;
     }
 
     .custom-control{
@@ -115,12 +128,21 @@ header#header-pagamento {
             content: '';
             position: absolute;
             left: -107px;
-            top: 4px;
-            background-image: url(../images/clique.png);
+            top: -3px;
+            background-image: url(../images/clique-2.png);
             background-size: contain;
             background-repeat: no-repeat;
-            width: 93px;
-            height: 15px;
+            width: 96px;
+            height: 38px;
+        }
+    }
+
+    @media (max-width: 700px) {
+        .custom-control{
+           margin-top: 20px;
+            &:after{
+               display: none;
+            }
         }
     }
 
@@ -145,6 +167,7 @@ header#header-pagamento {
         font-family: 'gotham-bold';
         color: $white;
         margin-left: 10px;
+        font-size: 22px;
     }
 
     .total{
