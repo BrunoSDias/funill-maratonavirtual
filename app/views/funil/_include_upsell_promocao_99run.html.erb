@@ -1,14 +1,14 @@
 <% if @promocao.present? %>
   <div class="row mt-5">
     <% @promocao.item_promocoes.each_with_index do |item, i| %>
-      <div class="col-md-5 jsItensPromocao">
+      <div class="col-5 jsItensPromocao text-center align-self-center">
         <input type="hidden" class="jsItemProdutoId" value="<%= item.codigo_produto %>" >
         <div class="box-check <% if i == 0 %>border-selected<% end %>" onclick="upsell.selecionaItem(this)" >
           <img src="<%= item.imagem %>" class="">
         </div>
       </div>
       <% if @promocao.item_promocoes.count > 0 && (i+1) != @promocao.item_promocoes.count %> 
-        <div class="col-md-2">
+        <div class="col-2">
           <h3 class="alinha-ou">OU</h3>
         </div>
       <% end %>
