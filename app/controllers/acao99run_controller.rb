@@ -30,4 +30,28 @@ class Acao99runController < ApplicationController
 
     redirect_to "/#{pagina.produto.slug}/#{pagina.proxima_pagina.slug}"
   end
+
+  def captura_email
+    usuario = Usuario.find(params[:email])
+
+    if usuario["telefone"].present?
+      redirect_to "#{CURSOS_URL}/login?token=#{usuario["token"]}"
+      return
+    end
+
+    pagina = Pagina.find(params[:pagina_id])
+
+    cookies[:usuario] = {value: JSON.parse(usuario.to_json)["table"].to_json, expires: 1.year.from_now, httponly: false}
+
+    redirect_to "/#{pagina.produto.slug}/#{pagina.proxima_pagina.slug}"
+  end
+
+  def captura_telefone
+    usuario = Usuario.find(params[:email], params[:telefone])
+    pagina = Pagina.find(params[:pagina_id])
+
+    cookies[:usuario] = {value: JSON.parse(usuario.to_json)["table"].to_json, expires: 1.year.from_now, httponly: false}
+
+    redirect_to "#{CURSOS_URL}/login?token=#{usuario["token"]}"
+  end
 end

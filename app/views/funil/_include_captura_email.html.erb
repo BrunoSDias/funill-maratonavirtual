@@ -1,0 +1,10 @@
+<form action="/99run/inscricao-email" method="post">
+    <div class="form-row form-container mt-4">
+        <div class="col-lg-9 col-12">
+            <i class="far fa-envelope"></i>
+            <input class="form-control input" placeholder="Insira seu e-mail aqui" type="text" name="email" value="<%= cookies[:email] %>">
+            <input type="hidden" name="pagina_id" value="<%= @pagina.id %>">
+        </div>
+        <button class="button-default-green -aux">Acessar agora!</button>
+    </div>
+</form>
