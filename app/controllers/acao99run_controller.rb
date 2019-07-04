@@ -48,6 +48,12 @@ class Acao99runController < ApplicationController
 
   def captura_telefone
     usuario = Usuario.find(params[:email], params[:telefone])
+
+    if usuario["email"].present?
+      redirect_to "#{CURSOS_URL}/login?token=#{usuario["token"]}"
+      return
+    end
+
     pagina = Pagina.find(params[:pagina_id])
 
     cookies[:usuario] = {value: JSON.parse(usuario.to_json)["table"].to_json, expires: 1.year.from_now, httponly: false}
