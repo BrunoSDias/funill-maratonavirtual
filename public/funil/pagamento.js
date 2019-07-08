@@ -392,6 +392,7 @@ promocao.atualizar = function(self, pagina_id, produtoId){
 }
 
 promocao.gerarBoleto = function(self, pagina_id, produtoId){
+  promocao.btnCompra = self;
   promocao.produtoId = produtoId;
   promocao.paginaCorrenteId = pagina_id;
 
@@ -474,6 +475,10 @@ promocao.gerarBoleto = function(self, pagina_id, produtoId){
     });
     return;
   }
+
+  $(promocao.btnCompra).data("texto", $(self).text());
+  $(promocao.btnCompra).html("Carregando ...");
+  $(promocao.btnCompra).attr("disabled", "disabled");
 
   promocao.showUpsell(pagina_id, function(){
     promocao.confirmarTransacao();
