@@ -763,6 +763,8 @@ promocao.confirmarTransacao = function(){
       }
     }
 
+    mensagem = mensagem.replace(/payer.address.zip_code: não é válido/g, "CEP não é válido ou não foi autorizado");
+
     if(mensagem !== "Not Found"){
       alert('Confira: \n' + mensagem.replace(/<br>/g, "\n"));
     }
