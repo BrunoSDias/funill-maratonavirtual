@@ -4,7 +4,7 @@
       <div class="col-5 jsItensPromocao text-center align-self-center">
         <input type="hidden" class="jsItemProdutoId" value="<%= item.codigo_produto %>" >
         <div class="box-check <% if i == 0 %>border-selected<% end %>" onclick="upsell.selecionaItem(this)" >
-          <img src="<%= item.imagem %>" class="">
+          <img src="<%= item.imagem %>" class="" style="width: 100%">
         </div>
       </div>
       <% if @promocao.item_promocoes.count > 0 && (i+1) != @promocao.item_promocoes.count %> 
