@@ -551,6 +551,10 @@ promocao.confirmarCompra = function(self, pagina_id, produtoId){
     sobrenome = splitName[splitName.length-1];
   }catch(e){}
 
+  if(year.length == 2){
+    year = "20" + year
+  }
+
   cc = Iugu.CreditCard(number, month, year, nome, sobrenome, cvv);
   
   Iugu.createPaymentToken(cc, function(data) {
