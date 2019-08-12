@@ -362,7 +362,8 @@ section#section-medal-corrida{
             input{
                 position: relative;
                 background-color: $white;
-                padding: 30px 70px;
+                padding: 10px 70px;
+                height: 60px;
                 border: 0;
                 margin: 5px 0;
                 @include border-radius(100px);
