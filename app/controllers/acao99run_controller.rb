@@ -34,7 +34,7 @@ class Acao99runController < ApplicationController
           }
         ]
       }.to_json,
-      expires: 1.year.from_now, httponly: false 
+      expires: 1.year.from_now, httponly: false
     }
 
     redirect_to "/#{pagina.produto.slug}/#{pagina.proxima_pagina.slug}"
