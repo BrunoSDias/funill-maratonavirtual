@@ -12,6 +12,14 @@ class Acao99runController < ApplicationController
       return
     end
 
+    kit_escolhido = nil
+    if params[:kit_id].present?
+      kit_escolhido = {
+        id: params[:kit_id],
+        tamanho_camiseta: params[:tamanho_camiseta]
+      }
+    end
+
     cookies[:usuario] = {value: JSON.parse(usuario.to_json)["table"].to_json, expires: 1.year.from_now, httponly: false}
     cookies[:funil] = {
       value: {
@@ -21,7 +29,8 @@ class Acao99runController < ApplicationController
         carrinho:[
           grupo_inscricao: {
             id: grupo_corrida.id,
-            preco: (params[:preco] || grupo_corrida.preco).to_f
+            preco: (params[:preco] || grupo_corrida.preco).to_f,
+            kit_escolhido: kit_escolhido
           }
         ]
       }.to_json,

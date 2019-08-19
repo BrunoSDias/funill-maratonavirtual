@@ -1,4 +1,67 @@
 <% if @conjunto_grupo_corrida.present? && @conjunto_grupo_corrida.instance_variable_get("@table").keys.present? %>
+
+<style type="text/css">
+  .modalFundo{
+    background-color: #000;position: absolute;width: 100%;height: 100%;top: 0;left: 0;z-index: 2;opacity: 0.8;
+  }
+
+  .modalContent{
+    background-color: #000;position: absolute;width: 100%;max-height: 300px;z-index: 3;top: 20px;left: 0px;text-align: center;color: #fff;
+    padding: 5% 10% 5% 10%;
+  }
+
+  .modalContent .box{
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .modalContent .infos{
+    /*position: absolute;*/
+    z-index: 4;
+    background: #000;
+    width: 100%;
+    top: 50%;
+    opacity: 0.9;
+    padding: 20px;
+  }
+
+  .modalContent .infos .badget-price{
+    font-size: 30px;
+  }
+
+  .modalContent .infos .title{
+    font-size: 20px;
+  }
+
+  .modalContent .infos .descricao{
+    font-size: 15px;
+  }
+
+  .modalContent .infos button{
+    background: #000;
+    font-size: 20px;
+    border-radius: 6px;
+    margin-top: 20px;
+    padding: 5px 20px 5px 20px;
+  }
+
+  .modalContent .infos .texto{
+    font-size: 20px;
+  }
+
+  .modalContent .infos select{
+    font-size: 20px;
+    width: 200px;
+    color: #000;
+  }
+
+</style>
+
+<div id="modal" style="display: none;">
+  <div class="modalFundo"></div>
+  <div id="modalContent" class="modalContent"></div>
+</div>
+
 <script src="/funil/pagamento.js?<%= Time.now.to_i %>" ></script>
 <div class="col-lg-5 offset-lg-2">
     <form action="/99run/login/comprar/grupo-corrida" method="post" id="formPostLogin">
@@ -9,7 +72,11 @@
             <h3 class="title badge-gradient d-inline-block">Passo 1:</h3>
             <p class="text">Qual distância você vai correr?</p>
 
-            <div class="btn-group btn-group-toggle sizes mt-4" data-toggle="buttons">
+            <div class="btn-group btn-group-toggle sizes mt-4" style="width: 100%;overflow: scroll;height: 70px;" data-toggle="buttons">
+
+                <input type="hidden" name="kit_id" id="kit_id" value="">
+                <input type="hidden" name="tamanho_camiseta" id="tamanho_camiseta" value="">
+
 
                 <% @conjunto_grupo_corrida.grupos.each_with_index do |grupo, i|
                   if cookies[:km].present? 
@@ -22,14 +89,70 @@
                     ativo = (i == 0)
                   end
                   %>
-                <label class="btn btn-size <%= ativo ? "active" : "" %>">
-                    <input type="radio" name="grupo_corrida_id" data-km="<%= grupo["desafio"]["distancia"] %>" autocomplete="off" value='<%= grupo["id"] %>'  <%= ativo ? "checked" : "" %>> <%= grupo["desafio"]["distancia"] %>km
-                </label>
+                  <% if grupo["kits"].present? %>
+                    <label class="btn btn-size" style="height: 36px;background-color: #000;"  onclick="promocao.escolherKit(<%= grupo["id"] %>)">
+                      <input type="radio" name="grupo_corrida_id" data-km="<%= grupo["desafio"]["distancia"] %>" autocomplete="off" value='<%= grupo["id"] %>'> <%= grupo["desafio"]["distancia"] %>km
+                    </label>
+                    <div id="kitGrupo<%= grupo["id"] %>" style="display: none">
+                      <div style="font-size: 40px;"><%= grupo["desafio"]["distancia"] %>km</div>
+                      <div class="row">
+                        <div class="col-12" id="kit">
+                          <% grupo["kits"].each do |kit| %>
+                            <div class="box">
+                              <a href="<%= kit["imagem"] %>" target="_blank"><img src="<%= kit["imagem"] %>" alt="Avatar" class="image" style="width:100%"></a>
+                              <div class="infos">
+                                <span class="badget-price -aux-price"><strong>R$<%= kit["valor"] %></strong></span>
+                                <h5 class="title"><%= kit["nome"] %></h5>
+                                <hr>
+                                <% if kit["descricao"].present? %>
+                                  <ul style="text-align: left;">
+                                    <% kit["descricao"].split("\r\n").each do |item| %>
+                                      <li class="descricao"><%= item %></li>
+                                    <% end %>
+                                  </ul>
+                                <% end %>
+                                <% 
+                                opcoes = []
+                                if kit["produtos"].present? 
+                                  kit["produtos"].each do |produto|
+                                    if produto["slug"].downcase.include?("camiseta")
+                                      opcoes = produto["detalhes"][0]["campos"][0]["options"].split("\r\n")
+                                    end
+                                  end
+                                end
+
+                                if opcoes.present?
+                                %>
+                                  <div class="camiseta">
+                                    <div class="texto">
+                                      Qual o tamanho da camiseta
+                                    </div>
+                                    <select id="tamanhoCamisa<%= grupo["id"] %>">
+                                      <% opcoes.each do |opt| %>
+                                      <option value="<%= opt %>"><%= opt %></option>
+                                      <% end %>
+                                    </select>
+                                  </div>
+                                <% end %>
+                                <hr>
+
+                                <button onclick="promocao.kitEscolhido(<%= kit.to_json %>, this)">Escolher este</button>
+                              </div>
+                            </div>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  <% else %>
+                    <label class="btn btn-size <%= ativo ? "active" : "" %>" style="height: 36px;">
+                      <input type="radio" name="grupo_corrida_id" data-km="<%= grupo["desafio"]["distancia"] %>" autocomplete="off" value='<%= grupo["id"] %>'  <%= ativo ? "checked" : "" %>> <%= grupo["desafio"]["distancia"] %>km
+                    </label>
+                  <% end %>
                 <% end %>
             </div>
         </div>
 
-        <div class="box-km mt-4">
+        <div id="box-km" class="box-km mt-4">
             <h3 class="title badge-gradient d-inline-block">Passo 2:</h3>
             <input type="hidden" name="pagina_id" value="<%= @pagina.id %>">
             <div class="form">
@@ -125,6 +248,10 @@
                   $("#99RunPostLoginEmail").blur(function(){
                     $(this).css("background", "#fff");
                   });
+                  return;
+                }
+                else if($("input[name=grupo_corrida_id]:checked").length == 0){
+                  alert("Selecione uma quilometragem");
                   return;
                 }
 
