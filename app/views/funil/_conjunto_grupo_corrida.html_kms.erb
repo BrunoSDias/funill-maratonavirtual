@@ -1,0 +1,78 @@
+<div class="btn-group btn-group-toggle sizes mt-4" style="width: 100%;overflow: scroll;height: 60px;" data-toggle="buttons">
+
+  <input type="hidden" name="kit_id" id="kit_id" value="">
+  <input type="hidden" name="tamanho_camiseta" id="tamanho_camiseta" value="">
+
+  <% conjunto_grupo_corrida.grupos.each_with_index do |grupo, i|
+    if cookies[:km].present? 
+      if conjunto_grupo_corrida.grupos.map{|g|g["desafio"]["distancia"]}.include?(cookies[:km])
+        ativo = cookies[:km] == grupo["desafio"]["distancia"]
+      else
+        ativo = (i == 0)
+      end  
+    else
+      ativo = (i == 0)
+    end
+    %>
+    <% if grupo["kits"].present? %>
+      <label class="btn btn-size" style="height: 36px;background-color: #000;"  onclick="promocao.escolherKit(<%= grupo["id"] %>)">
+        <input type="radio" name="grupo_corrida_id" data-km="<%= grupo["desafio"]["distancia"] %>" autocomplete="off" value='<%= grupo["id"] %>'><%= grupo["desafio"]["distancia"].to_i %>k
+      </label>
+      <div id="kitGrupo<%= grupo["id"] %>" style="display: none">
+        <div style="font-size: 40px;"><%= grupo["desafio"]["distancia"] %>km</div>
+        <div style="font-size: 20px;">Escolha qual kit quer:</div>
+        <div class="row">
+          <div class="col-12" id="kit">
+            <% grupo["kits"].each do |kit| %>
+              <div class="box">
+                <div class="infos">
+                  <a href="<%= kit["imagem"] %>" target="_blank"><img src="<%= kit["imagem"] %>" alt="Avatar" class="image" style="width:50%"></a>
+                  <br>
+                  <h5 class="title"><%= kit["nome"] %></h5>
+                  <span class="badget-price -aux-price"><strong>R$<%= kit["valor"] %></strong></span>
+                  <% if kit["descricao"].present? %>
+                    <ul style="text-align: left;">
+                      <% kit["descricao"].split("\r\n").each do |item| %>
+                        <li class="descricao"><%= item %></li>
+                      <% end %>
+                    </ul>
+                  <% end %>
+                  <% 
+                  opcoes = []
+                  if kit["produtos"].present? 
+                    kit["produtos"].each do |produto|
+                      if produto["slug"].downcase.include?("camiseta")
+                        opcoes = produto["detalhes"][0]["campos"][0]["options"].split("\r\n")
+                      end
+                    end
+                  end
+
+                  if opcoes.present?
+                  %>
+                    <div class="camiseta">
+                      <div class="texto">
+                        Qual o tamanho da camiseta
+                      </div>
+                      <select id="tamanhoCamisa<%= grupo["id"] %>">
+                        <% opcoes.each do |opt| %>
+                        <option value="<%= opt %>"><%= opt %></option>
+                        <% end %>
+                      </select>
+                    </div>
+                  <% end %>
+                  <hr>
+
+                  <button onclick="promocao.kitEscolhido(<%= kit.to_json %>, this)">Escolher este</button>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <label class="btn btn-size <%= ativo ? "active" : "" %>" style="height: 36px;">
+        <input type="radio" name="grupo_corrida_id" data-km="<%= grupo["desafio"]["distancia"] %>" autocomplete="off" value='<%= grupo["id"] %>'  <%= ativo ? "checked" : "" %>><%= grupo["desafio"]["distancia"].to_i %>k
+      </label>
+    <% end %>
+  <% end %>
+</div>

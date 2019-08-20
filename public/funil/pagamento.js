@@ -51,12 +51,24 @@ promocao.kitEscolhido = function(kit, self){
   $("#tamanho_camiseta").val($(self).parent().find("select").val());
   $("#modal").hide();
   $('html, body').animate({ scrollTop: $('#box-km').offset().top }, 100);
+
+  $(".box-km .btn-size.active").each(function(){
+    if($(this).find("input[type=radio]:checked").length == 0){
+      $(this).removeClass("active");
+    }
+  });
 }
 
 promocao.escolherKit = function(grupo_id){
   $('html, body').animate({ scrollTop: 0 }, 100);
   $("#modal").show();
   $("#modalContent").html($("#kitGrupo" + grupo_id).html());
+
+  $(".box-km .btn-size.active").each(function(){
+    if($(this).find("input[type=radio]:checked").length == 0){
+      $(this).removeClass("active");
+    }
+  });
 }
 
 promocao.updateUsuario = function(usuario_id, field, step, event, fim, callback){

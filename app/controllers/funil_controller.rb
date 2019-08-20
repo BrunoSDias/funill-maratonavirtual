@@ -4,6 +4,7 @@ class FunilController < ApplicationController
 
   def slug
     produtos = Produto.where(slug: params[:slug_produto])
+
     if produtos.count == 0
       raise ActionController::RoutingError.new('Not Found') if @conteudo.blank?
     end
@@ -19,6 +20,7 @@ class FunilController < ApplicationController
     if tag_grupo.present?
       slug_grupo = tag_grupo.first.gsub(/\{\{include_grupo_selecione:|\}\}/, '').strip
       @conjunto_grupo_corrida = ConjuntoGruposCorridaRun.find(slug_grupo)
+      @conjunto_grupo_corrida_bike = ConjuntoGruposCorridaRun.find(slug_grupo, true)
     end
 
     tag_pagamento = @conteudo.scan(/\{\{include_pagamento_99run.*?\}\}/) rescue ""
