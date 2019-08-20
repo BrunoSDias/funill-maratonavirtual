@@ -86,6 +86,9 @@
               <div style="color: #fff">Corrida:</div>
             <% end %>
 
+            <input type="hidden" name="kit_id" id="kit_id" value="">
+            <input type="hidden" name="tamanho_camiseta" id="tamanho_camiseta" value="">
+
             <%= render 'conjunto_grupo_corrida_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida} %>
             
             <% if @conjunto_grupo_corrida_bike.present? && @conjunto_grupo_corrida_bike.grupos.present? %>

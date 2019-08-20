@@ -1,9 +1,6 @@
 <% if conjunto_grupo_corrida.present? && conjunto_grupo_corrida.grupos.present? %>
 <div class="btn-group btn-group-toggle sizes mt-4" style="width: 100%;height: 60px;" data-toggle="buttons">
 
-  <input type="hidden" name="kit_id" id="kit_id" value="">
-  <input type="hidden" name="tamanho_camiseta" id="tamanho_camiseta" value="">
-
   <% conjunto_grupo_corrida.grupos.each_with_index do |grupo, i|
     if cookies[:km].present? 
       if conjunto_grupo_corrida.grupos.map{|g|g["desafio"]["distancia"]}.include?(cookies[:km])
