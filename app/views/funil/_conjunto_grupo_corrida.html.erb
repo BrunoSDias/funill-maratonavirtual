@@ -77,11 +77,11 @@
               <div style="color: #fff">Corrida:</div>
             <% end %>
 
-            <%= render 'conjunto_grupo_corrida.html_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida} %>
+            <%= render 'conjunto_grupo_corrida_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida} %>
             
             <% if @conjunto_grupo_corrida_bike.present? %>
               <div style="color: #fff">ou Bicicleta:</div>
-              <%= render 'conjunto_grupo_corrida.html_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida_bike} %>
+              <%= render 'conjunto_grupo_corrida_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida_bike} %>
             <% end %>
 
         </div>
