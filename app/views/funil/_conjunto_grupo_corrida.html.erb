@@ -73,13 +73,13 @@
             <h3 class="title badge-gradient d-inline-block">Passo 1:</h3>
             <p class="text">Qual distância você vai correr?</p>
 
-            <% if @conjunto_grupo_corrida_bike.present? %>
+            <% if @conjunto_grupo_corrida_bike.present? && @conjunto_grupo_corrida_bike.grupos.present? %>
               <div style="color: #fff">Corrida:</div>
             <% end %>
 
             <%= render 'conjunto_grupo_corrida_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida} %>
             
-            <% if @conjunto_grupo_corrida_bike.present? %>
+            <% if @conjunto_grupo_corrida_bike.present? && @conjunto_grupo_corrida_bike.grupos.present? %>
               <div style="color: #fff">ou Bicicleta:</div>
               <%= render 'conjunto_grupo_corrida_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida_bike} %>
             <% end %>
