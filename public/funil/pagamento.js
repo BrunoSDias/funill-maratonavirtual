@@ -682,6 +682,11 @@ promocao.checkSeCarrinho = function(self){
   });
 }
 
+promocao.entrar99RUN = function(){
+  var usuario = JSON.parse(decodeURIComponent(getCookie("usuario")).replace(/\+\:/g, ":"));
+  window.location.href = "https://www.99run.com/?ulog=" + usuario.id;
+}
+
 promocao.capituraDados = function(){
   var usuario = JSON.parse(decodeURIComponent(getCookie("usuario")).replace(/\+\:/g, ":"));
   var funil = JSON.parse(decodeURIComponent(getCookie("funil")).replace(/\+\:/g, ":"));
@@ -711,6 +716,7 @@ promocao.capituraDados = function(){
     promocao.motivoIntencao("Clicou no botão comprar para cartão");
   }
   data.usuario = usuario
+  data.entra_logado = true
   data.pedido = {
     items: funil.carrinho
   }
