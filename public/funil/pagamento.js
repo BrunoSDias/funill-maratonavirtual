@@ -124,6 +124,7 @@ promocao.updateUsuario = function(usuario_id, field, step, event, fim, callback)
 
   promocao.motivoIntencao("Atualizou o cadastro campo: " + field);
 
+  $(".step").hide();
   $("#step" + field).hide();
   $("#" + step).show();
   if(fim){
