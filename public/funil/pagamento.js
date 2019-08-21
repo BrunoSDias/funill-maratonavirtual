@@ -107,6 +107,21 @@ promocao.updateUsuario = function(usuario_id, field, step, event, fim, callback)
     }
   }
 
+  if(field == "cpf"){
+    var cpf = $("#cpf");
+    if(cpf.length > 0 && !maratonaVirtual.testaCPF(cpf.val())){
+      cpf.focus();
+      setTimeout(function(){ $("#cpf").val(""); }, 200);
+      cpf.css("background", "#fbb67a")
+      cpf.attr("placeholder", "CPF inválido");
+      cpf.blur(function(){
+        $(this).css("background", "#fff");
+      });
+      $("#stepcpf").show();
+      return;
+    }
+  }
+
   usuario = {id: usuario_id}
   usuario[field] = $("#" + field).val();
 
@@ -241,7 +256,7 @@ promocao.atualizar = function(self, pagina_id, produtoId){
   var estado = $("#estado");
   var senha = $("#senha");
 
-  if(cpf.lenth > 0 && (!cpf.val() || cpf.val() == "")){
+  if(cpf.length > 0 && (!cpf.val() || cpf.val() == "")){
     cpf.focus();
     cpf.css("background", "#fbb67a")
     cpf.attr("placeholder", "CPF obrigatório");
@@ -252,7 +267,7 @@ promocao.atualizar = function(self, pagina_id, produtoId){
     $("#stepcpf").show();
     return;
   }
-  else if(cpf.lenth > 0 && !maratonaVirtual.testaCPF(cpf.val())){
+  else if(cpf.length > 0 && !maratonaVirtual.testaCPF(cpf.val())){
     cpf.focus();
     setTimeout(function(){ $("#cpf").val(""); }, 200);
     cpf.css("background", "#fbb67a")
@@ -441,7 +456,7 @@ promocao.gerarBoleto = function(self, pagina_id, produtoId){
     });
     return;
   }
-  else if(cpf.lenth > 0 && !maratonaVirtual.testaCPF(cpf.val())){
+  else if(cpf.length > 0 && !maratonaVirtual.testaCPF(cpf.val())){
     cpf.focus();
     setTimeout(function(){ $("#cpf").val(""); }, 200);
     cpf.css("background", "#fbb67a")
