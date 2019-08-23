@@ -1,67 +1,117 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>The change you wanted was rejected (422)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
-
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
-
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
-
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-  </style>
+    <title>Pagina sem acesso 99RUN.com</title>
+<meta charset="UTF-8">
+<meta name="author" content="">
+<meta name="description" content="">
+<meta name="robots" content="noarchive">
+<meta name="reply-to" content="c">
+<meta name="keywords" content="">
+<meta property="og:locale" content="pt-br">
+<meta property="og:url" content="">
+<meta property="og:title" content="">
+<meta property="og:site_name" content="">
+<meta property="og:description" content="">
+<meta property="og:image" content="">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1200">
+<meta property="og:type" content="website">
+<meta http-equiv="Content-Language" content="pt-br">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+<link rel="stylesheet" href="/99run/assets/vendor/owl-carousel/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="/99run/assets/vendor/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/99run/assets/vendor/phone/css/intlInputPhone.min.css">
+<link rel="stylesheet" type="text/css" href="/99run/assets/fontes/flaticon.css">
+<link rel="stylesheet" href="/99run/assets/css/animate.css">
+<link rel="stylesheet" href="/99run/assets/css/menu_sideslide.css">
+<link rel="stylesheet" href="/99run/assets/css/main.css">
+<link rel="shortcut icon" href="/99run/assets/images/favicon.ico" />
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 </head>
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/422.html -->
-  <div class="dialog">
-    <div>
-      <h1>The change you wanted was rejected.</h1>
-      <p>Maybe you tried to change something you didn't have access to.</p>
+<body>
+    <header id="header-corrida">
+        <nav>
+            <div class="container">
+                <a class="navbar-brand mt-5" href="#"><img src="/99run/assets/images/logo-99.png" width="80px" /></a>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10">
+                    <h1 class="title-header">Pagina com erro ou não encontrada<br><span class="bold-text">Acesse<br></span> <span class="gradient-text"><a href="http://www.99run.com" style="font-size: 70px;font-weight: bold;">99RUN.com</a></span></h1>
+                    <h4 class="subtitle">Corra e receba sua <span class="badge-gradient">medalha em casa</span></h4>
+                </div>
+            </div>   
+        </div>
+
+        <div class="play">
+            <a href="#." id="playme" onclick="revealVideo('video','youtube')">
+                <img src="/99run/assets/images/play-orange.png" alt="">
+            </a>
+        </div>
+    </header>
+
+    <div align="center">
+      <p>99RUN
+         <br>CNPJ: 25.384.723/0001-62
+         <br>Rua Atuau, 69 SP - São Paulo
+         <br>CEP: 05428-030
+      </p>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
-  </div>
+
+    <div id="video" class="lightbox" onclick="hideVideo('video','youtube')">
+        <div class="lightbox-container">  
+            <div class="lightbox-content">
+            
+            <button onclick="hideVideo('video','youtube')" class="lightbox-close">
+                Fechar | ✕
+            </button>
+            <div class="video-container">
+                <iframe id="youtube" width="960" height="540" src="https://www.youtube.com/embed/hG9ux2kdvlk?rel=0?showinfo=0" frameborder="0" allowfullscreen></iframe>
+            </div>      
+            
+            </div>
+        </div>
+    </div>
+
+   <div id="energel" class="lightbox" onclick="hideVideo('energel','eyoutube')">
+        <div class="lightbox-container">  
+            <div class="lightbox-content">
+            
+            <button onclick="hideVideo('energel','eyoutube')" class="lightbox-close">
+                Fechar | ✕
+            </button>
+            <div class="video-container">
+                <iframe id="eyoutube" width="960" height="540" src="https://www.youtube.com/embed/oN3SMzp3owY?rel=0?showinfo=0" frameborder="0" allowfullscreen></iframe>
+            </div>      
+            
+            </div>
+        </div>
+    </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="/99run/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/99run/assets/vendor/owl-carousel/owl.carousel.min.js"></script>
+<!-- <script type="text/javascript" src="/99run/assets/js/card.js"></script>
+ --><script type="text/javascript" src="/99run/assets/js/jquery.card.js"></script>
+<!-- <script type="text/javascript" src="/99run/assets/js/classie.js"></script> -->
+<script type="text/javascript" src="/99run/assets/js/app.js"></script>
+<script src="/99run/assets/vendor/phone/js/intlInputPhone.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.input-phone').intlInputPhone();
+    })
+</script>
+   
 </body>
+
 </html>
