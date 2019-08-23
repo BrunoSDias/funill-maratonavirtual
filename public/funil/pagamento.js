@@ -50,7 +50,7 @@ promocao.kitEscolhido = function(kit, self){
   $("#kit_id").val(kit.id);
   $("#tamanho_camiseta").val($(self).parent().find("select").val());
   $("#modal").hide();
-  $('html, body').animate({ scrollTop: $('#box-km').offset().top }, 100);
+  $('html, body').animate({ scrollTop: $('#formPostLogin').offset().top }, 10);
 
   $(".box-km .btn-size.active").each(function(){
     if($(this).find("input[type=radio]:checked").length == 0){
@@ -60,7 +60,7 @@ promocao.kitEscolhido = function(kit, self){
 }
 
 promocao.escolherKit = function(grupo_id){
-  $('html, body').animate({ scrollTop: 0 }, 100);
+  $('html, body').animate({ scrollTop: 0 }, 10);
   $("#modal").show();
   $("#modalContent").html($("#kitGrupo" + grupo_id).html());
 

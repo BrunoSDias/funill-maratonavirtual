@@ -17,8 +17,13 @@
         <input type="radio" name="grupo_corrida_id" data-km="<%= grupo["desafio"]["distancia"] %>" autocomplete="off" value='<%= grupo["id"] %>'><%= grupo["desafio"]["distancia"].to_i %>k
       </label>
       <div id="kitGrupo<%= grupo["id"] %>" style="display: none">
-        <div style="font-size: 40px;"><%= grupo["desafio"]["distancia"] %>km</div>
-        <div style="font-size: 20px;">Escolha qual kit quer:</div>
+        <div style="font-size: 40px;" class="desafio-km"><%= grupo["desafio"]["distancia"] %>km</div>
+        <div style="font-size: 20px;color: #ccc" class="mudar-km">
+          <a href="javascript:;" onclick="$('.infos button').trigger('click');">
+            Mudar quilometragem
+          </a>
+        </div>
+        <div style="font-size: 20px;" class="qual-kit-quer">Escolha qual kit quer</div>
         <div class="row" style="max-width: 600px;display: inline-block;">
           <div class="col-12" id="kit">
             <% grupo["kits"].each do |kit| %>
