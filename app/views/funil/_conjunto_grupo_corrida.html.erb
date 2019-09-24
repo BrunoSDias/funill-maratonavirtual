@@ -1,4 +1,14 @@
-<% if @conjunto_grupo_corrida.present? && @conjunto_grupo_corrida.instance_variable_get("@table").keys.present? %>
+<%
+  if @conjunto_grupo_corrida.blank? || @conjunto_grupo_corrida.instance_variable_get("@table").keys.blank?
+    if @conjunto_grupo_corrida_bike.present? && @conjunto_grupo_corrida_bike.instance_variable_get("@table").keys.present?
+      @conjunto = @conjunto_grupo_corrida_bike
+    end
+  else
+    @conjunto = @conjunto_grupo_corrida
+  end
+%>
+
+<% if @conjunto.present? && @conjunto.instance_variable_get("@table").keys.present? %>
 
 <style type="text/css">
   .modalFundo{
@@ -76,13 +86,13 @@
 <div class="col-lg-5 offset-lg-2">
     <form action="/99run/login/comprar/grupo-corrida" method="post" id="formPostLogin">
         <h1 class="total">
-            Valor a ser pago<br><span class="price"><%= number_to_currency(@conjunto_grupo_corrida.valor || @conjunto_grupo_corrida.grupos[0]["preco"]) %></span> <span class="frete">frete <span class="badge-gradient">grátis</span></span>
+            Valor a ser pago<br><span class="price"><%= number_to_currency(@conjunto.valor || @conjunto.grupos[0]["preco"]) %></span> <span class="frete">frete <span class="badge-gradient">grátis</span></span>
         </h1>
         <div class="box-km">
             <h3 class="title badge-gradient d-inline-block">Passo 1:</h3>
-            <p class="text">Qual distância você vai correr?</p>
+            <p class="text">Qual distância você vai fazer?</p>
 
-            <% if @conjunto_grupo_corrida_bike.present? && @conjunto_grupo_corrida_bike.grupos.present? %>
+            <% if @conjunto_grupo_corrida_bike.present? && @conjunto_grupo_corrida_bike.grupos.present? && @conjunto_grupo_corrida.present? && @conjunto_grupo_corrida.grupos.present?  %>
               <div style="color: #fff">Corrida:</div>
             <% end %>
 
@@ -92,7 +102,9 @@
             <%= render 'conjunto_grupo_corrida_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida} %>
             
             <% if @conjunto_grupo_corrida_bike.present? && @conjunto_grupo_corrida_bike.grupos.present? %>
+              <% if @conjunto_grupo_corrida.present? && @conjunto_grupo_corrida.grupos.present? %>
               <div style="color: #fff">ou Bicicleta:</div>
+              <% end %>
               <%= render 'conjunto_grupo_corrida_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida_bike} %>
             <% end %>
 
@@ -121,7 +133,7 @@
             <input type="hidden" name="pagar_com_boleto" id="pagar_com_boleto" value="false">
             <input type="hidden" name="cod_marketing" id="cod_marketing_post" value="">
             <input type="hidden" name="preco" id="preco" value="
-            <%= @conjunto_grupo_corrida.valor || @conjunto_grupo_corrida.grupos[0]["preco"] %>">
+            <%= @conjunto.valor || @conjunto.grupos[0]["preco"] %>">
             <script type="text/javascript">
               function IsEmail(email) {
                 var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
