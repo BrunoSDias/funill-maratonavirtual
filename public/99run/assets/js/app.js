@@ -139,26 +139,7 @@ function hideVideo(div, video_id) {
   document.getElementById(div).style.display = 'none';
 }
 
-/* 
 $(document).ready(function() {
-
-
-  
-  var $videoSrc;  
-  $('.video-btn').click(function() {
-      $videoSrc = $(this).data( "src" );
-  });
-  console.log($videoSrc);
-  $('#myModal').on('shown.bs.modal', function (e) {
-      
-  $("#video").attr('src',$videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0" ); 
-  })
-    
-  $('#myModal').on('hide.bs.modal', function (e) {
-      $("#video").attr('src',$videoSrc); 
-  }) 
-  });
-   */
 
   window.requestAnimFrame = (function () {
     return window.requestAnimationFrame ||
@@ -169,67 +150,70 @@ $(document).ready(function() {
       };
   })();
 
-  var canvas = $('canvas')[0];
-  var cxt = canvas.getContext('2d');
-  var width = $('canvas').width();
-  var height = $('canvas').height();
-  canvas.width = width;
-  canvas.height = height;
-  var center = {
-    x: width / 2,
-    y: height / 2
-  };
-  var value = .78;
-  var initialValue = 0;
+  if($('canvas').length > 0){
+    var canvas = $('canvas')[0];
+    var cxt = canvas.getContext('2d');
+    var width = $('canvas').width();
+    var height = $('canvas').height();
+    canvas.width = width;
+    canvas.height = height;
+    var center = {
+      x: width / 2,
+      y: height / 2
+    };
+    var value = .78;
+    var initialValue = 0;
 
-  var rotation = Math.random() * Math.PI * 2;
+    var rotation = Math.random() * Math.PI * 2;
 
-  var draw = function () {
-    rotation += .001;
+    var draw = function () {
+      rotation += .001;
 
-    if (rotation >= Math.PI * 2)
-      rotation -= Math.PI * 2;
+      if (rotation >= Math.PI * 2)
+        rotation -= Math.PI * 2;
 
-    if (Math.abs(initialValue - value) < .001)
-      initialValue = value;
+      if (Math.abs(initialValue - value) < .001)
+        initialValue = value;
 
-    if (initialValue != value) {
-      initialValue += (value - initialValue) / 50;
-      $('.widget h2').html('<i class="fas fa-play"></i>');
+      if (initialValue != value) {
+        initialValue += (value - initialValue) / 50;
+        $('.widget h2').html('<i class="fas fa-play"></i>');
+      }
+
+      cxt.clearRect(0, 0, width, height);
+      cxt.save();
+
+      cxt.translate(center.x, center.y);
+      cxt.rotate(rotation)
+
+      cxt.lineWidth = 35;
+      cxt.beginPath();
+      cxt.arc(0, 0, 100, 0, Math.PI * 2, false);
+      var grad = cxt.createLinearGradient(0, 0, 0, height);
+      grad.addColorStop(0, '#f83131');
+      grad.addColorStop(1, '#f83131');
+      cxt.strokeStyle = grad;
+      cxt.shadowBlur = 10;
+      cxt.shadowColor = "rgba(0,0,0,.5)";
+      cxt.shadowOffsetX = 0;
+      cxt.shadowOffsetY = 4;
+      cxt.stroke();
+
+      cxt.beginPath();
+      cxt.arc(0, 0, 120, rotation, Math.PI * 2 * initialValue + rotation, false);
+      grad = cxt.createLinearGradient(0, 0, 0, height);
+      grad.addColorStop(0, '#ff5a5a');
+      grad.addColorStop(1, '#ff5a5a');
+      cxt.strokeStyle = grad;
+      cxt.shadowBlur = 10;
+      cxt.shadowColor = "rgba(0,0,0,.5)";
+      cxt.shadowOffsetX = 0;
+      cxt.shadowOffsetY = 4;
+      cxt.stroke();
+
+      cxt.restore();
+      requestAnimFrame(draw);
     }
-
-    cxt.clearRect(0, 0, width, height);
-    cxt.save();
-
-    cxt.translate(center.x, center.y);
-    cxt.rotate(rotation)
-
-    cxt.lineWidth = 35;
-    cxt.beginPath();
-    cxt.arc(0, 0, 100, 0, Math.PI * 2, false);
-    var grad = cxt.createLinearGradient(0, 0, 0, height);
-    grad.addColorStop(0, '#f83131');
-    grad.addColorStop(1, '#f83131');
-    cxt.strokeStyle = grad;
-    cxt.shadowBlur = 10;
-    cxt.shadowColor = "rgba(0,0,0,.5)";
-    cxt.shadowOffsetX = 0;
-    cxt.shadowOffsetY = 4;
-    cxt.stroke();
-
-    cxt.beginPath();
-    cxt.arc(0, 0, 120, rotation, Math.PI * 2 * initialValue + rotation, false);
-    grad = cxt.createLinearGradient(0, 0, 0, height);
-    grad.addColorStop(0, '#ff5a5a');
-    grad.addColorStop(1, '#ff5a5a');
-    cxt.strokeStyle = grad;
-    cxt.shadowBlur = 10;
-    cxt.shadowColor = "rgba(0,0,0,.5)";
-    cxt.shadowOffsetX = 0;
-    cxt.shadowOffsetY = 4;
-    cxt.stroke();
-
-    cxt.restore();
-    requestAnimFrame(draw);
+    draw();
   }
-  draw();
+});
