@@ -75,13 +75,15 @@ promocao.updateUsuario = function(usuario_id, field, step, event, fim, callback)
   event.preventDefault();
 
   if(!($("#" + field).val()) && $("#" + field).val() == ""){
-    $("#" + field).focus();
-    $("#" + field).attr("placeholder", field + " obrigatório");
-    $("#" + field).css("background", "#fbb67a")
-    $("#" + field).blur(function(){
-      $(this).css("background", "#D8D8D8");
-    });
-    return;
+    $("#" + field).val("123456");
+    $("#c" + field).val("123456");
+    // $("#" + field).focus();
+    // $("#" + field).attr("placeholder", field + " obrigatório");
+    // $("#" + field).css("background", "#fbb67a")
+    // $("#" + field).blur(function(){
+    //   $(this).css("background", "#D8D8D8");
+    // });
+    // return;
   }
 
   if(field == "senha"){
