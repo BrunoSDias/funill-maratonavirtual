@@ -555,6 +555,7 @@ promocao.confirmarCompra = function(self, pagina_id, produtoId){
   }
   else if($("#nomeCartao").val().split(" ").length < 2) {
     $("#nomeCartao").focus();
+    $("#nomeCartao").val("");
     $("#nomeCartao").css("background", "#fbb67a")
     $("#nomeCartao").attr("placeholder", "Digite o nome e o sobrenome");
     $("#nomeCartao").blur(function(){
