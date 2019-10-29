@@ -553,6 +553,15 @@ promocao.confirmarCompra = function(self, pagina_id, produtoId){
     });
     return;
   }
+  else if($("#nomeCartao").val().split(" ").length > 1) {
+    $("#nomeCartao").focus();
+    $("#nomeCartao").css("background", "#fbb67a")
+    $("#nomeCartao").attr("placeholder", "Digite o nome e o sobrenome");
+    $("#nomeCartao").blur(function(){
+      $(this).css("background", "#fff");
+    });
+    return;
+  }
 
   if(!$("#mesAnoCartao").val() || $("#mesAnoCartao").val() == ""){
     $("#mesAnoCartao").focus();
