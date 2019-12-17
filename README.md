@@ -28,4 +28,4 @@ psql funil_development
 
 CREATE USER ofcgkxweiecqob WITH ENCRYPTED PASSWORD '';
 
-pg_restore -U danilo -d funil_development -1 ~/
+pg_restore -U danilo -d funil_development -1 ~/Downloads/
