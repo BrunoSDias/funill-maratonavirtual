@@ -593,8 +593,18 @@ promocao.confirmarCompra = function(self, pagina_id, produtoId){
 
   var nome = $("#nomeCartao").val();
   var number = $("#numeroCartao").val();
-  var month = $("#mesAnoCartao").val().split("/")[0];
-  var year = $("#mesAnoCartao").val().split("/")[1];
+  var month = 0;
+  var year = 0;
+
+  if($("#mesAnoCartao").val().indexOf("/") !== -1){
+    month = $("#mesAnoCartao").val().split("/")[0];
+    year = $("#mesAnoCartao").val().split("/")[1];
+  }
+  else{
+    month = $("#mesAnoCartao").substring(0,2);
+    year = $("#mesAnoCartao").substring(2,10);
+  }
+
   var cvv = $("#cvvCartao").val();
 
   var sobrenome = "";
