@@ -102,12 +102,14 @@
             <%= render 'conjunto_grupo_corrida_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida} %>
             
             <% if @conjunto_grupo_corrida_bike.present? && @conjunto_grupo_corrida_bike.grupos.present? %>
-              <% if @conjunto_grupo_corrida.present? && @conjunto_grupo_corrida.grupos.present? %>
-              <div style="color: #fff">ou Bicicleta:</div>
-              <% end %>
+              <div style="color: #fff">Bicicleta:</div>
               <%= render 'conjunto_grupo_corrida_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida_bike} %>
             <% end %>
 
+            <% if @conjunto_grupo_corrida_natacao.present? && @conjunto_grupo_corrida_natacao.grupos.present? %>
+              <div style="color: #fff">Natação:</div>
+              <%= render 'conjunto_grupo_corrida_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida_natacao} %>
+            <% end %>
         </div>
 
         <div id="box-km" class="box-km mt-4">

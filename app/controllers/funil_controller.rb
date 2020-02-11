@@ -20,7 +20,8 @@ class FunilController < ApplicationController
     if tag_grupo.present?
       slug_grupo = tag_grupo.first.gsub(/\{\{include_grupo_selecione:|\}\}/, '').strip
       @conjunto_grupo_corrida = ConjuntoGruposCorridaRun.find(slug_grupo)
-      @conjunto_grupo_corrida_bike = ConjuntoGruposCorridaRun.find(slug_grupo, true)
+      @conjunto_grupo_corrida_bike = ConjuntoGruposCorridaRun.find(slug_grupo, "bike")
+      @conjunto_grupo_corrida_natacao = ConjuntoGruposCorridaRun.find(slug_grupo, "natacao")
     end
 
     tag_pagamento = @conteudo.scan(/\{\{include_pagamento_99run.*?\}\}/) rescue ""
