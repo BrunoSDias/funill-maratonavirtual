@@ -1,5 +1,5 @@
 <% if conjunto_grupo_corrida.present? && conjunto_grupo_corrida.grupos.present? %>
-<div class="btn-group btn-group-toggle sizes mt-4" style="width: 100%;height: 60px;" data-toggle="buttons">
+<div class="btn-group btn-group-toggle sizes mt-4" style="width: 100%;display: inline-block;" data-toggle="buttons">
 
   <% conjunto_grupo_corrida.grupos.each_with_index do |grupo, i|
     if cookies[:km].present? 
@@ -19,7 +19,7 @@
         <%= grupo["desafios"].map{|d| "#{d["distancia"]}K"}.join(" + ") %>
       </label>
       <div id="kitGrupo<%= grupo["id"] %>" style="display: none">
-        <div style="font-size: 40px;" class="desafio-km"><%= grupo["desafios"].map{|d| "#{d["distancia"].to_i}K"}.join(" + ") %></div>
+        <div style="font-size: 40px;" class="desafio-km"><%= grupo["desafios"].map{|d| "#{d["distancia"]}K"}.join(" + ") %></div>
         <div style="font-size: 20px;color: #ccc" class="mudar-km">
           <a href="javascript:;" onclick="$('.infos button').trigger('click');">
             Mudar quilometragem
