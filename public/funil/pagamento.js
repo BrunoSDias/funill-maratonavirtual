@@ -601,8 +601,8 @@ promocao.confirmarCompra = function(self, pagina_id, produtoId){
     year = $("#mesAnoCartao").val().split("/")[1];
   }
   else{
-    month = $("#mesAnoCartao").substring(0,2);
-    year = $("#mesAnoCartao").substring(2,10);
+    month = $("#mesAnoCartao").val().substring(0,2);
+    year = $("#mesAnoCartao").val().substring(2,10);
   }
 
   var cvv = $("#cvvCartao").val();
