@@ -1,7 +1,7 @@
 <% if @boleto == "true" %>
     <%= render 'include_pagamento_boleto_99run' %>
 <% else %>
-    <%= render 'include_pagamento_cartao_99run', preco: @preco %>
+    <%= render 'include_pagamento_cartao_99run' %>
 <% end %>
 <style type="text/css">
   .jsUpsell{
