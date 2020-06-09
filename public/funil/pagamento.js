@@ -49,6 +49,7 @@ maratonaVirtual.testaCPF = function(strCPF) {
 promocao.kitEscolhido = function(kit, self){
   $("#formPostLogin .total .price").html(`R$${kit.valor}`);
   $("#kit_id").val(kit.id);
+  $("#preco_kit").val(kit.valor);
   $("#tamanho_camiseta").val($(self).parent().find("select").val());
   $("#modal").hide();
   $('html, body').animate({ scrollTop: $('#formPostLogin').offset().top }, 10);
