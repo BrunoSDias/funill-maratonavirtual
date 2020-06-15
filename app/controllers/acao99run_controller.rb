@@ -16,7 +16,8 @@ class Acao99runController < ApplicationController
     if params[:kit_id].present?
       kit_escolhido = {
         id: params[:kit_id],
-        tamanho_camiseta: params[:tamanho_camiseta]
+        tamanho_camiseta: params[:tamanho_camiseta],
+        preco_kit: params[:preco_kit].to_f
       }
     end
 

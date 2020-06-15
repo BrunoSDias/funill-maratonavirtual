@@ -27,8 +27,8 @@
                 </div>
 
                 <div class="col-4">
-                    <select class="form-control" name="parcelas" id="parcelas" style="height: 60px;margin-top: 10px;" onchange="promocao.reajuste_parcelas(this, <%= @preco %>)">
-                      <% total = @preco %>
+                    <select class="form-control" name="parcelas" id="parcelas" style="height: 60px;margin-top: 10px;" onchange="promocao.reajuste_parcelas(this, <%= @preco.to_s.gsub(",", ".").to_f %>)">
+                      <% total = @preco.to_s.gsub(",", ".").to_f %>
                       <% i = 0 %>
                       <% loop do %>
                         <% i += 1%>
@@ -101,8 +101,10 @@
         v_parcelado = ((valor*(parcelas+2)/100) + valor) / parcelas;
 
     var total = v_parcelado * parcelas;
-    $("#parcelado").text(parcelas + " x R$ " + v_parcelado.toFixed(2));
-    $("#total").text("R$ " + total.toFixed(2));
+    var string_parcela = v_parcelado.toFixed(2).replace("\.", "\,");
+    var string_total = total.toFixed(2).replace("\.", "\,");
+    $("#parcelado").text(parcelas + " x R$ " + string_parcela);
+    $("#total").text("R$ " + string_total);
   }
 </script>
 
