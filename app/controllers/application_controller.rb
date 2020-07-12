@@ -19,6 +19,8 @@ class ApplicationController < ActionController::Base
   end
 
   def add_www_subdomain
+    headers['Cache-Control'] = 'max-age=180, public'
+
     if Rails.env == "production"
       if /^http:/.match(request.original_url)
         redirect_to(request.original_url.gsub("http:", "https:"), :status => 301)
