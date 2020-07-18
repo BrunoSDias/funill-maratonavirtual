@@ -47,7 +47,7 @@
                   if kit["produtos"].present? 
                     kit["produtos"].each do |produto|
                       if produto["slug"].downcase.include?("camiseta")
-                        opcoes = produto["detalhes"][0]["campos"][0]["options"].split("\r\n")
+                        opcoes = produto["detalhes"][0]["campos"][0]["options"].split("\r\n") rescue []
                       end
                     end
                   end

@@ -2,6 +2,9 @@
 <script src="https://js.iugu.com/v2"></script>
 
 <div class="col-lg-6 offset-lg-2" id="formCartao">
+    <% if @preco.present?%>
+    <h2 id="parcelado">R$ 1 x <%= @preco %></h2>
+    <h1 id="total">R$ <%= @preco %></h1>
     <div class="card-wrapper mt-4"></div>
 
     <div class="form-container active mt-4">
@@ -24,16 +27,20 @@
                 </div>
 
                 <div class="col-4">
-                    <select class="form-control" name="parcelas" id="parcelas" style="height: 60px;margin-top: 10px;">
-                      <option value="1">1x</option>
-                      <option value="2">2x</option>
-                      <option value="3">3x</option>
-                      <option value="4">4x</option>
+                    <select class="form-control" name="parcelas" id="parcelas" style="height: 60px;margin-top: 10px;" onchange="promocao.reajuste_parcelas(this, <%= @preco.to_s.gsub(",", ".").to_f %>)">
+                      <% total = @preco.to_s.gsub(",", ".").to_f %>
+                      <% i = 0 %>
+                      <% loop do %>
+                        <% i += 1%>
+                        <% break if (total < 5 || i > 12)%>
+                        <option value="<%= i %>"><%= i %>x</option>
+                        <% total -= 5 %>
+                      <% end %>
                     </select>
                 </div>
             </div>
         </form>
-
+    <% end %>
     <% if @produto.present? && @produto.instance_variable_get("@table").keys.present? %>
         <p class="title-box mt-5">Aproveite e adicione</p>
         <div class="text-center box-promotion">
@@ -84,5 +91,44 @@
     });
 
     promocao.motivoIntencao("Intencão de compra com cartão");
+
+
+  promocao.reajuste_parcelas = function(el, valor){
+    var parcelas = parseInt(el.value);
+    if (parcelas == 1) 
+        v_parcelado = valor;
+    else
+        v_parcelado = ((valor*(parcelas+2)/100) + valor) / parcelas;
+
+    var total = v_parcelado * parcelas;
+    var string_parcela = v_parcelado.toFixed(2).replace("\.", "\,");
+    var string_total = total.toFixed(2).replace("\.", "\,");
+    $("#parcelado").text(parcelas + " x R$ " + string_parcela);
+    $("#total").text("R$ " + string_total);
+  }
 </script>
+
+<style type="text/css">
+    #total {
+        text-align: center;
+        font-size: 2em;
+        color: #919191;
+        margin-top: 0;
+        /*color: #fff;
+        text-align: center;
+        font-size: 4.3em;
+        margin-bottom: 0;
+        margin-top: 0;*/
+    }
+
+    #parcelado {
+        /*text-align: center;
+        font-size: 2em;
+        color: #919191;*/
+        color: #fff;
+        text-align: center;
+        font-size: 4.3em;
+        margin-bottom: 0;
+    }
+</style>
 
