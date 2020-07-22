@@ -1,6 +1,6 @@
 var maratonaVirtual = {};
-// maratonaVirtual.host = 'https://admin-maratonavirtual.herokuapp.com/';
-maratonaVirtual.host = 'http://localhost:3001/';
+maratonaVirtual.host = 'https://admin-maratonavirtual.herokuapp.com/';
+// maratonaVirtual.host = 'http://localhost:3001/';
 maratonaVirtual.token = '79hrovrwibfxsrh_TglsoTy*b5sjcht9f5na*53Gmcfjg555Site';
 maratonaVirtual.pg_id = "C49117ED8151463DB189BF82F7AECB67";
 
@@ -742,8 +742,8 @@ promocao.checkSeCarrinho = function(self){
 
 promocao.entrar99RUN = function(){
   var usuario = JSON.parse(decodeURIComponent(getCookie("usuario")).replace(/\+\:/g, ":"));
-  window.location.href = "http://localhost:3000/?ulog=" + usuario.id;
-  // window.location.href = "https://www.99run.com/?ulog=" + usuario.id;
+  // window.location.href = "http://localhost:3000/?ulog=" + usuario.id;
+  window.location.href = "https://www.99run.com/?ulog=" + usuario.id;
 }
 
 promocao.capituraDados = function(){
