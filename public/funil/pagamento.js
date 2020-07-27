@@ -21,6 +21,20 @@ maratonaVirtual.load = {
   }
 }
 
+maratonaVirtual.removeAcentos = function(str) {
+  var accents    = 'ÀÁÂÃÄÅàáâãäåßÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž';
+  var accentsOut = "AAAAAAaaaaaaBOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz";
+  str = str.split('');
+  var strLen = str.length;
+  var i, x;
+  for (i = 0; i < strLen; i++) {
+    if ((x = accents.indexOf(str[i])) != -1) {
+      str[i] = accentsOut[x];
+    }
+  }
+  return str.join('');
+}
+
 maratonaVirtual.testaCPF = function(strCPF) {
   if(!strCPF) return true
 
@@ -594,39 +608,44 @@ promocao.confirmarCompra = function(self, pagina_id, produtoId){
   $(promocao.btnCompra).attr("disabled", "disabled");
 
   Iugu.setAccountID(maratonaVirtual.pg_id);
+
   Iugu.setup();
 
-  var nome = $("#nomeCartao").val();
-  var number = $("#numeroCartao").val();
-  var month = 0;
-  var year = 0;
+  var formularioCartao = document.getElementsByClassName("cartao")[0];
+  var nome_completo = maratonaVirtual.removeAcentos(formularioCartao.elements[1].value);
+  formularioCartao.elements[0].value = formularioCartao.elements[0].value.replace(/ /g, "")
+  formularioCartao.elements[2].value = formularioCartao.elements[2].value.replace(/ /g, "")
+  // var nome = $("#nomeCartao").val();
+  // var number = $("#numeroCartao").val();
+  // var month = 0;
+  // var year = 0;
 
-  if($("#mesAnoCartao").val().indexOf("/") !== -1){
-    month = $("#mesAnoCartao").val().split("/")[0];
-    year = $("#mesAnoCartao").val().split("/")[1];
-  }
-  else{
-    month = $("#mesAnoCartao").val().substring(0,2);
-    year = $("#mesAnoCartao").val().substring(2,10);
-  }
+  // if($("#mesAnoCartao").val().indexOf("/") !== -1){
+  //   month = $("#mesAnoCartao").val().split("/")[0];
+  //   year = $("#mesAnoCartao").val().split("/")[1];
+  // }
+  // else{
+  //   month = $("#mesAnoCartao").val().substring(0,2);
+  //   year = $("#mesAnoCartao").val().substring(2,10);
+  // }
 
-  var cvv = $("#cvvCartao").val();
+  // var cvv = $("#cvvCartao").val();
 
-  var sobrenome = "";
-  try{
-    var splitName = nome.split(' ');
-    nome = splitName[0];
-    sobrenome = splitName[splitName.length-1];
-  }catch(e){}
+  // var sobrenome = "";
+  // try{
+  //   var splitName = nome.split(' ');
+  //   nome = splitName[0];
+  //   sobrenome = splitName[splitName.length-1];
+  // }catch(e){}
 
-  year = year.trim();
-  if(year.length == 2){
-    year = parseInt("20" + year);
-  }
+  // year = year.trim();
+  // if(year.length == 2){
+  //   year = parseInt("20" + year);
+  // }
 
-  cc = Iugu.CreditCard(number, month, year, nome, sobrenome, cvv);
+  // cc = Iugu.CreditCard(number, month, year, nome, sobrenome, cvv);
   
-  Iugu.createPaymentToken(cc, function(data) {
+  Iugu.createPaymentToken(formularioCartao, function(data) {
     maratonaVirtual.load.off();
     if (data.errors) {
       promocao.motivoIntencao("Numero de cartão inválido - createPaymentToken: " + JSON.stringify(data.errors));
@@ -726,6 +745,7 @@ promocao.checkSeCarrinho = function(self){
 
 promocao.entrar99RUN = function(){
   var usuario = JSON.parse(decodeURIComponent(getCookie("usuario")).replace(/\+\:/g, ":"));
+  // window.location.href = "http://localhost:3000/?ulog=" + usuario.id;
   window.location.href = "https://www.99run.com/?ulog=" + usuario.id;
 }
 
@@ -1009,7 +1029,7 @@ function eraseCookie(name) {
 }
 
 function IsEmail(email) {
-  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  var re = /\S+@\S+\.\S+/;
   return re.test(String(email).toLowerCase());
 }
 

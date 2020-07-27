@@ -3,27 +3,27 @@
 
 <div class="col-lg-6 offset-lg-2" id="formCartao">
     <% if @preco.present?%>
-    <h1 id="total">R$ <%= @preco %></h1>
     <h2 id="parcelado">R$ 1 x <%= @preco %></h2>
+    <h1 id="total">R$ <%= @preco %></h1>
     <div class="card-wrapper mt-4"></div>
 
     <div class="form-container active mt-4">
         <form class="cartao">
             <div class="form-row form-container mt-4">
                 <div class="col-12">
-                    <input class="form-control" value="" placeholder="Número do cartão" type="tel" name="number" id="numeroCartao">
+                    <input class="form-control" value="" placeholder="Número do cartão" type="tel" name="number" data-iugu="number" id="numeroCartao">
                 </div>
 
                 <div class="col-12">
-                    <input class="form-control" value="" placeholder="Nome completo" type="text" name="name" id="nomeCartao">
+                    <input class="form-control" value="" placeholder="Nome completo" type="text" name="name" data-iugu="full_name" id="nomeCartao">
                 </div>
                 
                 <div class="col-4">
-                    <input class="form-control" value="" placeholder="MM/AAAA" type="tel" name="expiry" id="mesAnoCartao">
+                    <input class="form-control" value="" placeholder="MM/AAAA" type="tel" name="expiry" data-iugu="expiration" id="mesAnoCartao">
                 </div>
                 
                 <div class="col-4">
-                    <input class="form-control" value="" placeholder="CVC" type="number" name="cvc" id="cvvCartao">
+                    <input class="form-control" value="" placeholder="CVC" type="number" name="cvc" data-iugu="verification_value" id="cvvCartao">
                 </div>
 
                 <div class="col-4">
@@ -110,17 +110,25 @@
 
 <style type="text/css">
     #total {
+        text-align: center;
+        font-size: 2em;
+        color: #919191;
+        margin-top: 0;
+        /*color: #fff;
+        text-align: center;
+        font-size: 4.3em;
+        margin-bottom: 0;
+        margin-top: 0;*/
+    }
+
+    #parcelado {
+        /*text-align: center;
+        font-size: 2em;
+        color: #919191;*/
         color: #fff;
         text-align: center;
         font-size: 4.3em;
         margin-bottom: 0;
-        margin-top: 0;
-    }
-
-    #parcelado {
-        text-align: center;
-        font-size: 2em;
-        color: #919191;
     }
 </style>
 
