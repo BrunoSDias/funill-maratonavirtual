@@ -4,6 +4,9 @@ maratonaVirtual.host = 'https://admin-maratonavirtual.herokuapp.com/';
 maratonaVirtual.token = '79hrovrwibfxsrh_TglsoTy*b5sjcht9f5na*53Gmcfjg555Site';
 maratonaVirtual.pg_id = "C49117ED8151463DB189BF82F7AECB67";
 
+var lastClick = 0;
+var delay = 10000;
+
 var promocao = {};
 promocao.callback = undefined;
 promocao.paginaCorrenteId = undefined;
@@ -746,7 +749,7 @@ promocao.entrar99RUN = function(){
   window.location.href = "https://www.99run.com/?ulog=" + usuario.id;
 }
 
-promocao.capituraDados = function(){
+promocao.capituraDados = function(pre_pedido){
   var usuario = JSON.parse(decodeURIComponent(getCookie("usuario")).replace(/\+\:/g, ":"));
   var funil = JSON.parse(decodeURIComponent(getCookie("funil")).replace(/\+\:/g, ":"));
 
@@ -786,18 +789,24 @@ promocao.capituraDados = function(){
   }
 
   data.ordem = promocao.ordem
+  data.pre_pedido = pre_pedido
 
   return data;
 }
 
 promocao.token = undefined;
 promocao.confirmarTransacao = function(){
+  if (lastClick >= (Date.now() - delay))
+    return;
+
+  lastClick = Date.now();
+
   maratonaVirtual.load.on();
 
   var usuario = JSON.parse(decodeURIComponent(getCookie("usuario")).replace(/\+\:/g, ":"));
   var funil = JSON.parse(decodeURIComponent(getCookie("funil")).replace(/\+\:/g, ":"));
 
-  var data = promocao.capituraDados();
+  var data = promocao.capituraDados(false);
 
   var url = maratonaVirtual.host + '/usuarios/' + data.usuario.id + '/comprar.json';
   $.ajax({
@@ -894,7 +903,7 @@ promocao.prePedido = function(){
     }
   }
 
-  var data = promocao.capituraDados();
+  var data = promocao.capituraDados(true);
   var url = maratonaVirtual.host + '/usuarios/pre-pedido.json';
   $.ajax({
     type: 'POST',
