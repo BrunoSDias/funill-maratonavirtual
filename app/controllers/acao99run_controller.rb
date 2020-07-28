@@ -7,6 +7,8 @@ class Acao99runController < ApplicationController
     pagina = Pagina.find(params[:pagina_id])
     grupo_corrida = GrupoCorridaRun.find(params[:grupo_corrida_id])
 
+    organizador = grupo_corrida.organizador
+
     if usuario.id.blank?
       redirect_to "/#{pagina.produto.slug}/#{pagina.slug}"
       return
@@ -31,7 +33,8 @@ class Acao99runController < ApplicationController
           grupo_inscricao: {
             id: grupo_corrida.id,
             preco: (params[:preco] || grupo_corrida.preco).to_f,
-            kit_escolhido: kit_escolhido
+            kit_escolhido: kit_escolhido,
+            organizador: organizador
           }
         ]
       }.to_json,
