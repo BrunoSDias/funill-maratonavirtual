@@ -1,5 +1,6 @@
 var maratonaVirtual = {};
-maratonaVirtual.host = 'https://admin-maratonavirtual.herokuapp.com/';
+// maratonaVirtual.host = 'https://admin-maratonavirtual.herokuapp.com/';
+maratonaVirtual.host = 'https://d1n35syvs16s9j.cloudfront.net/';
 // maratonaVirtual.host = 'http://localhost:3001/';
 maratonaVirtual.token = '79hrovrwibfxsrh_TglsoTy*b5sjcht9f5na*53Gmcfjg555Site';
 maratonaVirtual.pg_id = "C49117ED8151463DB189BF82F7AECB67";
