@@ -34,9 +34,12 @@
 
 <div class="col-lg-6 offset-lg-2" id="formCartao">
     <div class="card-wrapper mt-4"></div>
-
     <div class="form-container active mt-4">
-        <h1 style="color: #fff">Confirme os seus dados para que possamos gerar o boleto</h1>
+        <% if @preco.present? && @preco.to_f == 0 %>
+          <h1 style="color: #fff">Confirme os seus dados para que possamos gerar sua inscrição</h1>
+        <%else%>
+          <h1 style="color: #fff">Confirme os seus dados para que possamos gerar o boleto</h1>
+        <% end %>
         <form class="cartao">
           <div class="form-row form-container mt-4">
             <%= render 'include_form_boleto_99run' %>
@@ -71,7 +74,11 @@
           <% end %>
 
           <div class="col-12 mt-5 text-center">
+            <% if @preco.present? && @preco.to_f == 0 %>
+              <button class="button-default-green d-block w-100" onclick="promocao.gerarBoleto(this, <%= @pagina.id %>, <%= @pagina.produto_id %>);" >Gerar inscrição</button>
+            <% else %>
               <button class="button-default-green d-block w-100" onclick="promocao.gerarBoleto(this, <%= @pagina.id %>, <%= @pagina.produto_id %>);" >Gerar boleto</button>
+            <% end %>
           </div>
         </div>
     </div>

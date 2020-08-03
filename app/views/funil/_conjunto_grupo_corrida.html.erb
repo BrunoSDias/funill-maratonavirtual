@@ -130,9 +130,14 @@
                 </div>
             </div>
 
-            <a href="javascript:;" onclick="postFormCartao()" class="button-default-green d-block w-100 -aux cartaoClass">Em até 12x<br><span>no cartão de crédito</span></a>
-            <span class="text-center font-light ou ouClass">ou</span>
-            <a href="javascript:;" onclick="postFormBoleto()" class="d-block w-100 -aux-2 boletoClass">A vista no<br><span>boleto</span></a>
+            <% valor_conjunto = @conjunto.valor || @conjunto.grupos[0]["preco"] %>
+            <% unless valor_conjunto.to_f == 0 %>
+              <a href="javascript:;" onclick="postFormCartao()" class="button-default-green d-block w-100 -aux cartaoClass">Em até 12x<br><span>no cartão de crédito</span></a>
+              <span class="text-center font-light ou ouClass">ou</span>
+              <a href="javascript:;" onclick="postFormBoleto()" class="d-block w-100 -aux-2 boletoClass">A vista no<br><span>boleto</span></a>
+            <% else %>
+              <a href="javascript:;" onclick="postFormBoleto()" class="button-default-green d-block w-100 -aux" style="padding:26px; padding-left: 140px;">Inscrever-se</span></a>
+            <% end %>
             <input type="hidden" name="pagar_com_boleto" id="pagar_com_boleto" value="false">
             <input type="hidden" name="cod_marketing" id="cod_marketing_post" value="">
             <input type="hidden" name="preco" id="preco" value="
