@@ -16,10 +16,18 @@
     <% if grupo["kits"].present? %>
       <label class="btn btn-size" style="height: 36px;background-color: #000;" onclick="promocao.escolherKit(<%= grupo["id"] %>)">
         <input type="radio" name="grupo_corrida_id" data-km="<%= grupo["desafio"]["distancia"] %>" autocomplete="off" value='<%= grupo["id"] %>'>
-        <%= grupo["desafios"].map{|d| "#{d["distancia"]}K"}.join(" + ") %>
+        <% if grupo["sem_limite"] %>
+          SEM LIMITE
+        <% else %>
+          <%= grupo["desafios"].map{|d| "#{d["distancia"]}K"}.join(" + ") %>
+        <% end %>
       </label>
       <div id="kitGrupo<%= grupo["id"] %>" style="display: none">
-        <div style="font-size: 40px;" class="desafio-km"><%= grupo["desafios"].map{|d| "#{d["distancia"]}K"}.join(" + ") %></div>
+        <% if grupo["sem_limite"] %>
+          <div style="font-size: 40px;" class="desafio-km">SEM LIMITE</div>
+        <% else %>
+          <div style="font-size: 40px;" class="desafio-km"><%= grupo["desafios"].map{|d| "#{d["distancia"]}K"}.join(" + ") %></div>
+        <% end %>
         <div style="font-size: 20px;color: #ccc" class="mudar-km">
           <a href="javascript:;" onclick="$('.infos button').trigger('click');">
             Mudar quilometragem
