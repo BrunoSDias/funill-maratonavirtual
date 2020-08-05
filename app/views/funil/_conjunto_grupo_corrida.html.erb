@@ -91,8 +91,8 @@
         <div class="box-km">
             <h3 class="title badge-gradient d-inline-block">Passo 1:</h3>
             <p class="text">Qual distância você vai fazer?</p>
-            <% if @conjunto_grupo_corrida_bike.present? && @conjunto_grupo_corrida_bike.grupos.present? && @conjunto_grupo_corrida.present? && @conjunto_grupo_corrida.grupos.present?  %>
-              <div style="color: #fff">Corrida:</div>
+            <% if (@conjunto_grupo_corrida_bike.present? && @conjunto_grupo_corrida_bike.grupos.present?) || (@conjunto_grupo_corrida_natacao.present? && @conjunto_grupo_corrida_natacao.grupos.present?) || (@conjunto_grupo_corrida_duathlon.present? && @conjunto_grupo_corrida_duathlon.grupos.present?) || (@conjunto_grupo_corrida_triathlon.present? && @conjunto_grupo_corrida_triathlon.grupos.present?) && @conjunto_grupo_corrida.present? && @conjunto_grupo_corrida.grupos.present?  %>
+              <div style="color: #fff; font-size: 1.3em; padding-left: 5px; margin-bottom: -10px;">Corrida:</div>
             <% end %>
 
             <input type="hidden" name="kit_id" id="kit_id" value="">
@@ -102,22 +102,22 @@
             <%= render 'conjunto_grupo_corrida_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida} %>
             
             <% if @conjunto_grupo_corrida_bike.present? && @conjunto_grupo_corrida_bike.grupos.present? %>
-              <div style="color: #fff">Bicicleta:</div>
+              <div style="color: #fff; font-size: 1.3em; padding-left: 5px; margin-bottom: -10px; margin-top: 5px;">Bicicleta:</div>
               <%= render 'conjunto_grupo_corrida_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida_bike} %>
             <% end %>
 
             <% if @conjunto_grupo_corrida_natacao.present? && @conjunto_grupo_corrida_natacao.grupos.present? %>
-              <div style="color: #fff">Natação:</div>
+              <div style="color: #fff; font-size: 1.3em; padding-left: 5px; margin-bottom: -10px; margin-top: 5px;">Natação:</div>
               <%= render 'conjunto_grupo_corrida_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida_natacao} %>
             <% end %>
             
             <% if @conjunto_grupo_corrida_duathlon.present? && @conjunto_grupo_corrida_duathlon.grupos.present? %>
-              <div style="color: #fff">Duathlon:</div>
+              <div style="color: #fff; font-size: 1.3em; padding-left: 5px; margin-bottom: -10px; margin-top: 5px;">Duathlon:</div>
               <%= render 'conjunto_grupo_corrida_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida_duathlon} %>
             <% end %>
 
             <% if @conjunto_grupo_corrida_triathlon.present? && @conjunto_grupo_corrida_triathlon.grupos.present? %>
-              <div style="color: #fff">Triathlon:</div>
+              <div style="color: #fff; font-size: 1.3em; padding-left: 5px; margin-bottom: -10px; margin-top: 5px;">Triathlon:</div>
               <%= render 'conjunto_grupo_corrida_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida_triathlon} %>
             <% end %>
         </div>
