@@ -91,7 +91,6 @@
         <div class="box-km">
             <h3 class="title badge-gradient d-inline-block">Passo 1:</h3>
             <p class="text">Qual distância você vai fazer?</p>
-
             <% if @conjunto_grupo_corrida_bike.present? && @conjunto_grupo_corrida_bike.grupos.present? && @conjunto_grupo_corrida.present? && @conjunto_grupo_corrida.grupos.present?  %>
               <div style="color: #fff">Corrida:</div>
             <% end %>
@@ -110,6 +109,16 @@
             <% if @conjunto_grupo_corrida_natacao.present? && @conjunto_grupo_corrida_natacao.grupos.present? %>
               <div style="color: #fff">Natação:</div>
               <%= render 'conjunto_grupo_corrida_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida_natacao} %>
+            <% end %>
+            
+            <% if @conjunto_grupo_corrida_duathlon.present? && @conjunto_grupo_corrida_duathlon.grupos.present? %>
+              <div style="color: #fff">Duathlon:</div>
+              <%= render 'conjunto_grupo_corrida_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida_duathlon} %>
+            <% end %>
+
+            <% if @conjunto_grupo_corrida_triathlon.present? && @conjunto_grupo_corrida_triathlon.grupos.present? %>
+              <div style="color: #fff">Triathlon:</div>
+              <%= render 'conjunto_grupo_corrida_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida_triathlon} %>
             <% end %>
         </div>
 

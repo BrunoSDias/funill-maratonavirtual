@@ -22,6 +22,8 @@ class FunilController < ApplicationController
       @conjunto_grupo_corrida = ConjuntoGruposCorridaRun.find(slug_grupo)
       @conjunto_grupo_corrida_bike = ConjuntoGruposCorridaRun.find(slug_grupo, "bike")
       @conjunto_grupo_corrida_natacao = ConjuntoGruposCorridaRun.find(slug_grupo, "natacao")
+      @conjunto_grupo_corrida_duathlon = ConjuntoGruposCorridaRun.find(slug_grupo, "duathlon")
+      @conjunto_grupo_corrida_triathlon = ConjuntoGruposCorridaRun.find(slug_grupo, "triathlon")
     end
 
     tag_pagamento = @conteudo.scan(/\{\{include_pagamento_99run.*?\}\}/) rescue ""
