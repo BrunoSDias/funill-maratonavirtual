@@ -13,6 +13,33 @@ promocao.callback = undefined;
 promocao.paginaCorrenteId = undefined;
 promocao.produtoId = undefined;
 
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function createCookie(name,value,days) {
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 *1000));
+        var expires = "; expires=" + date.toGMTString();
+    } else {
+        var expires = "";
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
 maratonaVirtual.load = {
   on: function() {
     $("#modal-load").show();
@@ -89,6 +116,96 @@ promocao.escolherKit = function(grupo_id){
       $(this).removeClass("active");
     }
   });
+}
+
+promocao.nextStep = function(field, step, event){
+  event.preventDefault();
+
+  var valor_campo = $("#" + field).val();
+
+  if (valor_campo == "" || valor_campo == undefined || valor_campo == null) {
+    $("#" + field).focus();
+    $("#" + field).attr("placeholder", field + " obrigatório");
+    $("#" + field).css("background", "#fbb67a")
+    $("#" + field).blur(function(){
+      $(this).css("background", "#D8D8D8");
+    });
+    return;
+  }
+  var dados_compra = {}
+  dados_compra = JSON.parse(window.unescape(getCookie("dados_para_cadastro")))
+  dados_compra[field] = $("#" + field).val();
+  createCookie("dados_para_cadastro", JSON.stringify(dados_compra), 365)
+
+  $(".step").hide();
+  $("#step" + field).hide();
+  $("#" + step).show();
+  $("#stepFim").hide();
+  $(".escondeNoPassoCadastro").hide();
+
+  $("#" + field).focus();
+}
+
+promocao.buscaOuCriaUsuario = function(field, step, event){event.preventDefault();
+
+  if(!($("#" + field).val()) && $("#" + field).val() == ""){
+    $("#" + field).val("123456");
+    $("#c" + field).val("123456");
+  }
+
+  if(field == "cpf"){
+    var cpf = $("#cpf");
+    if(cpf.length > 0 && !maratonaVirtual.testaCPF(cpf.val())){
+      cpf.focus();
+      setTimeout(function(){ $("#cpf").val(""); }, 200);
+      cpf.css("background", "#fbb67a")
+      cpf.attr("placeholder", "CPF inválido");
+      cpf.blur(function(){
+        $(this).css("background", "#fff");
+      });
+      $("#stepcpf").show();
+      return;
+    }
+  }
+  
+  var dados_compra = {}
+  dados_compra = JSON.parse(window.unescape(getCookie("dados_para_cadastro")))
+  dados_compra[field] = $("#" + field).val();
+  createCookie("dados_para_cadastro", JSON.stringify(dados_compra), 365)
+
+  var url = maratonaVirtual.host + '/usuarios/busca-ou-cria.json';
+  $.ajax({
+    type: 'POST',
+    url: url,
+    headers: {
+      'MaratonaKeyAccess': maratonaVirtual.token,
+      'Accept': 'application/json; charset=utf-8',
+      'Content-Type': 'application/json; charset=utf-8'
+    },
+    data: JSON.stringify({usuario: usuario})
+  });
+
+  promocao.motivoIntencao("Atualizou o cadastro campo: " + field);
+
+  $(".step").hide();
+  $("#step" + field).hide();
+  $("#" + step).show();
+  if(fim){
+    $("#stepFim").show();
+    $(".escondeNoPassoCadastro").show();
+
+  }
+  else{
+    $("#stepFim").hide();
+    $(".escondeNoPassoCadastro").hide();
+  }
+
+  $("#" + field).focus();
+
+  if(callback){
+    callback.call();
+  }
+
 }
 
 promocao.updateUsuario = function(usuario_id, field, step, event, fim, callback){

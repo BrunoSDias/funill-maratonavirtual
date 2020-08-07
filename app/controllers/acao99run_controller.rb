@@ -9,37 +9,73 @@ class Acao99runController < ApplicationController
 
     organizador = grupo_corrida.organizador
 
-    if usuario.id.blank?
-      redirect_to "/#{pagina.produto.slug}/#{pagina.slug}"
-      return
-    end
+    # if usuario.id.blank?
+    #   redirect_to "/#{pagina.produto.slug}/#{pagina.slug}"
+    #   return
+    # end
 
-    kit_escolhido = nil
-    if params[:kit_id].present?
-      kit_escolhido = {
-        id: params[:kit_id],
-        tamanho_camiseta: params[:tamanho_camiseta],
-        preco_kit: params[:preco_kit].to_f
+    if usuario.present? && usuario.id.present?
+      kit_escolhido = nil
+      if params[:kit_id].present?
+        kit_escolhido = {
+          id: params[:kit_id],
+          tamanho_camiseta: params[:tamanho_camiseta],
+          preco_kit: params[:preco_kit].to_f
+        }
+      end
+
+      cookies[:usuario] = {value: JSON.parse(usuario.to_json)["table"].to_json, expires: 1.year.from_now, httponly: false}
+      cookies[:funil] = {
+        value: {
+          pagar_com_boleto: params[:pagar_com_boleto],
+          pagina_id: pagina.id,
+          carrinho:[
+            grupo_inscricao: {
+              id: grupo_corrida.id,
+              preco: (params[:preco] || grupo_corrida.preco).to_f,
+              kit_escolhido: kit_escolhido,
+              organizador: organizador
+            }
+          ]
+        }.to_json,
+        expires: 1.year.from_now, httponly: false
       }
-    end
+    else
+      kit_escolhido = nil
+      if params[:kit_id].present?
+        kit_escolhido = {
+          id: params[:kit_id],
+          tamanho_camiseta: params[:tamanho_camiseta],
+          preco_kit: params[:preco_kit].to_f
+        }
+      end
 
-    cookies[:usuario] = {value: JSON.parse(usuario.to_json)["table"].to_json, expires: 1.year.from_now, httponly: false}
-    cookies[:funil] = {
-      value: {
-        pagar_com_boleto: params[:pagar_com_boleto],
-        usuario_id: usuario.id,
-        pagina_id: pagina.id,
-        carrinho:[
-          grupo_inscricao: {
-            id: grupo_corrida.id,
-            preco: (params[:preco] || grupo_corrida.preco).to_f,
-            kit_escolhido: kit_escolhido,
-            organizador: organizador
-          }
-        ]
-      }.to_json,
-      expires: 1.year.from_now, httponly: false
-    }
+      dados_para_cadastro = {
+        email: params[:email], 
+        telefone: params[:telefone], 
+        cod_marketing: params[:cod_marketing], 
+        grupo_corrida_id: params[:grupo_corrida_id]
+      }
+
+      cookies[:dados_para_cadastro] = {value: dados_para_cadastro.to_json, expires: 1.year.from_now, httponly: false}
+      cookies[:funil] = {
+        value: {
+          pagar_com_boleto: params[:pagar_com_boleto],
+          usuario_id: usuario.id,
+          pagina_id: pagina.id,
+          carrinho:[
+            grupo_inscricao: {
+              id: grupo_corrida.id,
+              preco: (params[:preco] || grupo_corrida.preco).to_f,
+              kit_escolhido: kit_escolhido,
+              organizador: organizador
+            }
+          ]
+        }.to_json,
+        expires: 1.year.from_now, httponly: false
+      }
+
+    end
 
     redirect_to "/#{pagina.produto.slug}/#{pagina.proxima_pagina.slug}"
   end
