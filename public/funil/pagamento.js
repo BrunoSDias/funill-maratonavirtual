@@ -778,6 +778,7 @@ promocao.capituraDados = function(pre_pedido){
     data.token = promocao.token
     promocao.motivoIntencao("Clicou no botão comprar para cartão");
   }
+
   data.usuario = usuario
   data.entra_logado = true
   data.pedido = {

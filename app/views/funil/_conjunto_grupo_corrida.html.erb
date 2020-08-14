@@ -84,7 +84,8 @@
 
 <script src="/funil/pagamento.js?<%= Time.now.to_i %>" ></script>
 <div class="col-lg-5 offset-lg-2">
-    <form action="/99run/login/comprar/grupo-corrida" method="post" id="formPostLogin">
+    <!-- <form action="/99run/login/comprar/grupo-corrida" method="post" id="formPostLogin"> -->
+    <div action="/99run/login/comprar/grupo-corrida" method="post" id="formPostLogin">
         <h1 class="total">
             Valor a ser pago<br><span class="price"><%= number_to_currency(@conjunto.valor || @conjunto.grupos[0]["preco"]) %></span>
         </h1>
@@ -159,12 +160,12 @@
 
               var postFormBoleto = function() {
                 $("#pagar_com_boleto").val("true");
-                postForm();
+                postForm("boleto");
               }
 
               var postFormCartao = function() {
                 $("#pagar_com_boleto").val("false");
-                postForm();
+                postForm("cartao");
               }
 
               var setSalvarDadosCookie = function() {
@@ -190,8 +191,15 @@
 
               setSalvarDadosCookie();
 
-              var postForm = function() {
+              var postForm = function(forma_pagamento) {
                 $("#cod_marketing_post").val($("#cod_marketing").val());
+
+                var telefone = $("#99RunPostLoginTelefone").val();
+                var email = $("#99RunPostLoginEmail").val();
+                var kit_id = $("#kit_id").val();
+                var preco_kit = $("#preco_kit").val();
+                var tamanho_camiseta = $("#tamanho_camiseta").val();
+                var grupo_corrida_id = $("input[name=grupo_corrida_id]:checked").val();
 
                 if($("#99RunPostLoginTelefone").val() == ""){
                   $("#99RunPostLoginTelefone").val("");
@@ -230,8 +238,29 @@
                   return;
                 }
 
-                $('#formPostLogin').submit();
+                irParaPagamento(telefone, email, kit_id, tamanho_camiseta, forma_pagamento, grupo_corrida_id)
+
+                // $('#formPostLogin').submit();
+
               }
+
+
+
+              var irParaPagamento = function(telefone, email, kit_id, tamanho_camiseta, forma_pagamento, grupo_corrida_id) {
+
+                dadosPagamento = {
+                  "telefone": telefone,
+                  "email": email,
+                  "kit_id": kit_id,
+                  "tamanho_camiseta": tamanho_camiseta,
+                  "pagamento": forma_pagamento,
+                  "grupo_corrida_id": grupo_corrida_id
+                }
+
+                // window.location.href = "https://www.99run.com/?fc=" + encodeURIComponent(dadosPagamento)
+                window.location.href = "http://localhost:3000/?fc=" + encodeURIComponent(JSON.stringify(dadosPagamento))
+              }
+
             </script>
 
             <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
@@ -241,6 +270,7 @@
               $('.cpf').mask('999.999.999-99');
             </script>
         </div>
-    </form>
+    </div>
+    <!-- </form> -->
 </div>
 <% end %>
