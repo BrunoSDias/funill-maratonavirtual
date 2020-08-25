@@ -18,12 +18,12 @@ class FunilController < ApplicationController
     @conteudo = @pagina.conteudo
     tag_grupo = @conteudo.scan(/\{\{include_grupo_selecione.*?\}\}/) rescue ""
     if tag_grupo.present?
-      slug_grupo = tag_grupo.first.gsub(/\{\{include_grupo_selecione:|\}\}/, '').strip
-      @conjunto_grupo_corrida = ConjuntoGruposCorridaRun.find(slug_grupo)
-      @conjunto_grupo_corrida_bike = ConjuntoGruposCorridaRun.find(slug_grupo, "bike")
-      @conjunto_grupo_corrida_natacao = ConjuntoGruposCorridaRun.find(slug_grupo, "natacao")
-      @conjunto_grupo_corrida_duathlon = ConjuntoGruposCorridaRun.find(slug_grupo, "duathlon")
-      @conjunto_grupo_corrida_triathlon = ConjuntoGruposCorridaRun.find(slug_grupo, "triathlon")
+      @slug_grupo = tag_grupo.first.gsub(/\{\{include_grupo_selecione:|\}\}/, '').strip
+      @conjunto_grupo_corrida = ConjuntoGruposCorridaRun.find(@slug_grupo)
+      @conjunto_grupo_corrida_bike = ConjuntoGruposCorridaRun.find(@slug_grupo, "bike")
+      @conjunto_grupo_corrida_natacao = ConjuntoGruposCorridaRun.find(@slug_grupo, "natacao")
+      @conjunto_grupo_corrida_duathlon = ConjuntoGruposCorridaRun.find(@slug_grupo, "duathlon")
+      @conjunto_grupo_corrida_triathlon = ConjuntoGruposCorridaRun.find(@slug_grupo, "triathlon")
     end
 
     tag_pagamento = @conteudo.scan(/\{\{include_pagamento_99run.*?\}\}/) rescue ""
