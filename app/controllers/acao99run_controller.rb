@@ -3,9 +3,9 @@ class Acao99runController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def login_compra_grupo_corrida
-    usuario = Usuario.find(params[:email], params[:telefone], params[:cod_marketing], params[:grupo_corrida_id])
+    usuario = Usuario.find(@auth, params[:email], params[:telefone], params[:cod_marketing], params[:grupo_corrida_id])
     pagina = Pagina.find(params[:pagina_id])
-    grupo_corrida = GrupoCorridaRun.find(params[:grupo_corrida_id])
+    grupo_corrida = GrupoCorridaRun.find(@auth, params[:grupo_corrida_id])
 
     organizador = grupo_corrida.organizador
 
@@ -45,7 +45,7 @@ class Acao99runController < ApplicationController
   end
 
   def captura_email
-    usuario = Usuario.find(params[:email])
+    usuario = Usuario.find(@auth, params[:email])
 
     if usuario["telefone"].present?
       redirect_to "#{CURSOS_URL}/login?token=#{usuario["token"]}"
@@ -60,7 +60,7 @@ class Acao99runController < ApplicationController
   end
 
   def captura_telefone
-    usuario = Usuario.find(params[:email], params[:telefone])
+    usuario = Usuario.find(@auth, params[:email], params[:telefone])
 
     if usuario["email"].present?
       redirect_to "#{CURSOS_URL}/login?token=#{usuario["token"]}"

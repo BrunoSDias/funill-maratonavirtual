@@ -1,6 +1,6 @@
 class AdministradoresController < ApplicationController
   before_action :set_administrador, only: [:show, :edit, :update, :destroy]
-
+  # skip_before_action :guest_request
   # GET /administradores
   # GET /administradores.json
   def index

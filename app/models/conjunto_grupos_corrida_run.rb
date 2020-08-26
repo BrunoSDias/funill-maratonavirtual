@@ -1,5 +1,5 @@
 class ConjuntoGruposCorridaRun
-  def self.find(slug, tipo="corrida")
+  def self.find(auth, slug, tipo="corrida")
     query = ""
     if tipo == "bike"
       query += "&bike=true"
@@ -11,7 +11,7 @@ class ConjuntoGruposCorridaRun
       query += "&triathlon=true"
     end
     
-    grupo = Rest.show("#{HOST_API}/conjunto_grupos_corridas/slug/#{slug}.json?#{query}")
+    grupo = Rest.show(auth, "#{HOST_API}/conjunto_grupos_corridas/slug/#{slug}.json?#{query}")
     OpenStruct.new(grupo)
   end
 end

@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  before_action  :authenticate_user!
+  before_action :authenticate_user!
+  before_action :guest_request
   before_action :add_www_subdomain
 
   def authenticate_user!
@@ -16,6 +17,11 @@ class ApplicationController < ActionController::Base
       @adm = Administrador.find(JSON.parse(cookies[:funil_admin])["id"])
       return @adm
     end
+  end
+
+  def guest_request
+    guest = Usuario.loga_guest()
+    @auth = "Bearer #{guest["usuario"]["token"]}"
   end
 
   def add_www_subdomain

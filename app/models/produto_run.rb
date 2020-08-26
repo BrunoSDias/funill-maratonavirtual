@@ -1,6 +1,6 @@
 class ProdutoRun
-  def self.find(slug)
-    produto = Rest.show("#{HOST_API}/produtos/slug/#{slug}.json")
+  def self.find(auth, slug)
+    produto = Rest.show(auth, "#{HOST_API}/produtos/slug/#{slug}.json")
     OpenStruct.new(produto)
   end
 end

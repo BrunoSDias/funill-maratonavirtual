@@ -1,9 +1,8 @@
 class Rest
-  def self.all(url, query={})
+  def self.all(auth_token, url, query={})
     uri = URI.parse(URI.escape(url))
-    headers = {"MaratonaKeyAccess" => TOKEN}
+    headers = {"MaratonaKeyAccess" => TOKEN, "UsrAuthToken" => auth_token}
     request = HTTParty.get(uri, :query => query, :headers => headers)
-    
     if (200...300).include?(request.code.to_i)
       if request.body.present?
         return JSON.parse(request.body)
@@ -14,9 +13,9 @@ class Rest
     return []
   end
 
-  def self.exist?(url, query={})
+  def self.exist?(auth_token, url, query={})
     uri = URI.parse(URI.escape(url))
-    headers = {"MaratonaKeyAccess" => TOKEN}
+    headers = {"MaratonaKeyAccess" => TOKEN, "UsrAuthToken" => auth_token}
     request = HTTParty.get(uri, :query => query, :headers => headers)
     if (200...300).include?(request.code.to_i)
       return true
@@ -26,9 +25,9 @@ class Rest
     return false
   end
 
-  def self.show(url, query={})
+  def self.show(auth_token, url, query={})
     uri = URI.parse(URI.escape(url))
-    headers = {"MaratonaKeyAccess" => TOKEN}
+    headers = {"MaratonaKeyAccess" => TOKEN, "UsrAuthToken" => auth_token}
     request = HTTParty.get(uri, :query => query, :headers => headers)
     if (200...300).include?(request.code.to_i)
       if request.body.present?
@@ -42,9 +41,9 @@ class Rest
     return {}
   end
 
-  def self.post(url, data={})
+  def self.post(auth_token, url, data={})
     uri = URI.parse(URI.escape(url))
-    headers = {"MaratonaKeyAccess" => TOKEN}
+    headers = {"MaratonaKeyAccess" => TOKEN, "UsrAuthToken" => auth_token}
     request = HTTParty.post(uri, :body => data, :headers => headers)
     if (200...300).include?(request.code.to_i)
       if request.body.present?
@@ -60,9 +59,9 @@ class Rest
     return {}
   end
 
-  def self.put(url, data={})
+  def self.put(auth_token, url, data={})
     uri = URI.parse(URI.escape(url))
-    headers = {"MaratonaKeyAccess" => TOKEN}
+    headers = {"MaratonaKeyAccess" => TOKEN, "UsrAuthToken" => auth_token}
     request = HTTParty.put(uri, :body => data, :headers => headers)
     if (200...300).include?(request.code.to_i)
       if request.body.present?

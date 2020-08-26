@@ -19,17 +19,17 @@ class FunilController < ApplicationController
     tag_grupo = @conteudo.scan(/\{\{include_grupo_selecione.*?\}\}/) rescue ""
     if tag_grupo.present?
       @slug_grupo = tag_grupo.first.gsub(/\{\{include_grupo_selecione:|\}\}/, '').strip
-      @conjunto_grupo_corrida = ConjuntoGruposCorridaRun.find(@slug_grupo)
-      @conjunto_grupo_corrida_bike = ConjuntoGruposCorridaRun.find(@slug_grupo, "bike")
-      @conjunto_grupo_corrida_natacao = ConjuntoGruposCorridaRun.find(@slug_grupo, "natacao")
-      @conjunto_grupo_corrida_duathlon = ConjuntoGruposCorridaRun.find(@slug_grupo, "duathlon")
-      @conjunto_grupo_corrida_triathlon = ConjuntoGruposCorridaRun.find(@slug_grupo, "triathlon")
+      @conjunto_grupo_corrida = ConjuntoGruposCorridaRun.find(@auth, @slug_grupo)
+      @conjunto_grupo_corrida_bike = ConjuntoGruposCorridaRun.find(@auth, @slug_grupo, "bike")
+      @conjunto_grupo_corrida_natacao = ConjuntoGruposCorridaRun.find(@auth, @slug_grupo, "natacao")
+      @conjunto_grupo_corrida_duathlon = ConjuntoGruposCorridaRun.find(@auth, @slug_grupo, "duathlon")
+      @conjunto_grupo_corrida_triathlon = ConjuntoGruposCorridaRun.find(@auth, @slug_grupo, "triathlon")
     end
 
     tag_pagamento = @conteudo.scan(/\{\{include_pagamento_99run.*?\}\}/) rescue ""
     if tag_pagamento.present?
       slug_produto = tag_pagamento.first.gsub(/\{\{include_pagamento_99run:|\}\}/, '').strip
-      @produto = ProdutoRun.find(slug_produto)
+      @produto = ProdutoRun.find(@auth, slug_produto)
     end
 
     if cookies[:funil].present?
@@ -41,7 +41,7 @@ class FunilController < ApplicationController
     end
 
     if cookies[:usuario].present?
-      @usuario = Usuario.find_by_id(JSON.parse(cookies[:usuario])["id"])
+      @usuario = Usuario.find_by_id(@auth, JSON.parse(cookies[:usuario])["id"])
       @usuario.cpf = @usuario.cpf_cnpj rescue ""
       @usuario.telefone = @usuario.telefone.gsub("+", " ") rescue ""
       @usuario.cep = @usuario.endereco["cep"] rescue ""
@@ -66,12 +66,10 @@ class FunilController < ApplicationController
       # @usuario.endereco = ""
 
       cookies[:usuario] = {value: JSON.parse(@usuario.to_json)["table"].to_json, expires: 1.year.from_now, httponly: false}
-    else
-      @usuario = OpenStruct.new
     end
 
     if cookies[:id_pedido].present?
-      @pedido = PedidoRun.find(cookies[:id_pedido])
+      @pedido = PedidoRun.find(@auth, cookies[:id_pedido])
     end
   end
 
