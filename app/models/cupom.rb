@@ -3,10 +3,18 @@ class Cupom < ApplicationRecord
     uri = URI.parse(URI.escape("#{HOST_API}/cupons_validos.json"))
     headers = {"MaratonaKeyAccess" => TOKEN}
     request = HTTParty.get(uri, :headers => headers)
-    debugger
     if (200...300).include?(request.code.to_i)
       if request.body.present?
-        return JSON.parse(request.body)
+        cupons = JSON.parse(request.body)
+        cupons = cupons.map { |c| c["codigo"] }.compact
+
+        if cupons.present?
+          cupons = cupons
+        else
+          cupons = []
+        end
+
+        return cupons
       end
     end
     return []

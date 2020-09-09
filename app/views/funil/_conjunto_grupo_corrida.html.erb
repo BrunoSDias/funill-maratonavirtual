@@ -137,10 +137,10 @@
                         <i class="far fa-envelope"></i>
                         <input class="form-control" placeholder="Insira seu e-mail aqui" type="text" name="email" id="99RunPostLoginEmail" value="<%= cookies[:email] %>">
                     </div>
-                    
+
                     <% if @pagina.valido_com_cupom %>
                       <div class="col-12">
-                          <i class="far fa-envelope"></i>
+                          <i class="fa fa-money"></i>
                           <input class="form-control" placeholder="Insira seu cupom aqui" type="text" name="cupom" id="99RunPostLoginCupom" value="<%= cookies[:cupom] %>">
                       </div>
                     <% end %>
@@ -163,6 +163,20 @@
               function IsEmail(email) {
                 var re = /\S+@\S+\.\S+/;
                 return re.test(String(email).toLowerCase());
+              }
+
+              function IsCupomValido(cupom, cupons) {
+                var valido = false
+                // var cupons = JSON.parse(cupons)
+                if (cupons.length > 0) {
+                  for(var i = 0; i < cupons.length; i++) {
+                    if (cupons[i] == cupom) {
+                      valido = true
+                      break;
+                    }
+                  }
+                }
+                return valido
               }
 
               var postFormBoleto = function() {
@@ -203,6 +217,7 @@
 
                 var telefone = $("#99RunPostLoginTelefone").val();
                 var email = $("#99RunPostLoginEmail").val();
+                var cupom = $("#99RunPostLoginCupom").val();
                 var kit_id = $("#kit_id").val();
                 var preco_kit = $("#preco_kit").val();
                 var tamanho_camiseta = $("#tamanho_camiseta").val();
@@ -240,12 +255,33 @@
                   });
                   return;
                 }
+
+                if($("#99RunPostLoginCupom").val() == ""){
+                  $("#99RunPostLoginCupom").val("");
+                  $("#99RunPostLoginCupom").focus();
+                  $("#99RunPostLoginCupom").attr("placeholder", "Insira o cupom");
+                  $("#99RunPostLoginCupom").css("background", "#fbb67a")
+                  $("#99RunPostLoginCupom").blur(function(){
+                    $(this).css("background", "#fff");
+                  });
+                  return;
+                }
+                else if(!IsCupomValido($("#99RunPostLoginCupom").val(), <%= raw @cupons %>)){
+                  $("#99RunPostLoginCupom").val("");
+                  $("#99RunPostLoginCupom").focus();
+                  $("#99RunPostLoginCupom").attr("placeholder", "Cupom inválido, tente novamente");
+                  $("#99RunPostLoginCupom").css("background", "#fbb67a")
+                  $("#99RunPostLoginCupom").blur(function(){
+                    $(this).css("background", "#fff");
+                  });
+                  return;
+                }
                 else if($("input[name=grupo_corrida_id]:checked").length == 0){
                   alert("Selecione uma quilometragem");
                   return;
                 }
 
-                irParaPagamento(telefone, email, kit_id, tamanho_camiseta, forma_pagamento, grupo_corrida_id)
+                irParaPagamento(telefone, email, kit_id, tamanho_camiseta, forma_pagamento, grupo_corrida_id, cupom)
 
                 // $('#formPostLogin').submit();
 
@@ -253,19 +289,34 @@
 
 
 
-              var irParaPagamento = function(telefone, email, kit_id, tamanho_camiseta, forma_pagamento, grupo_corrida_id) {
+              var irParaPagamento = function(telefone, email, kit_id, tamanho_camiseta, forma_pagamento, grupo_corrida_id, cupom) {
+                <% if @pagina.valido_com_cupom %>
 
-                dadosPagamento = {
-                  "telefone": telefone,
-                  "email": email,
-                  "kit_id": kit_id,
-                  "tamanho_camiseta": tamanho_camiseta,
-                  "pagamento": forma_pagamento,
-                  "grupo_corrida_id": grupo_corrida_id
-                }
+                  dadosPagamento = {
+                    "telefone": telefone,
+                    "email": email,
+                    "kit_id": kit_id,
+                    "tamanho_camiseta": tamanho_camiseta,
+                    "pagamento": forma_pagamento,
+                    "grupo_corrida_id": grupo_corrida_id,
+                    "cupom": cupom
+                  }
 
-                // window.location.href = "https://www.99run.com/?fc=" + encodeURIComponent(JSON.stringify(dadosPagamento))
-                window.location.href = "http://localhost:3000/?fc=" + encodeURIComponent(JSON.stringify(dadosPagamento))
+                <% else %>
+                
+                  dadosPagamento = {
+                    "telefone": telefone,
+                    "email": email,
+                    "kit_id": kit_id,
+                    "tamanho_camiseta": tamanho_camiseta,
+                    "pagamento": forma_pagamento,
+                    "grupo_corrida_id": grupo_corrida_id
+                  }
+
+                <% end %>
+
+                window.location.href = "https://www.99run.com/?fc=" + encodeURIComponent(JSON.stringify(dadosPagamento))
+                // window.location.href = "http://localhost:3000/?fc=" + encodeURIComponent(JSON.stringify(dadosPagamento))
               }
 
             </script>
