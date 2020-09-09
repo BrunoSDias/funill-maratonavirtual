@@ -12,6 +12,8 @@ class FunilController < ApplicationController
     paginas = Pagina.where(slug: params[:slug_pagina])
     if paginas.count == 0
       raise ActionController::RoutingError.new('Not Found') if @conteudo.blank?
+    elsif paginas.first.valido_com_cupom
+      cupons = Cupom.validos
     end
 
     @pagina = paginas.first

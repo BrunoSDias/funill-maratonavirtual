@@ -137,6 +137,13 @@
                         <i class="far fa-envelope"></i>
                         <input class="form-control" placeholder="Insira seu e-mail aqui" type="text" name="email" id="99RunPostLoginEmail" value="<%= cookies[:email] %>">
                     </div>
+                    
+                    <% if @pagina.valido_com_cupom %>
+                      <div class="col-12">
+                          <i class="far fa-envelope"></i>
+                          <input class="form-control" placeholder="Insira seu cupom aqui" type="text" name="cupom" id="99RunPostLoginCupom" value="<%= cookies[:cupom] %>">
+                      </div>
+                    <% end %>
                 </div>
             </div>
 
@@ -257,8 +264,8 @@
                   "grupo_corrida_id": grupo_corrida_id
                 }
 
-                window.location.href = "https://www.99run.com/?fc=" + encodeURIComponent(JSON.stringify(dadosPagamento))
-                // window.location.href = "http://localhost:3000/?fc=" + encodeURIComponent(JSON.stringify(dadosPagamento))
+                // window.location.href = "https://www.99run.com/?fc=" + encodeURIComponent(JSON.stringify(dadosPagamento))
+                window.location.href = "http://localhost:3000/?fc=" + encodeURIComponent(JSON.stringify(dadosPagamento))
               }
 
             </script>

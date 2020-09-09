@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  codigo: MyString
+  data_inicial: 2020-09-09 15:48:28
+  data_final: 2020-09-09 15:48:28
+  valido: false
+
+two:
+  codigo: MyString
+  data_inicial: 2020-09-09 15:48:28
+  data_final: 2020-09-09 15:48:28
+  valido: false
