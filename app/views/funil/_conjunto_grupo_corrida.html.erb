@@ -261,6 +261,7 @@
                   return;
                 }
 
+                <% if @pagina.valido_com_cupom %>
                 if($("#99RunPostLoginCupom").val() == ""){
                   $("#99RunPostLoginCupom").val("");
                   $("#99RunPostLoginCupom").focus();
@@ -271,6 +272,7 @@
                   });
                   return;
                 }
+
                 else if(!IsCupomValido($("#99RunPostLoginCupom").val(), <%= raw @cupons %>)){
                   $("#99RunPostLoginCupom").val("");
                   $("#99RunPostLoginCupom").focus();
@@ -281,6 +283,9 @@
                   });
                   return;
                 }
+
+                <% end %>
+                
                 else if($("input[name=grupo_corrida_id]:checked").length == 0){
                   alert("Selecione uma quilometragem");
                   return;
