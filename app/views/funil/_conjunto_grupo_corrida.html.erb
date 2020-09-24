@@ -104,6 +104,7 @@
             <input type="hidden" name="kit_id" id="kit_id" value="">
             <input type="hidden" name="preco_kit" id="preco_kit" value="<%= @conjunto.valor || @conjunto.grupos[0]["preco"] %>">
             <input type="hidden" name="tamanho_camiseta" id="tamanho_camiseta" value="">
+            <input type="hidden" name="modelo_camiseta" id="modelo_camiseta" value="">
 
             <%= render 'conjunto_grupo_corrida_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida} %>
             
