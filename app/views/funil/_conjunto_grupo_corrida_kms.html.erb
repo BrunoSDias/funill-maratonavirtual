@@ -16,25 +16,50 @@
     <% if grupo["kits"].present? %>
       <label class="btn btn-size" style="height: 36px;background-color: #000;" onclick="promocao.escolherKit(<%= grupo["id"] %>)">
         <input type="radio" name="grupo_corrida_id" data-km="<%= grupo["desafio"]["distancia"] %>" autocomplete="off" value='<%= grupo["id"] %>'>
+
+        <!-- @conjunto_grupo_corrida.grupos[0]["desafios"][0]["distancia_altimetria"] -->
+            <!-- <%#= grupo["desafios"].map{|d| "#{d["distancia_altimetria"]}MA"}.join(" + ") %> -->
         <% if grupo["sem_limite"] %>
           SEM LIMITE
-        <% elsif grupo["desafios"].count == 2 && grupo["desafios"][0]["distancia"] == grupo["desafios"][1]["distancia"]%>
+        <% elsif grupo["desafios"].count == 2 && grupo["desafios"][0]["distancia"] == grupo["desafios"][1]["distancia"] && grupo["desafios"][0]["distancia"].to_f != 0 %>
           <%= "#{grupo["desafios"][0]["distancia"]}K DUPLO" %>
-        <% elsif grupo["desafios"].count == 3 && grupo["desafios"][0]["distancia"] == grupo["desafios"][1]["distancia"] && grupo["desafios"][0]["distancia"] == grupo["desafios"][2]["distancia"]%>
+        <% elsif grupo["desafios"].count == 3 && grupo["desafios"][0]["distancia"] == grupo["desafios"][1]["distancia"] && grupo["desafios"][0]["distancia"] == grupo["desafios"][2]["distancia"] && grupo["desafios"][0]["distancia"].to_f != 0 %>
           <%= "#{grupo["desafios"][0]["distancia"]}K TRIPLO" %>
         <% else %>
-          <%= grupo["desafios"].map{|d| "#{d["distancia"]}K"}.join(" + ") %>
+          <% distancias = []
+            grupo["desafios"].each do |d|
+              if d["distancia"].to_f == 0
+                distancias << "#{d["distancia_altimetria"]}MA"
+              else
+                distancias << "#{d["distancia"]}K"
+              end
+            end
+          %>
+
+          <%= distancias.join(" + ")%>
+          <%#= grupo["desafios"].map{|d| "#{d["distancia"]}K"}.join(" + ") %>
         <% end %>
       </label>
       <div id="kitGrupo<%= grupo["id"] %>" style="display: none">
         <% if grupo["sem_limite"] %>
           <div style="font-size: 40px;" class="desafio-km">SEM LIMITE</div>
-        <% elsif grupo["desafios"].count == 2 && grupo["desafios"][0]["distancia"] == grupo["desafios"][1]["distancia"]%>
+        <% elsif grupo["desafios"].count == 2 && grupo["desafios"][0]["distancia"] == grupo["desafios"][1]["distancia"] && grupo["desafios"][0]["distancia"].to_f != 0 %>
           <div style="font-size: 40px;" class="desafio-km"><%= "#{grupo["desafios"][0]["distancia"]}K DUPLO" %></div>
-        <% elsif grupo["desafios"].count == 3 && grupo["desafios"][0]["distancia"] == grupo["desafios"][1]["distancia"] && grupo["desafios"][0]["distancia"] == grupo["desafios"][2]["distancia"]%>
+        <% elsif grupo["desafios"].count == 3 && grupo["desafios"][0]["distancia"] == grupo["desafios"][1]["distancia"] && grupo["desafios"][0]["distancia"] == grupo["desafios"][2]["distancia"] && grupo["desafios"][0]["distancia"].to_f != 0 %>
           <div style="font-size: 40px;" class="desafio-km"><%= "#{grupo["desafios"][0]["distancia"]}K TRIPLO" %></div>
         <% else %>
-          <div style="font-size: 40px;" class="desafio-km"><%= grupo["desafios"].map{|d| "#{d["distancia"]}K"}.join(" + ") %></div>
+          <% distancias = []
+            grupo["desafios"].each do |d|
+              if d["distancia"].to_f == 0
+                distancias << "#{d["distancia_altimetria"]}MA"
+              else
+                distancias << "#{d["distancia"]}K"
+              end
+            end
+          %>
+          
+          <div style="font-size: 40px;" class="desafio-km"><%= distancias.join(" + ")%></div>
+          <!-- <div style="font-size: 40px;" class="desafio-km"><%#= grupo["desafios"].map{|d| "#{d["distancia"]}K"}.join(" + ") %></div> -->
         <% end %>
         <div style="font-size: 20px;color: #ccc" class="mudar-km">
           <a href="javascript:;" onclick="$('.infos button').trigger('click');">
