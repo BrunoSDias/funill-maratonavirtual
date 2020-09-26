@@ -19,6 +19,7 @@ class FunilController < ApplicationController
     @pagina = paginas.first
     @conteudo = @pagina.conteudo
     tag_grupo = @conteudo.scan(/\{\{include_grupo_selecione.*?\}\}/) rescue ""
+    
     if tag_grupo.present?
       @slug_grupo = tag_grupo.first.gsub(/\{\{include_grupo_selecione:|\}\}/, '').strip
       @conjunto_grupo_corrida = ConjuntoGruposCorridaRun.find(@slug_grupo)

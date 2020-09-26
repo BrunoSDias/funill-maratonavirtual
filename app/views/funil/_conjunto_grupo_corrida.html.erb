@@ -2,6 +2,12 @@
   if @conjunto_grupo_corrida.blank? || @conjunto_grupo_corrida.instance_variable_get("@table").keys.blank?
     if @conjunto_grupo_corrida_bike.present? && @conjunto_grupo_corrida_bike.instance_variable_get("@table").keys.present?
       @conjunto = @conjunto_grupo_corrida_bike
+    elsif @conjunto_grupo_corrida_natacao.present? && @conjunto_grupo_corrida_natacao.instance_variable_get("@table").keys.present?
+      @conjunto = @conjunto_grupo_corrida_natacao
+    elsif @conjunto_grupo_corrida_duathlon.present? && @conjunto_grupo_corrida_duathlon.instance_variable_get("@table").keys.present?
+      @conjunto = @conjunto_grupo_corrida_duathlon
+    elsif @conjunto_grupo_corrida_triathlon.present? && @conjunto_grupo_corrida_triathlon.instance_variable_get("@table").keys.present?
+      @conjunto = @conjunto_grupo_corrida_triathlon
     end
   else
     @conjunto = @conjunto_grupo_corrida
