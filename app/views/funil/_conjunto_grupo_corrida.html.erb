@@ -125,7 +125,7 @@
             <% end %>
             
             <% if @conjunto_grupo_corrida_duathlon.present? && @conjunto_grupo_corrida_duathlon.grupos.present? %>
-              <% unless @conjunto_grupo_corrida_duathlon.present? && @conjunto_grupo_corrida_duathlon.id == 560 %>
+              <% unless @conjunto_grupo_corrida_duathlon.present? && (@conjunto_grupo_corrida_duathlon.id == 560 || @conjunto_grupo_corrida_duathlon.id == 563) %>
                 <div style="color: #fff; font-size: 1.3em; padding-left: 5px; margin-bottom: -10px; margin-top: 5px;">Duathlon:</div>
               <% end %>
               <%= render 'conjunto_grupo_corrida_kms', {conjunto_grupo_corrida: @conjunto_grupo_corrida_duathlon} %>
