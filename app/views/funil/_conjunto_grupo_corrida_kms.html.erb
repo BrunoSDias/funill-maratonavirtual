@@ -91,38 +91,45 @@
                       if produto["slug"].downcase.include?("camiseta")
                         opcoes_tamanho = produto["detalhes"][0]["campos"][0]["options"].split("\r\n") rescue []
                         opcoes_modelo = produto["detalhes"][0]["campos"][1]["options"].split("\r\n") rescue []
-                      end
+                        
+                        if opcoes_tamanho.present? || opcoes_modelo.present?
+                        %>
+                          <div style="border: 1px solid #fff; padding: 8px;">
+                          <h2 style="font-size: 2.3rem;"><%= produto["slug"].capitalize %></h2>
+                          <%
+                          if opcoes_tamanho.present?
+                          %>
+                            <div class="camiseta">
+                              <div class="texto">
+                                Qual o tamanho da camiseta?
+                              </div>
+                              <select id="tamanhoCamisa<%= grupo["id"] %>" class='tamanhoCamiseta'>
+                                <% opcoes_tamanho.each do |opt| %>
+                                <option value="<%= produto["slug"] %>: <%= opt %>"><%= opt %></option>
+                                <% end %>
+                              </select>
+                            </div>
+                          <% end %>
+
+                          <%
+                          if opcoes_modelo.present?
+                          %>
+                            <div class="camiseta">
+                              <div class="texto">
+                                Qual o modelo da camiseta?
+                              </div>
+                              <select id="modeloCamisa<%= grupo["id"] %>" class='modeloCamiseta'>
+                                <% opcoes_modelo.each do |opt| %>
+                                <option value="<%= produto["slug"] %>: <%= opt %>"><%= opt %></option>
+                                <% end %>
+                              </select>
+                            </div>
+                          <% end 
+                          end %>
+                        </div>
+                      <% end
                     end
-                  end
-
-                  if opcoes_tamanho.present?
-                  %>
-                    <div class="camiseta">
-                      <div class="texto">
-                        Qual o tamanho da camiseta?
-                      </div>
-                      <select id="tamanhoCamisa<%= grupo["id"] %>" class='tamanhoCamiseta'>
-                        <% opcoes_tamanho.each do |opt| %>
-                        <option value="<%= opt %>"><%= opt %></option>
-                        <% end %>
-                      </select>
-                    </div>
-                  <% end %>
-
-                  <%
-                  if opcoes_modelo.present?
-                  %>
-                    <div class="camiseta">
-                      <div class="texto">
-                        Qual o modelo da camiseta?
-                      </div>
-                      <select id="modeloCamisa<%= grupo["id"] %>" class='modeloCamiseta'>
-                        <% opcoes_modelo.each do |opt| %>
-                        <option value="<%= opt %>"><%= opt %></option>
-                        <% end %>
-                      </select>
-                    </div>
-                  <% end %>
+                  end %>
                   <hr>
 
                   <button onclick="promocao.kitEscolhido(<%= kit.to_json %>, this)">Escolher este</button>

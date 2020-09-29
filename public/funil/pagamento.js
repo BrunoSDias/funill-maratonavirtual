@@ -68,8 +68,39 @@ promocao.kitEscolhido = function(kit, self){
   $("#formPostLogin .total .price").html(`R$${kit.valor}`);
   $("#kit_id").val(kit.id);
   $("#preco_kit").val(kit.valor);
-  $("#tamanho_camiseta").val($(self).parent().find(".tamanhoCamiseta").val());
-  $("#modelo_camiseta").val($(self).parent().find(".modeloCamiseta").val());
+  var tamanhoCamiseta = $(self).parent().find(".tamanhoCamiseta");
+  var modeloCamiseta = $(self).parent().find(".modeloCamiseta");
+  var tamanhoCamisetaLength = tamanhoCamiseta.length
+  var modeloCamisetaLength = modeloCamiseta.length
+  var tamanhoCamisetaValue = "";
+  var modeloCamisetaValue = "";
+
+  if (tamanhoCamisetaLength > 1) {
+    $(tamanhoCamiseta).each(function(index) {
+      if (index == (tamanhoCamisetaLength - 1))
+        tamanhoCamisetaValue += $(this).val()
+      else
+        tamanhoCamisetaValue += $(this).val() + ","
+    })
+  }
+  else {
+    tamanhoCamisetaValue = $(tamanhoCamiseta).val()
+  }
+
+  if (modeloCamisetaLength > 1) {
+    $(modeloCamiseta).each(function(index) {
+      if (index == (modeloCamisetaLength - 1))
+        modeloCamisetaValue += $(this).val()
+      else
+        modeloCamisetaValue += $(this).val() + ","
+    })
+  }
+  else {
+    modeloCamisetaValue = $(modeloCamiseta).val()
+  }
+
+  $("#tamanho_camiseta").val(tamanhoCamisetaValue);
+  $("#modelo_camiseta").val(modeloCamisetaValue);
   $("#modal").hide();
   $('html, body').animate({ scrollTop: $('#formPostLogin').offset().top }, 10);
 
