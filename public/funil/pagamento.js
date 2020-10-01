@@ -64,6 +64,17 @@ maratonaVirtual.testaCPF = function(strCPF) {
   return true;
 }
 
+promocao.changeKM = function() {
+  $("#modal").hide();
+  $('html, body').animate({ scrollTop: $('#formPostLogin').offset().top }, 10);
+  document.querySelector("input[name=grupo_corrida_id]:checked").checked = false;
+  
+  $(".box-km .btn-size.active").each(function(){
+    $(this).find("input[type=radio]:checked").attr('checked', false)
+    $(this).removeClass("active");
+  });
+}
+
 promocao.kitEscolhido = function(kit, self){
   $("#formPostLogin .total .price").html(`R$${kit.valor}`);
   $("#kit_id").val(kit.id);
