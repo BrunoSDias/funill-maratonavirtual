@@ -185,7 +185,7 @@
                 // var cupons = JSON.parse(cupons)
                 if (cupons.length > 0) {
                   for(var i = 0; i < cupons.length; i++) {
-                    if (cupons[i] == cupom) {
+                    if (cupons[i].toLowerCase() == cupom.toLowerCase()) {
                       valido = true
                       break;
                     }
