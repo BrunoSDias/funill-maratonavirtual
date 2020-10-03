@@ -76,7 +76,14 @@
                   <a href="<%= kit["banner"] %>" target="_blank"><img src="<%= kit["banner"] %>" alt="Avatar" class="image" style="width:100%"></a>
                   <br>
                   <h5 class="title"><%= kit["nome"] %></h5>
-                  <span class="badget-price -aux-price"><strong>R$<%= kit["valor"] %></strong></span>
+                  <%
+                    if conjunto_grupo_corrida.id == 566 || conjunto_grupo_corrida.id == 567 
+                      valor_kit = kit["valor"] + (kit["valor"] / 9)
+                    else
+                      valor_kit =  kit["valor"]
+                    end
+                  %>
+                  <span class="badget-price -aux-price"><strong>R$<%= valor_kit.round(2) %></strong></span>
                   <% if kit["descricao"].present? %>
                     <ul style="text-align: left;">
                       <% kit["descricao"].split("\r\n").each do |item| %>
@@ -133,7 +140,11 @@
                   end %>
                   <hr>
 
-                  <button onclick="promocao.kitEscolhido(<%= kit.to_json %>, this)">Escolher este</button>
+                  <% if conjunto_grupo_corrida.id == 566 || conjunto_grupo_corrida.id == 567 %>
+                    <button onclick="promocao.kitEscolhido(<%= kit.to_json %>, this, true); descontado = false;">Escolher este</button>
+                  <% else %>
+                    <button onclick="promocao.kitEscolhido(<%= kit.to_json %>, this,)">Escolher este</button>
+                  <% end %>
                 </div>
               </div>
             <% end %>

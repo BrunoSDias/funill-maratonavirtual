@@ -14,6 +14,8 @@
   end
 %>
 
+<script type="text/javascript"> var descontado = false </script>
+
 <% if @conjunto.present? && @conjunto.instance_variable_get("@table").keys.present? %>
 
 <style type="text/css">
@@ -97,7 +99,13 @@
             <% if (@conjunto.valor || @conjunto.grupos[0]["preco"]) == 0 %>
               <span class="price">Inscrição Gratuíta</span>
             <% else %>
-              Valor a ser pago<br><span class="price"><%= number_to_currency(@conjunto.valor || @conjunto.grupos[0]["preco"]) %></span>
+              <%
+                if @conjunto.id == 566 || @conjunto.id == 567
+                  valor = @conjunto.valor || @conjunto.grupos[0]["preco"]
+                  valor = valor + (valor / 9)
+                end
+              %>
+              Valor a ser pago<br><span class="price"><%= number_to_currency(valor) %></span>
             <% end %>
         </h1>
         <div class="box-km">
@@ -341,6 +349,31 @@
                 window.location.href = "https://www.99run.com/?fc=" + encodeURIComponent(JSON.stringify(dadosPagamento))
                 // window.location.href = "http://localhost:3000/?fc=" + encodeURIComponent(JSON.stringify(dadosPagamento))
               }
+
+              <% if @conjunto.id == 566 || @conjunto.id == 567 %>
+                document.getElementById("99RunPostLoginCupom").addEventListener("keyup", function() {
+                  if(IsCupomValido($("#99RunPostLoginCupom").val(), <%= raw @cupons %>) && !descontado){
+                    var value = document.getElementsByClassName("price")[1].textContent
+                    value = value.replace("R$", "")
+                    value = parseFloat(value)
+                    value = value - ((value * 10) / 100)  
+                    $(".price").text("R$" + value.toFixed(2))
+                    descontado = true
+                  }
+                })
+
+                document.getElementById("99RunPostLoginCupom").addEventListener("focusout", function() {
+                  if(IsCupomValido($("#99RunPostLoginCupom").val(), <%= raw @cupons %>) && !descontado){
+                    var value = document.getElementsByClassName("price")[1].textContent
+                    value = value.replace("R$", "")
+                    value = parseFloat(value)
+                    value = value - ((value * 10) / 100)
+                    $(".price").text("R$" + value.toFixed(2))
+                    descontado = true
+                  }
+                })
+                
+              <% end %>
 
             </script>
 

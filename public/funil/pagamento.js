@@ -75,10 +75,14 @@ promocao.changeKM = function() {
   });
 }
 
-promocao.kitEscolhido = function(kit, self){
-  $("#formPostLogin .total .price").html(`R$${kit.valor}`);
+promocao.kitEscolhido = function(kit, self, graac){
+  if (graac) {
+    kit.valor = kit.valor + (kit.valor / 9) 
+  }
+
+  $("#formPostLogin .total .price").html(`R$${kit.valor.toFixed(2)}`);
   $("#kit_id").val(kit.id);
-  $("#preco_kit").val(kit.valor);
+  $("#preco_kit").val(kit.valor.toFixed(2));
   var tamanhoCamiseta = $(self).parent().find(".tamanhoCamiseta");
   var modeloCamiseta = $(self).parent().find(".modeloCamiseta");
   var tamanhoCamisetaLength = tamanhoCamiseta.length
