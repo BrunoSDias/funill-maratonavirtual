@@ -14,6 +14,8 @@ class FunilController < ApplicationController
       raise ActionController::RoutingError.new('Not Found') if @conteudo.blank?
     elsif paginas.first.valido_com_cupom
       @cupons = Cupom.validos
+    elsif paginas.first.cupom_opcional
+      @cupons = Cupom.validos
     end
 
     @pagina = paginas.first

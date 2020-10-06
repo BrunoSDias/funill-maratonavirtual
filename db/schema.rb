@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_09_184828) do
+ActiveRecord::Schema.define(version: 2020_10_06_145439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2020_09_09_184828) do
     t.boolean "inicio"
     t.integer "upsell_id"
     t.boolean "valido_com_cupom", default: false
+    t.boolean "cupom_opcional", default: false
     t.index ["produto_id"], name: "index_paginas_on_produto_id"
   end
 

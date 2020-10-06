@@ -157,7 +157,7 @@
                         <input class="form-control" placeholder="Insira seu e-mail aqui" type="text" name="email" id="99RunPostLoginEmail" value="<%= cookies[:email] %>">
                     </div>
 
-                    <% if @pagina.valido_com_cupom %>
+                    <% if @pagina.valido_com_cupom || @pagina.cupom_opcional%>
                       <div class="col-12">
                           <i class="fa fa-money"></i>
                           <input class="form-control" placeholder="Insira seu cupom aqui" type="text" name="cupom" id="99RunPostLoginCupom" value="<%= cookies[:cupom] %>">
@@ -300,6 +300,19 @@
                   return;
                 }
 
+                <%elsif @pagina.cupom_opcional %>
+                  if($("#99RunPostLoginCupom").val() != ""){
+                    if(!IsCupomValido($("#99RunPostLoginCupom").val(), <%= raw @cupons %>)){
+                      $("#99RunPostLoginCupom").val("");
+                      $("#99RunPostLoginCupom").focus();
+                      $("#99RunPostLoginCupom").attr("placeholder", "Cupom inválido, tente novamente");
+                      $("#99RunPostLoginCupom").css("background", "#fbb67a")
+                      $("#99RunPostLoginCupom").blur(function(){
+                        $(this).css("background", "#fff");
+                      });
+                      return;
+                    }
+                  }
                 <% end %>
                 
                 else if($("input[name=grupo_corrida_id]:checked").length == 0){
@@ -327,6 +340,31 @@
                     "grupo_corrida_id": grupo_corrida_id,
                     "cupom": cupom,
                     "modelo_camiseta": modelo_camiseta
+                  }
+
+                <% elsif @pagina.cupom_opcional %>
+                  if (cupom) {
+                    dadosPagamento = {
+                      "telefone": telefone,
+                      "email": email,
+                      "kit_id": kit_id,
+                      "tamanho_camiseta": tamanho_camiseta,
+                      "pagamento": forma_pagamento,
+                      "grupo_corrida_id": grupo_corrida_id,
+                      "cupom": cupom,
+                      "modelo_camiseta": modelo_camiseta
+                    }
+                  }
+                  else {
+                    dadosPagamento = {
+                      "telefone": telefone,
+                      "email": email,
+                      "kit_id": kit_id,
+                      "tamanho_camiseta": tamanho_camiseta,
+                      "pagamento": forma_pagamento,
+                      "grupo_corrida_id": grupo_corrida_id,
+                      "modelo_camiseta": modelo_camiseta
+                    }
                   }
 
                 <% else %>
