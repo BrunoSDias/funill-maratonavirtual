@@ -100,10 +100,7 @@
               <span class="price">Inscrição Gratuíta</span>
             <% else %>
               <%
-                if @conjunto.id == 566 || @conjunto.id == 567
-                  valor = @conjunto.valor || @conjunto.grupos[0]["preco"]
-                  valor = valor + (valor / 9)
-                end
+                valor = @conjunto.valor || @conjunto.grupos[0]["preco"]
               %>
               Valor a ser pago<br><span class="price"><%= number_to_currency(valor) %></span>
             <% end %>
