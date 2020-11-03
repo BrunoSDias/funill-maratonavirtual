@@ -381,11 +381,11 @@
 
                 <% end %>
 
-                window.location.href = "https://www.99run.com/?fc=" + encodeURIComponent(JSON.stringify(dadosPagamento))
-                // window.location.href = "http://localhost:3000/?fc=" + encodeURIComponent(JSON.stringify(dadosPagamento))
+                // window.location.href = "https://www.99run.com/?fc=" + encodeURIComponent(JSON.stringify(dadosPagamento))
+                window.location.href = "http://localhost:3000/?fc=" + encodeURIComponent(JSON.stringify(dadosPagamento))
               }
 
-              <% if @conjunto.id == 566 || @conjunto.id == 567 %>
+              <% if @conjunto.id == 566 || @conjunto.id == 567  || @conjunto.id == 568 %>
                 document.getElementById("99RunPostLoginCupom").addEventListener("keyup", function() {
                   if(IsCupomValido($("#99RunPostLoginCupom").val(), <%= raw @cupons %>) && !descontado){
                     var value = document.getElementsByClassName("price")[1].textContent
